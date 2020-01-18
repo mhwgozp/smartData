@@ -24,6 +24,8 @@
            &nbsp;&nbsp;&nbsp;
            截止日期:<select id="endYear" name="endYear"></select> <select id="endMonth" name="endMonth"></select> <select id="endDay" name="endDay"></select>
            &nbsp;&nbsp;
+           <input id ="showMacroData" type="radio" value="1" name="宏观数据">宏观</input>
+           &nbsp;&nbsp;
            <button id="update">go</button>
        <script>
        var tempDate = new Date();
@@ -44,24 +46,30 @@
             $('#update').click(function () {
                 var startDate= generateDate($('#startYear').val(),$('#startMonth').val(), $('#startDay').val());
                 var endDate= generateDate($('#endYear').val(),$('#endMonth').val(), $('#endDay').val());
-
+                var showMacroData = $('#showMacroData').val();
                 $.ajax({
                     url: '',
                     type: 'post',
-                    data: {'ts_code': $('#ts_code').val(), 'startDate': startDate, 'endDate': endDate},
+                    data: {'ts_code': $('#ts_code').val(), 'startDate': startDate, 'endDate': endDate, 'endDate': endDate, 'showMacroData':showMacroData},
                     success: function (response) {
 
                     /////////////////////////////////////////////////////////////////
                     //console.log(response);
                     data2=splitData(response.newData);
-                    //alert(response.newData);
+
+                    var volumes2 = [];
+                    //alert(response.macroData.length);
+                    for (var i = 0; i < response.macroData.length; i++)
+                    {
+                        volumes2.push(response.macroData[i]);
+                    }
 
                     var item = {
                                 name : "testtest",
                                 type : 'line',
                                 xAxisIndex: 0,
                                 yAxisIndex: 1,
-                                data:   data.volumes,
+                                data:   volumes2,
                                 smooth : true,//平滑曲线显示
                                 };
 
@@ -74,6 +82,7 @@
                     option.series[3].data = calculateMA(20,data2);
                     option.series[4].data = calculateMA(30,data2);
                     option.series.push(item);
+
                     option.series[5].data = data2.volumes;
 
 

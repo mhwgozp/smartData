@@ -15,16 +15,17 @@ def hello(request):
         ts_code = request.POST.get('ts_code')
         startDate = request.POST.get('startDate')
         endDate = request.POST.get('endDate')
+        showMacroData = request.POST.get('showMacroData')
         df = pro.index_daily(ts_code=ts_code, start_date= startDate, end_date=endDate,
                              fields='trade_date,open,close,low,high,vol')
         mydata = df.values.tolist()
         for i in range(len(mydata)):
             mydata[i][0] = int(mydata[i][0])
         mydata.reverse()
-        print(startDate)
-        print(endDate)
-        print(mydata)
-        return JsonResponse({'newData': mydata})
+        print(showMacroData)
+        if showMacroData == '1':
+            macroData=[100, 110, 125, 130, 124,122, 118, 115, 122, 126, 132]
+        return JsonResponse({'newData': mydata, 'macroData':macroData})
 
     df = pro.index_daily(ts_code='000001.SH', start_date='20190101', end_date='datetime.datetime.now()',
                          fields='trade_date,open,close,low,high,vol')
@@ -39,7 +40,7 @@ def hello(request):
 #    for indexs in df.index:
 #        print(df.loc[indexs].values[0:-1])
 #        mydata.append(df.loc[indexs].values[0:-1])
-    return render(request, "main.html", {'stockData': mydata})
+    return render(request, "index.html", {'stockData': mydata})
     #return render(request, "index.html", {'stockData': json.dumps(mydata)})
     #return HttpResponse()
     # return render_to_response("index.html", {'stockData': mydata}, context_instance=RequestContext(request))
