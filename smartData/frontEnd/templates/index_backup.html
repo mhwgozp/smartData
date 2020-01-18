@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+   </head>
+   <body style="height: 100%; margin: 0">
+
+   <div id="options">
+
+        <select id="ts_code">
+        <option value="000001.SH">上证指数</option>
+        <option value="399300.SZ">创业板指数</option>
+        </select>
+       开始日期:<input type="text" id="startDate"/>   截止日期:<input type="text" id="endDate"/>
+       <button id="update">go</button>
+       <input type="text" id="callbackresult"/>
+       <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+       <script>
+       var stockData;
+        $('#update').click(function () {
+            $.ajax({
+                url: '',
+                type: 'post',
+                data: {'ts_code': $('#ts_code').val(), 'startDate': $('#startDate').val(), 'endDate': $('#endDate').val()},
+                success: function (response) {
+                /////////////////////////////////////////////////////////////////
+                //console.log(response);
+                data2=splitData(response.newData);
+				//设置k线图数据
+				option.xAxis.data = data2.categoryData;
+				option.series[0].data = data2.values;
+				option.series[2].data = calculateMA(5);
+				option.series[3].data = calculateMA(10);
+				option.series[4].data = calculateMA(20);
+				option.series[5].data = calculateMA(30);
+				myChart.setOption(option, true);
+                /////////////////////////////////////////////////////////////////
+                }
+            })
+        })
+        </script>
+    </div>
+
+       <div id="container" style="height: 100%"></div>
+
+       <script src="/static/echarts/dist/echarts.js"></script>
+
+       <!-- <script src="/static/echarts/dist/echarts.min.js"></script>-->
+
+
+       <script type="text/javascript">
+
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+var upColor = '#ec0000';
+var upBorderColor = '#8A0000';
+var downColor = '#00da3c';
+var downBorderColor = '#008F28';
+
+
+// 数据意义：开盘(open)，收盘(close)，最低(lowest)，最高(highest)
+//stockData2=  [[20191108, 2964.1849, 2993.9773, 2998.7594, 2962.8447], [20191107, 2978.7144, 2978.1531, 2988.955, 2969.1201], [20191106, 2978.5955, 2992.0399, 2995.5629, 2969.7242], [20191105, 2991.5622, 2977.7048, 3008.3144, 2968.0324], [20191104, 2975.4919, 2964.576, 2983.0581, 2964.576], [20191101, 2958.1992, 2924.3402, 2959.833, 2917.1455], [20191031, 2929.0561, 2944.8427, 2946.7523, 2923.5167], [20191030, 2939.3209, 2949.4631, 2953.2986, 2934.8279], [20191029, 2954.176, 2979.0365, 2979.0365, 2954.176], [20191028, 2980.0498, 2958.686, 2980.128, 2956.9607], [20191025, 2954.9327, 2940.4741, 2958.2409, 2920.5195], [20191024, 2940.9215, 2944.0067, 2953.0441, 2927.0612], [20191023, 2941.6188, 2952.9693, 2957.2995, 2934.6274], [20191022, 2954.3799, 2945.6001, 2954.6415, 2934.3873], [20191021, 2939.6179, 2933.8969, 2940.3246, 2917.6884], [20191018, 2938.1413, 2982.3417, 2987.2035, 2933.2424], [20191017, 2977.3342, 2979.9929, 2986.7191, 2969.568], [20191016, 2978.7124, 2992.6103, 3010.4241, 2975.9233], [20191015, 2991.0459, 3005.6646, 3005.6646, 2986.3033], [20191014, 3007.8834, 2993.9617, 3026.3834, 2989.8125], [20191011, 2973.6558, 2954.8189, 2980.7875, 2943.0137], [20191010, 2947.7106, 2923.7069, 2949.2404, 2918.2284], [20191009, 2924.8566, 2902.0751, 2924.8566, 2891.5394], [20191008, 2913.5704, 2905.7559, 2933.0163, 2905.7559], [20190930, 2905.1892, 2927.9165, 2936.482, 2905.1892], [20190927, 2932.5491, 2929.486, 2939.0789, 2920.93], [20190926, 2929.0875, 2964.4776, 2970.0354, 2928.2589], [20190925, 2955.4325, 2977.6676, 2977.6676, 2955.4325], [20190924, 2985.3406, 2979.4752, 3002.8967, 2973.7601], [20190923, 2977.0767, 2998.3995, 2998.3995, 2960.827], [20190920, 3006.4467, 3004.8142, 3011.34, 2996.1929], [20190919, 2999.2789, 2992.9222, 2999.2789, 2975.3978], [20190918, 2985.6586, 2984.0837, 2996.4022, 2982.4003], [20190917, 2978.1178, 3023.7109, 3023.7109, 2970.5704], [20190916, 3030.7544, 3041.922, 3042.9284, 3020.0495], [20190912, 3031.2351, 3016.6267, 3033.473, 3005.1948], [20190911, 3008.8118, 3029.9334, 3030.557, 3004.2152], [20190910, 3021.2024, 3027.4103, 3027.4103, 3005.3825], [20190909, 3024.7388, 3023.778, 3026.2398, 3005.6949], [20190906, 2999.6013, 2996.6216, 2999.9434, 2981.5983], [20190905, 2985.8648, 2972.6619, 3015.8443, 2972.6619], [20190904, 2957.4116, 2927.747, 2957.4116, 2925.8825], [20190903, 2930.1538, 2925.9422, 2930.1538, 2915.1974], [20190902, 2924.1063, 2886.9418, 2928.4793, 2883.6823]];
+
+
+//var data0 = splitData(stockData2);
+
+var data0 = splitData({{ stockData }});
+
+function splitData(rawData) {
+    var categoryData = [];
+    var values = []
+    for (var i = 0; i < rawData.length; i++) {
+        categoryData.push(rawData[i].splice(0, 1)[0]);
+        values.push(rawData[i]);
+    }
+    return {
+        categoryData: categoryData,
+        values: values
+    };
+}
+
+function calculateMA(dayCount) {
+    var result = [];
+    for (var i = 0, len = data0.values.length; i < len; i++) {
+        if (i < dayCount) {
+            result.push('-');
+            continue;
+        }
+        var sum = 0;
+        for (var j = 0; j < dayCount; j++) {
+            sum += data0.values[i - j][1];
+        }
+        result.push(sum / dayCount);
+    }
+    return result;
+}
+
+
+
+option = {
+    title: {
+        text: '上证指数',
+        left: 0
+            },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross'
+        }
+    },
+    legend: {
+        data: ['日K', 'MA5', 'MA10', 'MA20', 'MA30']
+    },
+    grid: {
+        left: '10%',
+        right: '10%',
+        bottom: '15%'
+    },
+    xAxis: {
+        type: 'category',
+        data: data0.categoryData,
+        scale: true,
+        boundaryGap : false,
+        axisLine: {onZero: false},
+        splitLine: {show: false},
+        splitNumber: 20,
+        min: 'dataMin',
+        max: 'dataMax'
+    },
+    yAxis: {
+        scale: true,
+        splitArea: {
+            show: true
+        }
+    },
+    dataZoom: [
+        //下面的拖拽条？？
+        {
+            type: 'inside',
+            start: 50,
+            end: 100
+        },
+        {
+            show: true,
+            type: 'slider',
+            y: '90%',
+            start: 50,
+            end: 100
+        }
+    ],
+    series: [
+        {
+            name: '日K',
+            type: 'candlestick',
+            data: data0.values,
+            itemStyle: {
+                            normal:{
+                                color: upColor,
+                                color0: downColor,
+                                borderColor: upBorderColor,
+                                borderColor0: downBorderColor
+                                   }
+                        },
+
+            //锚点   //////////////////////////////////
+            markPoint: {
+                            label: {
+                                        normal:
+                                        {
+                                            formatter: function (param)
+                                            {
+                                                return param != null ? Math.round(param.value) : '';
+                                            }
+                                        }
+                                    },
+                            //在相应的日期中标志锚点（比如当前是标记data中股价最高、股价最低、股价等于平均值、以及2013/5/31号这一天）
+                            data: [
+                                {
+                                    name: 'highest value',
+                                    type: 'max',
+                                    valueDim: 'highest'
+                                },
+                                {
+                                    name: 'lowest value',
+                                    type: 'min',
+                                    valueDim: 'lowest'
+                                },
+                                {
+                                    name: 'average value on close',
+                                    type: 'average',
+                                    valueDim: 'close'
+                                }
+                                 ],
+                            tooltip: {
+                                        formatter: function (param)
+                                        {
+                                            return param.name + '<br>' + (param.data.coord || '');
+                                        }
+                            }
+                         },
+            ////////////////////////////////////////////////////////
+
+             {
+                name: 'MA5',
+                type: 'line',
+                data: calculateMA(5),
+                smooth: true,
+                lineStyle:
+                 {
+                    normal: {opacity: 0.5}
+                 }
+            },
+            /////////////////////////////////////////////////////////
+            {
+                name: 'MA10',
+                type: 'line',
+                data: calculateMA(10),
+                smooth: true,
+                lineStyle: {
+                    normal: {opacity: 0.5}
+                }
+            },
+            //////////////////////////////////////////////////////////
+            {
+                name: 'MA20',
+                type: 'line',
+                data: calculateMA(20),
+                smooth: true,
+                lineStyle: {
+                    normal: {opacity: 0.5}
+                }
+            },
+            ///////////////////////////////////////////////////////////
+            {
+                name: 'MA30',
+                type: 'line',
+                data: calculateMA(30),
+                smooth: true,
+                lineStyle: {
+                    normal: {opacity: 0.5}
+                }
+            }
+            ///////////////////////////////////////////////////////////
+        },
+    ]
+};
+
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+   </body>
+</html>
