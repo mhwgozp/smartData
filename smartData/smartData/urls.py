@@ -15,10 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.views.generic.base import TemplateView
 
 from frontEnd import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.hello)
+    path('rr', views.dataManagerReserveRequirement),
+    path('cpi', views.dataManagerCpi),
+    path('ppi', views.dataManagerPpi),
+    path('pmi', views.dataManagerPmi),
+    path('', views.hello),
+    path('vue/', TemplateView.as_view(template_name="vue.html")),
 ]

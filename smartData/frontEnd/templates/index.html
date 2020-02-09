@@ -5,7 +5,7 @@
    </head>
    <body style="height: 100%; margin: 0">
 
-   <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+   <script src="/static/js/jquery1.42.min.js"></script>
    <script src="/static/echarts/dist/echarts.js"></script>
    <script src="/static/YMDClass/YMDClass.js"></script>
 
@@ -32,7 +32,7 @@
        var y = tempDate.getFullYear();
        var m = tempDate.getMonth()+1;
        var d = tempDate.getDate();
-       new YMDselect('startYear','startMonth','startDay',y);
+       new YMDselect('startYear','startMonth','startDay',y-1);
        new YMDselect('endYear','endMonth','endDay',y,m,d);
 
        function generateDate(year,month,day)
@@ -42,6 +42,62 @@
         day=((Number(day)<10)?"0":"")+day;
         return year+month+day;
        }
+
+       function makePoints(baseData, macroData)
+       {
+            for (var i = 0; i < macroData.length; i++)
+            {
+                for(var j=0; j<(baseData.categoryData.length-1);j++)
+                {
+                    if(baseData.categoryData[j]==macroData[i][0] ||
+                        (baseData.categoryData[j]<macroData[i][0] && baseData.categoryData[j+1]>macroData[i][0]))
+                        {
+                           var item={
+                                      name: i,
+                                       coord: [String(baseData.categoryData[j]), baseData.values[j][0]],
+                                       value: macroData[i][1],
+                                       itemStyle: {
+                                           color: 'rgb(41,60,85)'
+                                                  }
+                                  };
+                                   option.series[0].markPoint.data.push(item);
+                        }
+                }
+            }
+       }
+
+       function attachData(baseData, macroData)
+       {
+            var newData = [];
+            for (var i = 0; i < macroData.length; i++)
+            {
+                for(var j=0; j<(baseData.categoryData.length-1);j++)
+                {
+                    if(baseData.categoryData[j]==macroData[i][0] ||
+                        (baseData.categoryData[j]<macroData[i][0] && baseData.categoryData[j+1]>macroData[i][0]))
+                        {
+                           newData.push([String(baseData.categoryData[j]), macroData[i][1]]);
+                           //newData.push( macroData[i][1]);
+                        }
+                }
+            }
+            var item = {
+                            name: 'newData',
+                            type: 'line',
+                            xAxisIndex: 0,
+                            yAxisIndex: 1,
+                            data: newData,
+                            smooth: true,
+                            lineStyle: {
+                                width:2,
+                                type: 'solid',
+                                color: "#0180ff" //折线的颜色
+                            },
+
+                       };
+            option.series.push(item);
+       }
+
            var stockData;
             $('#update').click(function () {
                 var startDate= generateDate($('#startYear').val(),$('#startMonth').val(), $('#startDay').val());
@@ -56,22 +112,8 @@
                     /////////////////////////////////////////////////////////////////
                     //console.log(response);
                     data2=splitData(response.newData);
+                    //makePoints(data2, response.macroData);
 
-                    var volumes2 = [];
-                    //alert(response.macroData.length);
-                    for (var i = 0; i < response.macroData.length; i++)
-                    {
-                        volumes2.push(response.macroData[i]);
-                    }
-
-                    var item = {
-                                name : "testtest",
-                                type : 'line',
-                                xAxisIndex: 0,
-                                yAxisIndex: 1,
-                                data:   volumes2,
-                                smooth : true,//平滑曲线显示
-                                };
 
                     //设置k线图数据
                     option.xAxis[0].data = data2.categoryData;
@@ -81,13 +123,15 @@
                     option.series[2].data = calculateMA(10,data2);
                     option.series[3].data = calculateMA(20,data2);
                     option.series[4].data = calculateMA(30,data2);
-                    option.series.push(item);
+                    attachData(data2, response.macroData);
+
+                    //option.series.push(item);
 
                     option.series[5].data = data2.volumes;
 
 
                     //option.series.push(item);
-                    //option.series.append(item);
+
                     myChart.setOption(option, true);
                     /////////////////////////////////////////////////////////////////
                     }
@@ -291,6 +335,7 @@
                         }
                     ],
                     series: [
+///////////////////////////////////////////////////////////
                         {
                             name: 'Dow-Jones index',
                             type: 'candlestick',
@@ -301,6 +346,21 @@
                                 borderColor: null,
                                 borderColor0: null
                             },
+                            //////////////////////////////////////
+                            markPoint: {
+                                        label: {
+                                                    normal: {
+                                                        formatter: function (param)
+                                                                {
+                                                                    return param != null ? Math.round(param.value) : '';
+                                                                }
+                                                            }
+                                                },
+                                        data: [
+
+                                            ]
+                                        },
+                            /////////////////////////////////////
                             tooltip: {
                                 formatter: function (param) {
                                     param = param[0];
@@ -314,6 +374,7 @@
                                 }
                             }
                         },
+//////////////////////////////////////////////////////
                         {
                             name: 'MA5',
                             type: 'line',
@@ -357,6 +418,8 @@
                             yAxisIndex: 2,
                             data: data.volumes
                         }
+
+
                     ]
                 };
             /////////////////////////////////////////////////////////

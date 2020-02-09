@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+
+<link rel="stylesheet" href="css/zzsc.css" />
+<script type="text/javascript" src="js/jquery1.42.min.js" ></script>
+<script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" ></script>
+
+</head>
+<body>
+
+<div class="sideMenu">
+	<h3>我是一级导航</h3>
+	<ul>
+		<li><a href="#">二级导航</a></li>
+		<li><a href="#">二级导航</a></li>
+		<li><a href="#">二级导航</a></li>
+	</ul>
+	<h3><a href="#">我是一级导航</a></h3>
+	<ul>
+		<li><a href="#">二级导航</a></li>
+		<li><a href="#">二级导航</a></li>
+		<li><a href="#">二级导航</a></li>
+	</ul>
+	<h3>我是一级导航</h3>
+	<ul>
+		<li><a href="#">二级导航</a></li>
+		<li><a href="#">站长素材</a></li>
+		<li><a href="#">二级导航</a></li>
+	</ul>
+</div>
+
+<script type="text/javascript">
+	jQuery(".sideMenu").slide({
+		titCell:"h3", //鼠标触发对象
+		targetCell:"ul", //与titCell一一对应，第n个titCell控制第n个targetCell的显示隐藏
+		effect:"slideDown", //targetCell下拉效果
+		delayTime:300 , //效果时间
+		triggerTime:150, //鼠标延迟触发时间（默认150）
+		defaultPlay:true,//默认是否执行效果（默认true）
+		trigger:"click",
+		returnDefault:true //鼠标从.sideMen移走后返回默认状态（默认false）
+		});
+</script>
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+</div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+   <script src="/static/vue/vue.js"></script>
+   <script src="/static/axios/axios.min.js"></script>
+
+
+
+<div id="cpiform">
+<form>
+<input type="date" v-model="form.Date"/>
+<input type="text" v-model="form.Value"/>
+<button @click="submitForm($event)">提交</button>
+</form>
+    <cpiTable></cpiTable>
+</div>
+
+   <!--    <script src="//unpkg.com/element-ui@2.13.0/lib/index.js"></script>   -->
+   <!-- 引入样式 -->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+<script>
+           import cpiTable from '/static/vue/cpi'
+      Vue.prototype.$http = axios;
+      new Vue({
+        el: '#cpiform',
+        data: {
+            form:{
+                    Date: '2020-01-04',
+                    Value:'3',
+                 }
+              },
+        conponents:
+        {
+    cpiTable
+        },
+        methods:
+                {
+                    submitForm(event)
+                    {
+                        event.preventDefault();
+
+                        var params = new URLSearchParams();
+                        for(var key in this.form)
+                        {
+                            params.append(key,this.form[key]);
+                        }
+                        this.$http.post('/dataManager', params).then(
+                            function (res)
+                            {
+                                console.log(res);
+                                
+                             })
+                      }
+                }
+             })
+</script>
+       </div>
+
+
+
+
+</body>
+</html>

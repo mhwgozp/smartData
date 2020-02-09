@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+<link rel="stylesheet" href="/static/css/style.css" />
+<link rel="stylesheet" href="/static/css/table.css" />
+
+</head>
+<body>
+
+<script type="text/javascript"> window.onload=function(){ updateTable( {{ tableData|safe }}, {{ tableTitle|safe }}); } </script>
+
+
+<script type="text/javascript" src="/static/js/jquery1.42.min.js" ></script>
+<script type="text/javascript" src="/static/js/menu.js" ></script>
+<div class="div-inline">
+	<ul id="menu">
+		<li>
+			<a href="#">宏观数据管理</a>
+			<ul>
+				<li><a href="/cpi">CPI</a></li>
+				<li><a href="/gdp">GDP</a></li>
+				<li><a href="/rr">存款准备金</a></li>
+				<li><a href="">利率</a></li>
+				<li><a href="/ppi">PPI</a></li>
+				<li class="current"><a href="/pmi">PMI</a></li>
+				<li><a href="">货币供应量</a></li>
+			</ul>
+		</li>
+		<li>
+			<a href="#">个股数据管理</a>
+			<ul>
+				<li><a href="">aaaaa</a></li>
+				<li><a href="">bbbbbb</a></li>
+			</ul>
+		</li>
+		<li><a href="/">首页</a></li>
+	</ul>
+
+</div>
+
+<div id="dataform" class="dataform" >
+    <h1>PMI 数据添加</h1>
+    <br>
+月份：<input type="date" id="Date"/>&nbsp;&nbsp;
+PMI值：<input type="text" id="Value"/>&nbsp;&nbsp;
+公布日期：<input type="date" id="PublicDate"/>&nbsp;&nbsp;
+
+<button id="update">添加</button>
+
+   <table id="dataTable" class="t1">
+        <thead>
+        <tr></tr>
+        </thead>
+        <tbody>
+             
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+
+function updateTable(data, tableTitle)
+{
+    var table = document.getElementById('dataTable');
+    tbody = table.getElementsByTagName('tbody')[0];
+    thead = table.getElementsByTagName('thead')[0];
+
+    var ths = table.rows;
+    rownum=table.rows.length;
+    for(var i=0; i<rownum-1;i++)
+    {
+      table.deleteRow(1);
+    }
+    var cels1 = ths[0].cells;
+    if(cels1.length <2)
+    {
+        for(var i=0; i<tableTitle.length; i++)
+        {
+             var th = document.createElement("th");
+            th.innerHTML = tableTitle[i];
+            ths[0].appendChild(th);
+        }
+    }
+
+    for(var i=0; i<data.length; i++){
+    var tr = tbody.insertRow(i);
+            for(var j=0;j<tableTitle.length;j++){
+                td = tr.insertCell(j);
+                td.innerHTML  = data[i][j];
+            }
+  }
+
+}
+
+$('#update').click(function () {
+                $.ajax({
+                    url: '',
+                    type: 'post',
+                    data: {'Date': $('#Date').val(), 'Value': $('#Value').val(),'PublicDate': $('#PublicDate').val()},
+                    success: function (response) {
+                    updateTable(response.tableData, response.tableTitle);
+                    }
+                })
+            })
+</script>
+
+</body>
+</html>
