@@ -1,0 +1,186 @@
+{'datanodes': [
+
+{'code': 'zb.A010101_sj.2019D', 'data': {'data': 278019.7, 'dotcount': 1, 'hasdata': True, 'strdata': '278019.7'}, 'wds': [{'valuecode': 'A010101', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wdcode': 'sj'}]}, {'code': 'zb.A010101_sj.2019C', 'data': {'data
+': 252208.7, 'dotcount': 1, 'hasdata': True, 'strdata': '252208.7'}, 'wds': [{'valuecode': 'A010101', 'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A010101_sj.2019B', 'data': {'data': 242573.8, 'dotcount': 1, 'hasdata': True, 'strdata': '2425
+73.8'}, 'wds': [{'valuecode': 'A010101', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'code': 'zb.A010101_sj.2019A', 'data': {'data': 218062.8, 'dotcount': 1, 'hasdata': True, 'strdata': '218062.8'}, 'wds': [{'valuecode': 'A010101', 'wdcode': 'zb'}, {'v
+aluecode': '2019A', 'wdcode': 'sj'}]}, 
+
+{'code': 'zb.A010102_sj.2019D', 'data': {'data': 990865.1, 'dotcount': 1, 'hasdata': True, 'strdata': '990865.1'}, 'wds': [{'valuecode': 'A010102', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wdcode': 'sj'}]}, {'code': 'zb.A010102_s
+j.2019C', 'data': {'data': 712845.4, 'dotcount': 1, 'hasdata': True, 'strdata': '712845.4'}, 'wds': [{'valuecode': 'A010102', 'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A010102_sj.2019B', 'data': {'data': 460636.7, 'dotcount': 1, 'hasdata'
+: True, 'strdata': '460636.7'}, 'wds': [{'valuecode': 'A010102', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'code': 'zb.A010102_sj.2019A', 'data': {'data': 218062.8, 'dotcount': 1, 'hasdata': True, 'strdata': '218062.8'}, 'wds': [{'valuecode': 'A01010
+2', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, 
+
+{'code': 'zb.A010103_sj.2019D', 'data': {'data': 27461.6, 'dotcount': 1, 'hasdata': True, 'strdata': '27461.6'}, 'wds': [{'valuecode': 'A010103', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wdcode': 'sj'}]},
+{'code': 'zb.A010103_sj.2019C', 'data': {'data': 19798, 'dotcount': 1, 'hasdata': True, 'strdata': '19798.0'}, 'wds': [{'valuecode': 'A010103', 'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A010103_sj.2019B', 'data': {'data': 14437.6, 'dotcou
+nt': 1, 'hasdata': True, 'strdata': '14437.6'}, 'wds': [{'valuecode': 'A010103', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'code': 'zb.A010103_sj.2019A', 'data': {'data': 8769.4, 'dotcount': 1, 'hasdata': True, 'strdata': '8769.4'}, 'wds': [{'valueco
+de': 'A010103', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, 
+
+{'code': 'zb.A010104_sj.2019D', 'data': {'data': 70466.7, 'dotcount': 1, 'hasdata': True, 'strdata': '70466.7'}, 'wds': [{'valuecode': 'A010104', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wdcode
+': 'sj'}]}, {'code': 'zb.A010104_sj.2019C', 'data': {'data': 43005, 'dotcount': 1, 'hasdata': True, 'strdata': '43005.0'}, 'wds': [{'valuecode': 'A010104', 'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A010104_sj.2019B', 'data': {'data': 2320
+7, 'dotcount': 1, 'hasdata': True, 'strdata': '23207.0'}, 'wds': [{'valuecode': 'A010104', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'code': 'zb.A010104_sj.2019A', 'data': {'data': 8769.4, 'dotcount': 1, 'hasdata': True, 'strdata': '8769.4'}, 'wds':
+[{'valuecode': 'A010104', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, {'code': 'zb.A010105_sj.2019D', 'data': {'data': 109252.8, 'dotcount': 1, 'hasdata': True, 'strdata': '109252.8'}, 'wds': [{'valuecode': 'A010105', 'wdcode': 'zb'}, {'valuecode': '201
+9D', 'wdcode': 'sj'}]}, {'code': 'zb.A010105_sj.2019C', 'data': {'data': 97790.4, 'dotcount': 1, 'hasdata': True, 'strdata': '97790.4'}, 'wds': [{'valuecode': 'A010105', 'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A010105_sj.2019B', 'data':
+ {'data': 97315.6, 'dotcount': 1, 'hasdata': True, 'strdata': '97315.6'}, 'wds': [{'valuecode': 'A010105', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'code': 'zb.A010105_sj.2019A', 'data': {'data': 81806.5, 'dotcount': 1, 'hasdata': True, 'strdata': '
+81806.5'}, 'wds': [{'valuecode': 'A010105', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, {'code': 'zb.A010106_sj.2019D', 'data': {'data': 386165.3, 'dotcount': 1, 'hasdata': True, 'strdata': '386165.3'}, 'wds': [{'valuecode': 'A010106', 'wdcode': 'zb'},
+{'valuecode': '2019D', 'wdcode': 'sj'}]}, {'code': 'zb.A010106_sj.2019C', 'data': {'data': 276912.5, 'dotcount': 1, 'hasdata': True, 'strdata': '276912.5'}, 'wds': [{'valuecode': 'A010106', 'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A01010
+6_sj.2019B', 'data': {'data': 179122.1, 'dotcount': 1, 'hasdata': True, 'strdata': '179122.1'}, 'wds': [{'valuecode': 'A010106', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'code': 'zb.A010106_sj.2019A', 'data': {'data': 81806.5, 'dotcount': 1, 'hasdat
+a': True, 'strdata': '81806.5'}, 'wds': [{'valuecode': 'A010106', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, {'code': 'zb.A010107_sj.2019D', 'data': {'data': 141305.2, 'dotcount': 1, 'hasdata': True, 'strdata': '141305.2'}, 'wds': [{'valuecode': 'A0101
+07', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wdcode': 'sj'}]}, {'code': 'zb.A010107_sj.2019C', 'data': {'data': 134620.4, 'dotcount': 1, 'hasdata': True, 'strdata': '134620.4'}, 'wds': [{'valuecode': 'A010107', 'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]
+}, {'code': 'zb.A010107_sj.2019B', 'data': {'data': 130820.6, 'dotcount': 1, 'hasdata': True, 'strdata': '130820.6'}, 'wds': [{'valuecode': 'A010107', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'code': 'zb.A010107_sj.2019A', 'data': {'data': 127486.9,
+ 'dotcount': 1, 'hasdata': True, 'strdata': '127486.9'}, 'wds': [{'valuecode': 'A010107', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, {'code': 'zb.A010108_sj.2019D', 'data': {'data': 534233.1, 'dotcount': 1, 'hasdata': True, 'strdata': '534233.1'}, 'wds
+': [{'valuecode': 'A010108', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wdcode': 'sj'}]}, {'code': 'zb.A010108_sj.2019C', 'data': {'data': 392927.9, 'dotcount': 1, 'hasdata': True, 'strdata': '392927.9'}, 'wds': [{'valuecode': 'A010108', 'wdcode': 'zb'}, {'valuecode': '
+2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A010108_sj.2019B', 'data': {'data': 258307.5, 'dotcount': 1, 'hasdata': True, 'strdata': '258307.5'}, 'wds': [{'valuecode': 'A010108', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'code': 'zb.A010108_sj.2019A', 'd
+ata': {'data': 127486.9, 'dotcount': 1, 'hasdata': True, 'strdata': '127486.9'}, 'wds': [{'valuecode': 'A010108', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, {'code': 'zb.A010109_sj.2019D', 'data': {'data': 28579.9, 'dotcount': 1, 'hasdata': True, 'strd
+ata': '28579.9'}, 'wds': [{'valuecode': 'A010109', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wdcode': 'sj'}]}, {'code': 'zb.A010109_sj.2019C', 'data': {'data': 20629, 'dotcount': 1, 'hasdata': True, 'strdata': '20629.0'}, 'wds': [{'valuecode': 'A010109', 'wdcode': 'zb'
+}, {'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A010109_sj.2019B', 'data': {'data': 15108.7, 'dotcount': 1, 'hasdata': True, 'strdata': '15108.7'}, 'wds': [{'valuecode': 'A010109', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'code': 'zb.A0101
+09_sj.2019A', 'data': {'data': 9249.4, 'dotcount': 1, 'hasdata': True, 'strdata': '9249.4'}, 'wds': [{'valuecode': 'A010109', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, {'code': 'zb.A01010A_sj.2019D', 'data': {'data': 73567.1, 'dotcount': 1, 'hasdata':
+ True, 'strdata': '73567.1'}, 'wds': [{'valuecode': 'A01010A', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wdcode': 'sj'}]}, {'code': 'zb.A01010A_sj.2019C', 'data': {'data': 44987.1, 'dotcount': 1, 'hasdata': True, 'strdata': '44987.1'}, 'wds': [{'valuecode': 'A01010A',
+'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A01010A_sj.2019B', 'data': {'data': 24358.1, 'dotcount': 1, 'hasdata': True, 'strdata': '24358.1'}, 'wds': [{'valuecode': 'A01010A', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'co
+de': 'zb.A01010A_sj.2019A', 'data': {'data': 9249.4, 'dotcount': 1, 'hasdata': True, 'strdata': '9249.4'}, 'wds': [{'valuecode': 'A01010A', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, {'code': 'zb.A01010B_sj.2019D', 'data': {'data': 86721.6, 'dotcount':
+ 1, 'hasdata': True, 'strdata': '86721.6'}, 'wds': [{'valuecode': 'A01010B', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wdcode': 'sj'}]}, {'code': 'zb.A01010B_sj.2019C', 'data': {'data': 79501.8, 'dotcount': 1, 'hasdata': True, 'strdata': '79501.8'}, 'wds': [{'valuecode
+': 'A01010B', 'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A01010B_sj.2019B', 'data': {'data': 79820.7, 'dotcount': 1, 'hasdata': True, 'strdata': '79820.7'}, 'wds': [{'valuecode': 'A01010B', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode':
+ 'sj'}]}, {'code': 'zb.A01010B_sj.2019A', 'data': {'data': 71064.5, 'dotcount': 1, 'hasdata': True, 'strdata': '71064.5'}, 'wds': [{'valuecode': 'A01010B', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, {'code': 'zb.A01010C_sj.2019D', 'data': {'data': 3171
+08.7, 'dotcount': 1, 'hasdata': True, 'strdata': '317108.7'}, 'wds': [{'valuecode': 'A01010C', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wdcode': 'sj'}]}, {'code': 'zb.A01010C_sj.2019C', 'data': {'data': 230387, 'dotcount': 1, 'hasdata': True, 'strdata': '230387.0'}, '
+wds': [{'valuecode': 'A01010C', 'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A01010C_sj.2019B', 'data': {'data': 150885.2, 'dotcount': 1, 'hasdata': True, 'strdata': '150885.2'}, 'wds': [{'valuecode': 'A01010C', 'wdcode': 'zb'}, {'valuecode'
+: '2019B', 'wdcode': 'sj'}]}, {'code': 'zb.A01010C_sj.2019A', 'data': {'data': 71064.5, 'dotcount': 1, 'hasdata': True, 'strdata': '71064.5'}, 'wds': [{'valuecode': 'A01010C', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, {'code': 'zb.A01010D_sj.2019D', '
+data': {'data': 73952.4, 'dotcount': 1, 'hasdata': True, 'strdata': '73952.4'}, 'wds': [{'valuecode': 'A01010D', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wdcode': 'sj'}]}, {'code': 'zb.A01010D_sj.2019C', 'data': {'data': 66823.8, 'dotcount': 1, 'hasdata': True, 'strda
+ta': '66823.8'}, 'wds': [{'valuecode': 'A01010D', 'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A01010D_sj.2019B', 'data': {'data': 68041.8, 'dotcount': 1, 'hasdata': True, 'strdata': '68041.8'}, 'wds': [{'valuecode': 'A01010D', 'wdcode': 'zb
+'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'code': 'zb.A01010D_sj.2019A', 'data': {'data': 60357.1, 'dotcount': 1, 'hasdata': True, 'strdata': '60357.1'}, 'wds': [{'valuecode': 'A01010D', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, {'code': 'zb.A010
+10E_sj.2019D', 'data': {'data': 269175.1, 'dotcount': 1, 'hasdata': True, 'strdata': '269175.1'}, 'wds': [{'valuecode': 'A01010E', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wdcode': 'sj'}]}, {'code': 'zb.A01010E_sj.2019C', 'data': {'data': 195222.7, 'dotcount': 1, 'has
+data': True, 'strdata': '195222.7'}, 'wds': [{'valuecode': 'A01010E', 'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A01010E_sj.2019B', 'data': {'data': 128398.9, 'dotcount': 1, 'hasdata': True, 'strdata': '128398.9'}, 'wds': [{'valuecode': 'A
+01010E', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'code': 'zb.A01010E_sj.2019A', 'data': {'data': 60357.1, 'dotcount': 1, 'hasdata': True, 'strdata': '60357.1'}, 'wds': [{'valuecode': 'A01010E', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'
+}]}, {'code': 'zb.A01011D_sj.2019D', 'data': {'data': 23072.4, 'dotcount': 1, 'hasdata': True, 'strdata': '23072.4'}, 'wds': [{'valuecode': 'A01011D', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wdcode': 'sj'}]}, {'code': 'zb.A01011D_sj.2019C', 'data': {'data': 18734.6,
+'dotcount': 1, 'hasdata': True, 'strdata': '18734.6'}, 'wds': [{'valuecode': 'A01011D', 'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A01011D_sj.2019B', 'data': {'data': 17954.2, 'dotcount': 1, 'hasdata': True, 'strdata': '17954.2'}, 'wds': [
+{'valuecode': 'A01011D', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'code': 'zb.A01011D_sj.2019A', 'data': {'data': 11143.1, 'dotcount': 1, 'hasdata': True, 'strdata': '11143.1'}, 'wds': [{'valuecode': 'A01011D', 'wdcode': 'zb'}, {'valuecode': '2019A'
+, 'wdcode': 'sj'}]}, {'code': 'zb.A01011E_sj.2019D', 'data': {'data': 70904.3, 'dotcount': 1, 'hasdata': True, 'strdata': '70904.3'}, 'wds': [{'valuecode': 'A01011E', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wdcode': 'sj'}]}, {'code': 'zb.A01011E_sj.2019C', 'data': {'
+data': 47831.9, 'dotcount': 1, 'hasdata': True, 'strdata': '47831.9'}, 'wds': [{'valuecode': 'A01011E', 'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A01011E_sj.2019B', 'data': {'data': 29097.3, 'dotcount': 1, 'hasdata': True, 'strdata': '290
+97.3'}, 'wds': [{'valuecode': 'A01011E', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'code': 'zb.A01011E_sj.2019A', 'data': {'data': 11143.1, 'dotcount': 1, 'hasdata': True, 'strdata': '11143.1'}, 'wds': [{'valuecode': 'A01011E', 'wdcode': 'zb'}, {'val
+uecode': '2019A', 'wdcode': 'sj'}]}, {'code': 'zb.A01011F_sj.2019D', 'data': {'data': 26795.9, 'dotcount': 1, 'hasdata': True, 'strdata': '26795.9'}, 'wds': [{'valuecode': 'A01011F', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wdcode': 'sj'}]}, {'code': 'zb.A01011F_sj.20
+19C', 'data': {'data': 23993.6, 'dotcount': 1, 'hasdata': True, 'strdata': '23993.6'}, 'wds': [{'valuecode': 'A01011F', 'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A01011F_sj.2019B', 'data': {'data': 23097, 'dotcount': 1, 'hasdata': True, '
+strdata': '23097.0'}, 'wds': [{'valuecode': 'A01011F', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'code': 'zb.A01011F_sj.2019A', 'data': {'data': 21959.2, 'dotcount': 1, 'hasdata': True, 'strdata': '21959.2'}, 'wds': [{'valuecode': 'A01011F', 'wdcode'
+: 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, {'code': 'zb.A01011G_sj.2019D', 'data': {'data': 95845.7, 'dotcount': 1, 'hasdata': True, 'strdata': '95845.7'}, 'wds': [{'valuecode': 'A01011G', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wdcode': 'sj'}]}, {'code': 'zb
+.A01011G_sj.2019C', 'data': {'data': 69049.8, 'dotcount': 1, 'hasdata': True, 'strdata': '69049.8'}, 'wds': [{'valuecode': 'A01011G', 'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A01011G_sj.2019B', 'data': {'data': 45056.2, 'dotcount': 1, 'h
+asdata': True, 'strdata': '45056.2'}, 'wds': [{'valuecode': 'A01011G', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'code': 'zb.A01011G_sj.2019A', 'data': {'data': 21959.2, 'dotcount': 1, 'hasdata': True, 'strdata': '21959.2'}, 'wds': [{'valuecode': 'A0
+1011G', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, {'code': 'zb.A01011H_sj.2019D', 'data': {'data': 11244, 'dotcount': 1, 'hasdata': True, 'strdata': '11244.0'}, 'wds': [{'valuecode': 'A01011H', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wdcode': 'sj'}]}
+, {'code': 'zb.A01011H_sj.2019C', 'data': {'data': 11310.2, 'dotcount': 1, 'hasdata': True, 'strdata': '11310.2'}, 'wds': [{'valuecode': 'A01011H', 'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A01011H_sj.2019B', 'data': {'data': 10861.3, 'do
+tcount': 1, 'hasdata': True, 'strdata': '10861.3'}, 'wds': [{'valuecode': 'A01011H', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'code': 'zb.A01011H_sj.2019A', 'data': {'data': 9386.6, 'dotcount': 1, 'hasdata': True, 'strdata': '9386.6'}, 'wds': [{'val
+uecode': 'A01011H', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, {'code': 'zb.A01011I_sj.2019D', 'data': {'data': 42802.1, 'dotcount': 1, 'hasdata': True, 'strdata': '42802.1'}, 'wds': [{'valuecode': 'A01011I', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wd
+code': 'sj'}]}, {'code': 'zb.A01011I_sj.2019C', 'data': {'data': 31558.1, 'dotcount': 1, 'hasdata': True, 'strdata': '31558.1'}, 'wds': [{'valuecode': 'A01011I', 'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A01011I_sj.2019B', 'data': {'data'
+: 20247.9, 'dotcount': 1, 'hasdata': True, 'strdata': '20247.9'}, 'wds': [{'valuecode': 'A01011I', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'code': 'zb.A01011I_sj.2019A', 'data': {'data': 9386.6, 'dotcount': 1, 'hasdata': True, 'strdata': '9386.6'},
+ 'wds': [{'valuecode': 'A01011I', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, {'code': 'zb.A01011J_sj.2019D', 'data': {'data': 5071.2, 'dotcount': 1, 'hasdata': True, 'strdata': '5071.2'}, 'wds': [{'valuecode': 'A01011J', 'wdcode': 'zb'}, {'valuecode':
+'2019D', 'wdcode': 'sj'}]}, {'code': 'zb.A01011J_sj.2019C', 'data': {'data': 4610.5, 'dotcount': 1, 'hasdata': True, 'strdata': '4610.5'}, 'wds': [{'valuecode': 'A01011J', 'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A01011J_sj.2019B', 'data
+': {'data': 4123, 'dotcount': 1, 'hasdata': True, 'strdata': '4123.0'}, 'wds': [{'valuecode': 'A01011J', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'code': 'zb.A01011J_sj.2019A', 'data': {'data': 4234.9, 'dotcount': 1, 'hasdata': True, 'strdata': '423
+4.9'}, 'wds': [{'valuecode': 'A01011J', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, {'code': 'zb.A01011K_sj.2019D', 'data': {'data': 18039.5, 'dotcount': 1, 'hasdata': True, 'strdata': '18039.5'}, 'wds': [{'valuecode': 'A01011K', 'wdcode': 'zb'}, {'valu
+ecode': '2019D', 'wdcode': 'sj'}]}, {'code': 'zb.A01011K_sj.2019C', 'data': {'data': 12968.3, 'dotcount': 1, 'hasdata': True, 'strdata': '12968.3'}, 'wds': [{'valuecode': 'A01011K', 'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A01011K_sj.201
+9B', 'data': {'data': 8357.9, 'dotcount': 1, 'hasdata': True, 'strdata': '8357.9'}, 'wds': [{'valuecode': 'A01011K', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'code': 'zb.A01011K_sj.2019A', 'data': {'data': 4234.9, 'dotcount': 1, 'hasdata': True, 'st
+rdata': '4234.9'}, 'wds': [{'valuecode': 'A01011K', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, 
+
+{'code': 'zb.A01011L_sj.2019D', 'data': {'data': 18973.8, 'dotcount': 1, 'hasdata': True, 'strdata': '18973.8'}, 'wds': [{'valuecode': 'A01011L', 'wdcode': '
+zb'}, {'valuecode': '2019D', 'wdcode': 'sj'}]}, {'code': 'zb.A01011L_sj.2019C', 'data': {'data': 19388.3, 'dotcount': 1, 'hasdata': True, 'strdata': '19388.3'}, 'wds': [{'valuecode': 'A01011L', 'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A0
+1011L_sj.2019B', 'data': {'data': 19064.9, 'dotcount': 1, 'hasdata': True, 'strdata': '19064.9'}, 'wds': [{'valuecode': 'A01011L', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'code': 'zb.A01011L_sj.2019A', 'data': {'data': 19650.1, 'dotcount': 1, 'hasd
+ata': True, 'strdata': '19650.1'}, 'wds': [{'valuecode': 'A01011L', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, 
+
+{'code': 'zb.A01011M_sj.2019D', 'data': {'data': 77077.1, 'dotcount': 1, 'hasdata': True, 'strdata': '77077.1'}, 'wds': [{'valuecode': 'A0101
+1M', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wdcode': 'sj'}]}, {'code': 'zb.A01011M_sj.2019C', 'data': {'data': 58103.3, 'dotcount': 1, 'hasdata': True, 'strdata': '58103.3'}, 'wds': [{'valuecode': 'A01011M', 'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]},
+ {'code': 'zb.A01011M_sj.2019B', 'data': {'data': 38715, 'dotcount': 1, 'hasdata': True, 'strdata': '38715.0'}, 'wds': [{'valuecode': 'A01011M', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'code': 'zb.A01011M_sj.2019A', 'data': {'data': 19650.1, 'dotco
+unt': 1, 'hasdata': True, 'strdata': '19650.1'}, 'wds': [{'valuecode': 'A01011M', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, 
+
+{'code': 'zb.A01011N_sj.2019D', 'data': {'data': 18798.9, 'dotcount': 1, 'hasdata': True, 'strdata': '18798.9'}, 'wds': [{'valu
+ecode': 'A01011N', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wdcode': 'sj'}]}, {'code': 'zb.A01011N_sj.2019C', 'data': {'data': 17369, 'dotcount': 1, 'hasdata': True, 'strdata': '17369.0'}, 'wds': [{'valuecode': 'A01011N', 'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcod
+e': 'sj'}]}, {'code': 'zb.A01011N_sj.2019B', 'data': {'data': 17484.4, 'dotcount': 1, 'hasdata': True, 'strdata': '17484.4'}, 'wds': [{'valuecode': 'A01011N', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'code': 'zb.A01011N_sj.2019A', 'data': {'data': 1
+5979.2, 'dotcount': 1, 'hasdata': True, 'strdata': '15979.2'}, 'wds': [{'valuecode': 'A01011N', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, 
+
+{'code': 'zb.A01011O_sj.2019D', 'data': {'data': 69631.5, 'dotcount': 1, 'hasdata': True, 'strdata': '69631.5'},
+'wds': [{'valuecode': 'A01011O', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wdcode': 'sj'}]}, {'code': 'zb.A01011O_sj.2019C', 'data': {'data': 50832.6, 'dotcount': 1, 'hasdata': True, 'strdata': '50832.6'}, 'wds': [{'valuecode': 'A01011O', 'wdcode': 'zb'}, {'valuecode':
+ '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A01011O_sj.2019B', 'data': {'data': 33463.6, 'dotcount': 1, 'hasdata': True, 'strdata': '33463.6'}, 'wds': [{'valuecode': 'A01011O', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'code': 'zb.A01011O_sj.2019A', 'd
+ata': {'data': 15979.2, 'dotcount': 1, 'hasdata': True, 'strdata': '15979.2'}, 'wds': [{'valuecode': 'A01011O', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, 
+
+{'code': 'zb.A01011P_sj.2019D', 'data': {'data': 8341.3, 'dotcount': 1, 'hasdata': True, 'strdata
+': '8341.3'}, 'wds': [{'valuecode': 'A01011P', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wdcode': 'sj'}]}, {'code': 'zb.A01011P_sj.2019C', 'data': {'data': 7528.1, 'dotcount': 1, 'hasdata': True, 'strdata': '7528.1'}, 'wds': [{'valuecode': 'A01011P', 'wdcode': 'zb'}, {
+'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A01011P_sj.2019B', 'data': {'data': 8395.6, 'dotcount': 1, 'hasdata': True, 'strdata': '8395.6'}, 'wds': [{'valuecode': 'A01011P', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'code': 'zb.A01011P_sj.
+2019A', 'data': {'data': 8424.8, 'dotcount': 1, 'hasdata': True, 'strdata': '8424.8'}, 'wds': [{'valuecode': 'A01011P', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, 
+
+{'code': 'zb.A01011Q_sj.2019D', 'data': {'data': 32689.7, 'dotcount': 1, 'hasdata': True,
+ 'strdata': '32689.7'}, 'wds': [{'valuecode': 'A01011Q', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wdcode': 'sj'}]}, {'code': 'zb.A01011Q_sj.2019C', 'data': {'data': 24348.4, 'dotcount': 1, 'hasdata': True, 'strdata': '24348.4'}, 'wds': [{'valuecode': 'A01011Q', 'wdcod
+e': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A01011Q_sj.2019B', 'data': {'data': 16820.3, 'dotcount': 1, 'hasdata': True, 'strdata': '16820.3'}, 'wds': [{'valuecode': 'A01011Q', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'code': '
+zb.A01011Q_sj.2019A', 'data': {'data': 8424.8, 'dotcount': 1, 'hasdata': True, 'strdata': '8424.8'}, 'wds': [{'valuecode': 'A01011Q', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, 
+
+{'code': 'zb.A01011R_sj.2019D', 'data': {'data': 9262.5, 'dotcount': 1, 'ha
+sdata': True, 'strdata': '9262.5'}, 'wds': [{'valuecode': 'A01011R', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wdcode': 'sj'}]}, {'code': 'zb.A01011R_sj.2019C', 'data': {'data': 8409.1, 'dotcount': 1, 'hasdata': True, 'strdata': '8409.1'}, 'wds': [{'valuecode': 'A01011
+R', 'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A01011R_sj.2019B', 'data': {'data': 7596.7, 'dotcount': 1, 'hasdata': True, 'strdata': '7596.7'}, 'wds': [{'valuecode': 'A01011R', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode': 'sj'}]}, {'
+code': 'zb.A01011R_sj.2019A', 'data': {'data': 7665.1, 'dotcount': 1, 'hasdata': True, 'strdata': '7665.1'}, 'wds': [{'valuecode': 'A01011R', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, 
+
+{'code': 'zb.A01011S_sj.2019D', 'data': {'data': 32933.5, 'dotcount
+': 1, 'hasdata': True, 'strdata': '32933.5'}, 'wds': [{'valuecode': 'A01011S', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wdcode': 'sj'}]}, {'code': 'zb.A01011S_sj.2019C', 'data': {'data': 23670.9, 'dotcount': 1, 'hasdata': True, 'strdata': '23670.9'}, 'wds': [{'valueco
+de': 'A01011S', 'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A01011S_sj.2019B', 'data': {'data': 15261.8, 'dotcount': 1, 'hasdata': True, 'strdata': '15261.8'}, 'wds': [{'valuecode': 'A01011S', 'wdcode': 'zb'}, {'valuecode': '2019B', 'wdcode
+': 'sj'}]}, {'code': 'zb.A01011S_sj.2019A', 'data': {'data': 7665.1, 'dotcount': 1, 'hasdata': True, 'strdata': '7665.1'}, 'wds': [{'valuecode': 'A01011S', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, 
+{'code': 'zb.A01012P_sj.2019D', 'data': {'data': 4115
+8.2, 'dotcount': 1, 'hasdata': True, 'strdata': '41158.2'}, 'wds': [{'valuecode': 'A01012P', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wdcode': 'sj'}]}, {'code': 'zb.A01012P_sj.2019C', 'data': {'data': 40734.5, 'dotcount': 1, 'hasdata': True, 'strdata': '40734.5'}, 'wd
+s': [{'valuecode': 'A01012P', 'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A01012P_sj.2019B', 'data': {'data': 39067.3, 'dotcount': 1, 'hasdata': True, 'strdata': '39067.3'}, 'wds': [{'valuecode': 'A01012P', 'wdcode': 'zb'}, {'valuecode': '2
+019B', 'wdcode': 'sj'}]}, {'code': 'zb.A01012P_sj.2019A', 'data': {'data': 39306, 'dotcount': 1, 'hasdata': True, 'strdata': '39306.0'}, 'wds': [{'valuecode': 'A01012P', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}, 
+{'code': 'zb.A01012Q_sj.2019D', 'data':
+ {'data': 160266, 'dotcount': 1, 'hasdata': True, 'strdata': '160266.0'}, 'wds': [{'valuecode': 'A01012Q', 'wdcode': 'zb'}, {'valuecode': '2019D', 'wdcode': 'sj'}]}, {'code': 'zb.A01012Q_sj.2019C', 'data': {'data': 119107.8, 'dotcount': 1, 'hasdata': True, 'strdata':
+'119107.8'}, 'wds': [{'valuecode': 'A01012Q', 'wdcode': 'zb'}, {'valuecode': '2019C', 'wdcode': 'sj'}]}, {'code': 'zb.A01012Q_sj.2019B', 'data': {'data': 78373.3, 'dotcount': 1, 'hasdata': True, 'strdata': '78373.3'}, 'wds': [{'valuecode': 'A01012Q', 'wdcode': 'zb'},
+{'valuecode': '2019B', 'wdcode': 'sj'}]}, {'code': 'zb.A01012Q_sj.2019A', 'data': {'data': 39306, 'dotcount': 1, 'hasdata': True, 'strdata': '39306.0'}, 'wds': [{'valuecode': 'A01012Q', 'wdcode': 'zb'}, {'valuecode': '2019A', 'wdcode': 'sj'}]}
+], 
+
+'freshsort': 0, 'hasdatacount': 128, 
+
+'wdnodes': [
+{'nodes': [{'cname': '国内生产总值_当季值', 'code': 'S', 'dotcount': 1, 'exp': '国内生产总值(GDP)是指按市场价格计算的一个国家（或地区）所有常住单位在一定时期内生产活动的最终成果。国内生产总值有三种表现形态，即价值形态、收入形态和产品形
+态。从价值形态看，它是所有常住单位在一定时期内生产的全部货物和服务价值与同期投入的全部非固定资产货物和服务价值的差额，即所有常住单位的增加值之和；从收入形态看，它是所有常住单位在一定时期内创造并分配给常住单位和非常住单位的初次收入之和；从产品形态看，它是所有常住单位在
+一定时期内最终使用的货物和服���价值与货物和服务净出口价值之和。在实际核算中，国内生产总值有三种计算方法，即生产法、收入法和支出法。三种方法分别从不同的方面反映国内生产总值及其构成。', 'ifshowcode': False, 'memo': '按当年价格计算。累计数据由当季数据相加得到。||三次
+产业分类依据国家统计局2018年修订的《三次产业划分规定》。第一产业是指农、林、牧、渔业（不含农、林、牧、渔专业及辅助性活动）；第二产业是指采矿业（不含开采专业及辅助性活动），制造业（不含金属制品、机械和设备修理业），电力、热力、燃气及水生产和供应业，建筑业；第三产业即服
+务业，是指除第一产业、第二产业以外的其他行业。||行业分类采用《国民经济行业分类（GB/T 4754－2017）》。||2015年之前各季度，其他服务业包含信息传输、软件和信息技术服务业，租赁和商务服务业，科学研究和技术服务业，水利、环境和公共设施管理业，居民服务、修理和其他服务业，教育
+，卫生和社会工作，文化、体育和娱乐业，公共管理、社会保障和社会组织共9个门类行业；2015年及之后各季度，其他服务业包含科学研究和技术服务业，水利、环境和公共设施管理业，居民服务、修理和其他服务业，教育，卫生和社会工作，文化、体育和娱乐业，公共管理、社会保障和社会组织共7个
+门类行业。', 'name': '国内生产总值_当季值', 'nodesort': '1', 'sortcode': 2, 'tag': '', 'unit': '亿元'}, {'cname': '国内生产总值_累计值', 'code': 'A010102', 'dotcount': 1, 'exp': '国内生产总值(GDP)是指按市场价格计算的一个国家（或地区）所有常住单位在一定时期内生产活动的
+最终成果。国内生产总值有三种表现形态，即价值形态、收入形态和产品形态。从价值形态看，它是所有常住单位在一定时期内生产的全部货物和服务价值与同期投入的全部非固定资产货物和服务价值的差额，即所有常住单位的增加值之和；从收入形态看，它是所有常住单位在一定时期内创造并分配给常
+住单位和非常住单位的初次收入之和；从产品形态看，它是所有常住单位在一定时期内最终使用的货物和服务价值与货物和服务净出口价值之和。在实际核算中，国内生产总值有三种计算方法，即生产法、收入法和支出法。三种方法分别从不同的方面反映国内生产总值及其构成。', 'ifshowcode': False
+, 'memo': '', 'name': '国内生产总值_累计值', 'nodesort': '1', 'sortcode': 3, 'tag': '', 'unit': '亿元'}, {'cname': '第一产业增加值_当季值', 'code': 'A010103', 'dotcount': 1, 'exp': '第一产业增加值是指按市场价格计算的一个国家（或地区）所有常住单位在一定时期内从事第一产
+业生产活动的最终成果。第一产业是指农、林、牧、渔业（不含农、林、牧、渔服务业）。', 'ifshowcode': False, 'memo': '', 'name': '第一产业增加值_当季值', 'nodesort': '1', 'sortcode': 4, 'tag': '', 'unit': '亿元'}, {'cname': '第一产业增加值_累计值', 'code': 'A010104', 'dotc
+ount': 1, 'exp': '第一产业增加值是指按市场价格计算的一个国家（或地区）所有常住单位在一定时期内从事第一产业生产活动的最终成果。第一产业是指农、林、牧、渔业（不含农、林、牧、渔服务业）。', 'ifshowcode': False, 'memo': '', 'name': '第一产业增加值_累计值', 'nodesort': '1'
+, 'sortcode': 5, 'tag': '', 'unit': '亿元'}, {'cname': '第二产业增加值_当季值', 'code': 'A010105', 'dotcount': 1, 'exp': '第二产业增加值是指按市场价格计算的一个国家（或地区）所有常住单位在一定时期内从事第二产业生产活动的最终成果。第二产业是指采矿业（不含开采辅助活动）
+，制造业（不含金属制品、机械和设备修理业），电力、热力、燃气及水生产和供应业，建筑业。', 'ifshowcode': False, 'memo': '', 'name': '第二产业增加值_当季值', 'nodesort': '1', 'sortcode': 6, 'tag': '', 'unit': '亿元'}, {'cname': '第二产业增加值_累计值', 'code': 'A010106',
+ 'dotcount': 1, 'exp': '第二产业增加值是指按市场价格计算的一个国家（或地区）所有常住单位在一定时期内从事第二产业生产活动的最终成果。第二产业是指采矿业（不含开采辅助活动），制造业（不含金属制品、机械和设备修理业），电力、热力、燃气及水生产和供应业，建筑业。', 'ifshowco
+de': False, 'memo': '', 'name': '第二产业增加值_累计值', 'nodesort': '1', 'sortcode': 7, 'tag': '', 'unit': '亿元'}, {'cname': '第三产业增加值_当季值', 'code': 'A010107', 'dotcount': 1, 'exp': '第三产业增加值是指按市场价值计算的一个国家（或地区）所有常住单位在一定时期
+内从事第三产业生产活动的最终成果。第三产业是指除第一、二产业以外的其他行业。', 'ifshowcode': False, 'memo': '', 'name': '第三产业增加值_当季值', 'nodesort': '1', 'sortcode': 8, 'tag': '', 'unit': '亿元'}, {'cname': '第三产业增加值_累计值', 'code': 'A010108', 'dotcount
+': 1, 'exp': '第三产业增加值是指按市场价值计算的一个国家（或地区）所有常住单位在一定时期内从事第三产业生产活动的最终成果。第三产业是指除第一、二产业以外的其他行业。', 'ifshowcode': False, 'memo': '', 'name': '第三产业增加值_累计值', 'nodesort': '1', 'sortcode': 9, 'ta
+g': '', 'unit': '亿元'}, {'cname': '农林牧渔业增加值_当季值', 'code': 'A010109', 'dotcount': 1, 'exp': '农林牧渔业增加值是指按市场价格计算的一个国家（或地区）所有常住单位在一定时期内从事农林牧渔业生产活动的最终成果。', 'ifshowcode': False, 'memo': '', 'name': '农林牧
+渔业增加值_当季值', 'nodesort': '1', 'sortcode': 10, 'tag': '', 'unit': '亿元'}, {'cname': '农林牧渔业增加值_累计值', 'code': 'A01010A', 'dotcount': 1, 'exp': '农林牧渔业增加值是指按市场价格计算的一个国家（或地区）所有常住单位在一定时期内从事农林牧渔业生产活动的最终成
+果。', 'ifshowcode': False, 'memo': '', 'name': '农林牧渔业增加值_累计值', 'nodesort': '1', 'sortcode': 11, 'tag': '', 'unit': '亿元'}, {'cname': '工业增加值_当季值', 'code': 'A01010B', 'dotcount': 1, 'exp': '工业增加值是指工业企业在报告期内以货币形式表现的从事工业生
+产活动的最终成果。工业增加值有两种计算方法：一是生产法，即工业总产出减去工业中间投入加上应交增值税；二是收入法，即从收入的角度出发，根据生产要素在生产过程中应得到的收入份额计算，具体构成项目有固定资产折旧、劳动者报酬、生产税净额、营业盈余。', 'ifshowcode': False, 'mem
+o': '', 'name': '工业增加值_当季值', 'nodesort': '1', 'sortcode': 12, 'tag': '', 'unit': '亿元'}, {'cname': '工业增加值_累计值', 'code': 'A01010C', 'dotcount': 1, 'exp': '工业增加值是指工业企业在报告期内以货币形式表现的从事工业生产活动的最终成果。工业增加值有两种计算
+方法：一是生产法，即工业总产出减去工业中间投入加上应交增值税；二是收入法，即从收入的角度出发，根据生产要素在生产过程中应得到的收入份额计算，具体构成项目有固定资产折旧、劳动者报酬、生产税净额、营业盈余。', 'ifshowcode': False, 'memo': '', 'name': '工业增加值_累计值', '
+nodesort': '1', 'sortcode': 13, 'tag': '', 'unit': '亿元'}, {'cname': '制造业增加值_当季值', 'code': 'A01010D', 'dotcount': 1, 'exp': '', 'ifshowcode': False, 'memo': '', 'name': '制造业增加值_当季值', 'nodesort': '1', 'sortcode': 14, 'tag': '', 'unit': '亿元'}, {'cna
+me': '制造业增加值_累计值', 'code': 'A01010E', 'dotcount': 1, 'exp': '', 'ifshowcode': False, 'memo': '', 'name': '制造业增加值_累计值', 'nodesort': '1', 'sortcode': 15, 'tag': '', 'unit': '亿元'}, {'cname': '建筑业增加值_当季值', 'code': 'A01011D', 'dotcount': 1, 'ex
+p': '建筑业增加值是指建筑业企业在报告期内以货币形式表现的从事建筑业生产活动的最终成果。目前建筑业增加值采用收入法计算，即从收入的角度出发，根据生产要素在生产过程中应得的收入份额计算。', 'ifshowcode': False, 'memo': '', 'name': '建筑业增加值_当季值', 'nodesort': '1', '
+sortcode': 16, 'tag': '', 'unit': '亿元'}, {'cname': '建筑业增加值_累计值', 'code': 'A01011E', 'dotcount': 1, 'exp': '建筑业增加值是指建筑业企业在报告期内以货币形式表现的从事建筑业生产活动的最终成果。目前建筑业增加值采用收入法计算，即从收入的角度出发，根据生产要素在生
+产过程中应得的收入份额计算。', 'ifshowcode': False, 'memo': '', 'name': '建筑业增加值_累计值', 'nodesort': '1', 'sortcode': 17, 'tag': '', 'unit': '亿元'}, {'cname': '批发和零售业增加值_当季值', 'code': 'A01011F', 'dotcount': 1, 'exp': '批发和零售业增加值是指按市场价
+格计算的一个国家（或地区）所有常住单位在一定时期内从事批发和零售业生产活动的最终成果。', 'ifshowcode': False, 'memo': '', 'name': '批发和零售业增加值_当季值', 'nodesort': '1', 'sortcode': 18, 'tag': '', 'unit': '亿元'}, {'cname': '批发和零售业增加值_累计值', 'code': '
+A01011G', 'dotcount': 1, 'exp': '批发和零售业增加值是指按市场价格计算的一个国家（或地区）所有常住单位在一定时期内从事批发和零售业生产活动的最终成果。', 'ifshowcode': False, 'memo': '', 'name': '批发和零售业增加值_累计值', 'nodesort': '1', 'sortcode': 19, 'tag': '', 'u
+nit': '亿元'}, {'cname': '交通运输、仓储和邮政业增加值_当季值', 'code': 'A01011H', 'dotcount': 1, 'exp': '交通运输、仓储和邮政业增加值是指按市场价格计算的一个国家（或地区）所有常住单位在一定时期内从事交通运输、仓储和邮政业生产活动的最终成果。', 'ifshowcode': False, 'm
+emo': '', 'name': '交通运输、仓储和邮政业增加值_当季值', 'nodesort': '1', 'sortcode': 20, 'tag': '', 'unit': '亿元'}, {'cname': '交通运输、仓储和邮政业增加值_累计值', 'code': 'A01011I', 'dotcount': 1, 'exp': '交通运输、仓储和邮政业增加值是指按市场价格计算的一个国家（
+或地区）所有常住单位在一定时期内从事交通运输、仓储和邮政业生产活动的最终成果。', 'ifshowcode': False, 'memo': '', 'name': '交通运输、仓储和邮政业增加值_累计值', 'nodesort': '1', 'sortcode': 21, 'tag': '', 'unit': '亿元'}, {'cname': '住宿和餐饮业增加值_当季值', 'code':
+ 'A01011J', 'dotcount': 1, 'exp': '住宿和餐饮业增加值是指按市场价格计算的一个国家（或地区）所有常住单位在一定时期内从事住宿和餐饮业生产活动的最终成果。', 'ifshowcode': False, 'memo': '', 'name': '住宿和餐饮业增加值_当季值', 'nodesort': '1', 'sortcode': 22, 'tag': '',
+'unit': '亿元'}, {'cname': '住宿和餐饮业增加值_累计值', 'code': 'A01011K', 'dotcount': 1, 'exp': '住宿和餐饮业增加值是指按市场价格计算的一个国家（或地区）所有常住单位在一定时期内从事住宿和餐饮业生产活动的最终成果。', 'ifshowcode': False, 'memo': '', 'name': '住宿和餐
+饮业增加值_累计值', 'nodesort': '1', 'sortcode': 23, 'tag': '', 'unit': '亿元'}, {'cname': '金融业增加值_当季值', 'code': 'A01011L', 'dotcount': 1, 'exp': '金融业增加值是指按市场价格计算的一个国家（或地区）所有常住单位在一定时期内从事金融业生产活动的最终成果。', 'ifsh
+owcode': False, 'memo': '', 'name': '金融业增加值_当季值', 'nodesort': '1', 'sortcode': 24, 'tag': '', 'unit': '亿元'}, {'cname': '金融业增加值_累计值', 'code': 'A01011M', 'dotcount': 1, 'exp': '金融业增加值是指按市场价格计算的一个国家（或地区）所有常住单位在一定时期
+内从事金融业生产活动的最终成果。', 'ifshowcode': False, 'memo': '', 'name': '金融业增加值_累计值', 'nodesort': '1', 'sortcode': 25, 'tag': '', 'unit': '亿元'}, {'cname': '房地产业增加值_当季值', 'code': 'A01011N', 'dotcount': 1, 'exp': '房地产业增加值是指按市场价格计
+算的一个国家（或地区）所有常住单位在一定时期内从事房地产业生产活动的最终成果。', 'ifshowcode': False, 'memo': '', 'name': '房地产业增加值_当季值', 'nodesort': '1', 'sortcode': 26, 'tag': '', 'unit': '亿元'}, {'cname': '房地产业增加值_累计值', 'code': 'A01011O', 'dotco
+unt': 1, 'exp': '房地产业增加值是指按市场价格计算的一个国家（或地区）所有常住单位在一定时期内从事房地产业生产活动的最终成果。', 'ifshowcode': False, 'memo': '', 'name': '房地产业增加值_累计值', 'nodesort': '1', 'sortcode': 27, 'tag': '', 'unit': '亿元'}, {'cname': '信
+息传输、软件和信息技术服务业增加值_当季值', 'code': 'A01011P', 'dotcount': 1, 'exp': '', 'ifshowcode': False, 'memo': '', 'name': '信息传输、软件和信息技术服务业增加值_当季值', 'nodesort': '1', 'sortcode': 28, 'tag': '', 'unit': '亿元'}, {'cname': '信息传输、软件和信
+息技术服务业增加值_累计值', 'code': 'A01011Q', 'dotcount': 1, 'exp': '', 'ifshowcode': False, 'memo': '', 'name': '信息传输、软件和信息技术服务业增加值_累计值', 'nodesort': '1', 'sortcode': 29, 'tag': '', 'unit': '亿元'}, {'cname': '租赁和商务服务业增加值_当季值', 'co
+de': 'A01011R', 'dotcount': 1, 'exp': '', 'ifshowcode': False, 'memo': '', 'name': '租赁和商务服务业增加值_当季值', 'nodesort': '1', 'sortcode': 30, 'tag': '', 'unit': '亿元'}, {'cname': '租赁和商务服务业增加值_累计值', 'code': 'A01011S', 'dotcount': 1, 'exp': '', 'if
+showcode': False, 'memo': '', 'name': '租赁和商务服务业增加值_累计值', 'nodesort': '1', 'sortcode': 31, 'tag': '', 'unit': '亿元'}, {'cname': '其他行业增加值_当季值', 'code': 'A01012P', 'dotcount': 1, 'exp': '其他行业增加值是指按市场价格计算的一个国家（或地区）所有常
+住单位在一定时期内从事其他行业生产活动的最终成果。', 'ifshowcode': False, 'memo': '', 'name': '其他行业增加值_当季值', 'nodesort': '1', 'sortcode': 32, 'tag': '', 'unit': '亿元'}, {'cname': '其他行业增加值_累计值', 'code': 'A01012Q', 'dotcount': 1, 'exp': '其他行业增
+加值是指按市场价格计算的一个国家（或地区）所有常住单位在一定时期内从事其他行业生产活动的最终成果。', 'ifshowcode': False, 'memo': '', 'name': '其他行业增加值_累计值', 'nodesort': '1', 'sortcode': 33, 'tag': '', 'unit': '亿元'}], 
+'wdcode': 'zb', 'wdname': '指标'}, 
+
+{'nodes': [{'cname': '2019年第四季度', 'code': '2019D', 'dotcount': 4, 'exp': '', 'ifshowcode': False, 'memo': '', 'name': '2019年第四季度', 'nodesort': '1', 'sortcode': 3, 'tag': '', 'unit': ''}, {'cname': '2019年第三季度', 'code': '2019C', 'dotcount': 4, 'exp': '', 'ifs
+howcode': False, 'memo': '', 'name': '2019年第三季度', 'nodesort': '1', 'sortcode': 4, 'tag': '', 'unit': ''}, {'cname': '2019年第二季度', 'code': '2019B', 'dotcount': 4, 'exp': '', 'ifshowcode': False, 'memo': '', 'name': '2019年第二季度', 'nodesort': '1', 'sortcode'
+: 5, 'tag': '', 'unit': ''}, {'cname': '2019年第一季度', 'code': '2019A', 'dotcount': 4, 'exp': '', 'ifshowcode': False, 'memo': '', 'name': '2019年第一季度', 'nodesort': '1', 'sortcode': 6, 'tag': '', 'unit': ''}], 
+'wdcode': 'sj', 'wdname': '时间'}
+
+]
+
+}
