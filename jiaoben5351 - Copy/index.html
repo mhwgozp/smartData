@@ -1,0 +1,341 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+
+<script src="jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="bootstrap.css">
+<style type="text/css">
+td{cursor:pointer;}
+.bgs {
+	background: #00B3EE;
+	color: #fff;
+}
+</style>
+	
+</head>
+<body>
+<table class="floor table table-striped table-hover" id="aaa">
+	<tbody>
+		<tr>
+			<td rowspan="3" onClick="choiceTitle(this)">五栋-1单元-选择栋</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">11楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">12楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">13楼</td>
+			<td class="bgTd"onclick="choiceFloor(this)" unit="1">14楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">15楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">16楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">17楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">18楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">19楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">20楼</td>
+			<td onClick="transverse(this)" type="0">选择行</td>
+		</tr>
+		<tr>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">11楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">12楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">13楼</td>
+			<td class="bgTd"onclick="choiceFloor(this)" unit="1">14楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">15楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">16楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">17楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">18楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">19楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">20楼</td>
+			<td onClick="transverse(this)" type="0">选择行</td>
+		</tr>
+		<tr>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">11楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">12楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">13楼</td>
+			<td class="bgTd"onclick="choiceFloor(this)" unit="1">14楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">15楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">16楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">17楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">18楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">19楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">20楼</td>
+			<td onClick="transverse(this)" type="0">选择行</td>
+		</tr>
+		<tr>
+			<td rowspan="3" onClick="choiceTitle(this)">五栋-1单元-选择栋</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">11楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">12楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">13楼</td>
+			<td class="bgTd"onclick="choiceFloor(this)" unit="1">14楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">15楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">16楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">17楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">18楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">19楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">20楼</td>
+			<td onClick="transverse(this)" type="0">选择行</td>
+		</tr>
+		<tr>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">11楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">12楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">13楼</td>
+			<td class="bgTd"onclick="choiceFloor(this)" unit="1">14楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">15楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">16楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">17楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">18楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">19楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">20楼</td>
+			<td onClick="transverse(this)" type="0">选择行</td>
+		</tr>
+		<tr>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">11楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">12楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">13楼</td>
+			<td class="bgTd"onclick="choiceFloor(this)" unit="1">14楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">15楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">16楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">17楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">18楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">19楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">20楼</td>
+			<td onClick="transverse(this)" type="0">选择行</td>
+		</tr>
+		<tr>
+			<td rowspan="3" onClick="choiceTitle(this)">五栋-1单元-选择栋</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">11楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">12楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">13楼</td>
+			<td class="bgTd"onclick="choiceFloor(this)" unit="1">14楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">15楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">16楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">17楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">18楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">19楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">20楼</td>
+			<td onClick="transverse(this)" type="0">选择行</td>
+		</tr>
+		<tr>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">11楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">12楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">13楼</td>
+			<td class="bgTd"onclick="choiceFloor(this)" unit="1">14楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">15楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">16楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">17楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">18楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">19楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">20楼</td>
+			<td onClick="transverse(this)" type="0">选择行</td>
+		</tr>
+		<tr>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">11楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">12楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">13楼</td>
+			<td class="bgTd"onclick="choiceFloor(this)" unit="1">14楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">15楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">16楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">17楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">18楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">19楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">20楼</td>
+			<td onClick="transverse(this)" type="0">选择行</td>
+		</tr>
+	</tboty>
+</table>
+			<table class="floor table table-striped table-hover" id="aaa">
+	<tbody>
+		<tr>
+			<td rowspan="3" onClick="choiceTitle(this)">五栋-1单元-选择栋</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">11楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">12楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">13楼</td>
+			<td class="bgTd"onclick="choiceFloor(this)" unit="1">14楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">15楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">16楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">17楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">18楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">19楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">20楼</td>
+			<td onClick="transverse(this)" type="0">选择行</td>
+		</tr>
+		<tr>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">11楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">12楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">13楼</td>
+			<td class="bgTd"onclick="choiceFloor(this)" unit="1">14楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">15楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">16楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">17楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">18楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">19楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">20楼</td>
+			<td onClick="transverse(this)" type="0">选择行</td>
+		</tr>
+		<tr>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">11楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">12楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">13楼</td>
+			<td class="bgTd"onclick="choiceFloor(this)" unit="1">14楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">15楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">16楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">17楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">18楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">19楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">20楼</td>
+			<td onClick="transverse(this)" type="0">选择行</td>
+		</tr>
+		<tr>
+			<td rowspan="3" onClick="choiceTitle(this)">五栋-1单元-选择栋</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">11楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">12楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">13楼</td>
+			<td class="bgTd"onclick="choiceFloor(this)" unit="1">14楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">15楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">16楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">17楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">18楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">19楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">20楼</td>
+			<td onClick="transverse(this)" type="0">选择行</td>
+		</tr>
+		<tr>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">11楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">12楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">13楼</td>
+			<td class="bgTd"onclick="choiceFloor(this)" unit="1">14楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">15楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">16楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">17楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">18楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">19楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">20楼</td>
+			<td onClick="transverse(this)" type="0">选择行</td>
+		</tr>
+		<tr>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">11楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">12楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">13楼</td>
+			<td class="bgTd"onclick="choiceFloor(this)" unit="1">14楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">15楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">16楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">17楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">18楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">19楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">20楼</td>
+			<td onClick="transverse(this)" type="0">选择行</td>
+		</tr>
+		<tr>
+			<td rowspan="3" onClick="choiceTitle(this)">五栋-1单元-选择栋</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">11楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">12楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">13楼</td>
+			<td class="bgTd"onclick="choiceFloor(this)" unit="1">14楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">15楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">16楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">17楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">18楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">19楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">20楼</td>
+			<td onClick="transverse(this)" type="0">选择行</td>
+		</tr>
+		<tr>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">11楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">12楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">13楼</td>
+			<td class="bgTd"onclick="choiceFloor(this)" unit="1">14楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">15楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">16楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">17楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">18楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">19楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">20楼</td>
+			<td onClick="transverse(this)" type="0">选择行</td>
+		</tr>
+		<tr>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">11楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">12楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">13楼</td>
+			<td class="bgTd"onclick="choiceFloor(this)" unit="1">14楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">15楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">16楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">17楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">18楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">19楼</td>
+			<td class="bgTd" onClick="choiceFloor(this)" unit="1">20楼</td>
+			<td onClick="transverse(this)" type="0">选择行</td>
+		</tr>
+	</tboty>
+</table>
+
+<script type="text/javascript">
+	//================      控制点击单元全选的时候             ====================
+	function choiceTitle(obj){
+		//声明参数b
+		var b = "";
+		//获取    rowspan  的值
+		var foor = $(obj).attr("rowspan");
+		//给当前的所有的参数  +1
+		var index = $(obj).parent().index()+1;
+		//循环最大不超过  rowspan 的值
+		for(var i=0;i<foor;i++){
+			//递加  +1   循环查找所有的td
+			$(obj).parent().parent().find("tr:nth-child("+(index+i)+")").find(".bgTd").each(function(){
+				//if判断
+				if(!$(this).hasClass("bgs")){			//判断全选的时候，b==true
+						b = false;						//取消全选
+						return false;					//跳出当前循环
+					}else{								//否则
+						b = true;						//实现全选
+					}
+			});
+			//判断b为真还是为假
+			if(b){
+				
+			}else{
+				//跳出  for  循环
+				break;
+			}
+		}
+		//循环查找所有的td
+		for(var i=0;i<foor;i++){
+			$(obj).parent().parent().find("tr:nth-child("+(index+i)+")").find(".bgTd").each(function(){
+				if(b){										//判断全选的时候，b==true
+					$(this).removeClass("bgs");			//取消全选
+				}else{									//否则
+					$(this).addClass("bgs");			//实现全选
+				}
+			})
+		}
+	}
+	//================      控制点击单个的时候             ====================
+	function choiceFloor(obj){
+		$(obj).toggleClass("bgs");						//控制单个的样式添加和删除
+	};
+	//================      控制点击横排全选的时候             ====================
+	function transverse(obj) {
+		//声明参数
+		var b = "";
+		//查找当前父级标签下的所有的   bgtd
+		$(obj).parents("tr").find(".bgTd").each(function(){
+			if(!$(this).hasClass("bgs")){		//判断全选的时候，b==true
+				b = false;						//取消全选
+				return false;					//跳出当前循环
+			}else{								//否则
+				b = true;						//实现全选
+			}
+			
+		});
+		//查找父级标签下的所有的   bgTd
+		$(obj).parents("tr").find(".bgTd").each(function(){
+			if(b){									//判断全选的时候，b==true
+				$(this).removeClass("bgs");			//取消全选
+			}else{									//否则
+				$(this).addClass("bgs");			//实现全选
+			}
+		});
+		
+	}
+</script>
+
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+</div>
+</body>
+</html>
