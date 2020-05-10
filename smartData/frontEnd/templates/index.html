@@ -4,45 +4,108 @@
        <meta charset="utf-8">
    </head>
    <body style="height: 100%; margin: 0">
+   <link rel="stylesheet" href="/static/css/jquery-labelauty.css" />
+   <link rel="stylesheet" href="/static/css/select_style.css" />
+<style type="text/css">
+ul{list-style-type: none;}
+li{display: inline-block;}
+li{margin: 2px 0;}
+input.labelauty + label{font:12px "Microsoft Yahei";}
+.options br{ margin:0 auto;
+line-height:25px; }
+</style>
 
-   <script src="/static/js/jquery1.42.min.js"></script>
+
+   <script src="/static/js/jquery-3.4.1.min.js"></script>
+   <script src="/static/js/jquery-labelauty.js"></script>
    <script src="/static/echarts/dist/echarts.js"></script>
-   <script src="/static/YMDClass/YMDClass.js"></script>
 
-   <div id="options">
-       <br>
-            <select id="ts_code">
-            <option value="000001.SH">上证指数</option>
-            <option value="399300.SZ">创业板指数</option>
-            </select>
-            <select id="ts_code2">
-            <option value="000001.SH">上证指数</option>
-            <option value="399300.SZ">创业板指数</option>
-            </select>
-           &nbsp;&nbsp;&nbsp;
-           开始日期:<select id="startYear" name="startYear"></select> <select id="startMonth" name="startMonth"></select> <select id="startDay" name="startDay"></select>
-           &nbsp;&nbsp;&nbsp;
-           截止日期:<select id="endYear" name="endYear"></select> <select id="endMonth" name="endMonth"></select> <select id="endDay" name="endDay"></select>
-           &nbsp;&nbsp;
-           <input id ="showMacroData" type="radio" value="1" name="宏观数据">宏观</input>
-           &nbsp;&nbsp;
-           <button id="update">go</button>
-       <script>
-       var tempDate = new Date();
-       var y = tempDate.getFullYear();
-       var m = tempDate.getMonth()+1;
-       var d = tempDate.getDate();
-       new YMDselect('startYear','startMonth','startDay',y-1);
-       new YMDselect('endYear','endMonth','endDay',y,m,d);
+   <div id="options" class="options">
+       <ul class="select">
+           <li>
+           开始日期:<input type="date" id="startDate"/>&nbsp;</li>
+           <li>
+           截止日期:<input type="date" id="endDate"/>&nbsp;
+           <br> <li>股票代码</li>
+             <input type="text" id="ts_code" name="ts_code" list="ts_codeList" maxlength="20" onfocus=this.value=''>
+               <datalist id="ts_codeList" style="display:none;">
+                <option value="000001.SH 上证指数"/>
+                <option value="399306.SZ 创业板指数"/>
+               </datalist>
+           <li><button id="addCode">添加</button></li>
+           <br><li>已选股票代码</li>
+               <li class="select-result">
+			     <dl>
+			     </dl>
+		       </li>
 
-       function generateDate(year,month,day)
-       {
-        var zero="0";
-        month=((Number(month)<10)?"0":"")+month;
-        day=((Number(day)<10)?"0":"")+day;
-        return year+month+day;
-       }
+           <br> <li>宏观数据</li>
+             <li><input id ="macroGdp" type="checkbox" name="checkbox" data-labelauty="GDP"></li>
+             <li><input id ="macroRRR" type="checkbox" name="checkbox" data-labelauty="存款准备金"></li>
+             <li><input id ="macroMondySupply" type="checkbox" name="checkbox" data-labelauty="货币供应量"></li>
+             <li><input id ="macroCPI" type="checkbox" name="checkbox" data-labelauty="CPI"></li>
+             <li><input id ="macroPMI" type="checkbox" name="checkbox" data-labelauty="PMI"></li>
+             <li><input id ="macroPPI" type="checkbox" name="checkbox" data-labelauty="PPI"></li>
+           <br> <li>个股数据</li>
+             <li><input id ="stockGrowthRateOfMainOperatingIncome" type="checkbox" name="checkbox" data-labelauty="主营业收入增长率"></li>
+             <li><input id ="stockGrossMargin" type="checkbox" name="checkbox" data-labelauty="毛利率"></li>
+             <li><input id ="stockNetInterestRate" type="checkbox" name="checkbox" data-labelauty="扣非净利率"></li>
+             <li><input id ="stockDebtRatio" type="checkbox" name="checkbox" data-labelauty="负债率"></li>
+             <li><input id ="stockTurnOverRate" type="checkbox" name="checkbox" data-labelauty="周转率"></li>
+           <br>       <li><button id="analyse">分析</button></li>
+       </ul>
+   </div>
+   <script type="text/javascript">
+       jQuery(function ($) {
+            $(function () {
+               $(':input').labelauty();
+            });
+        });
 
+       var stockCodes=[];
+       var macroParams=[];
+       var stockParams=[];
+        $(document).ready(function () {
+            var time = new Date();
+            var day = ("0" + time.getDate()).slice(-2);
+            var month = ("0" + (time.getMonth() + 1)).slice(-2);
+            var lastYear = time.getFullYear()-1 + "-" + (month) + "-" + (day);
+            $('#startDate').val(lastYear);
+
+            var today = time.getFullYear() + "-" + (month) + "-" + (day);
+            $('#endDate').val(today);
+
+            $("#addCode").click(function () {
+                var stockCode=$("#ts_code").val().split(" ");
+                selectedItem='<dd onClick="removeCode(this)" id="'+ stockCode[0] + '"><a href="#">'+stockCode[1]+'</a></dd>';
+                $(".select-result dl").append(selectedItem);
+                stockCodes.push(stockCode[0]);
+            });
+        });
+
+        Array.prototype.indexOf = function(val) {
+            for (var i = 0; i < this.length; i++) {
+            if (this[i] == val) return i;
+            }
+        return -1;
+        };
+
+        Array.prototype.remove = function(val) {
+            var index = this.indexOf(val);
+            if (index > -1) {
+            this.splice(index, 1);
+            }
+        };
+
+        function removeCode(obj){
+            stockCodes.remove(obj.id);
+            $(obj).remove();
+	    };
+   </script>
+
+
+
+   <script>
        function makePoints(baseData, macroData)
        {
             for (var i = 0; i < macroData.length; i++)
@@ -66,75 +129,164 @@
             }
        }
 
-       function attachData(baseData, macroData)
+       function addYAxis(show)
+       {
+            var item = {
+                        scale: true,
+                        gridIndex:0,
+                        position: "right",
+                        splitArea: {
+                                            show: true
+                                   }
+                       };
+            option.yAxis.push(item);
+           return (option.yAxis.length-1);
+       }
+
+       function attachData(dataName, xAxisDatas, data, yIndexShow)
        {
             var newData = [];
-            for (var i = 0; i < macroData.length; i++)
+            var lineColor = ["#93DAFF","#80E12A","#FFB6C1","#DA70D6","#828282"]
+            for (var i = 0; i < data.length; i++)
             {
-                for(var j=0; j<(baseData.categoryData.length-1);j++)
+
+                for(var j=0; j<(xAxisDatas.length-1);j++)
                 {
-                    if(baseData.categoryData[j]==macroData[i][0] ||
-                        (baseData.categoryData[j]<macroData[i][0] && baseData.categoryData[j+1]>macroData[i][0]))
+                    if(xAxisDatas[j]==data[i][0] ||
+                        (xAxisDatas[j]<data[i][0] && xAxisDatas[j+1]>data[i][0]))
                         {
-                           newData.push([String(baseData.categoryData[j]), macroData[i][1]]);
-                           //newData.push( macroData[i][1]);
+                           newData.push([String(xAxisDatas[j]), data[i][1]]);
+                           break;
+                           //newData.push( data[i][1]);
                         }
                 }
             }
+            yIndex = addYAxis(yIndexShow);
             var item = {
-                            name: 'newData',
+                            name: dataName,
                             type: 'line',
                             xAxisIndex: 0,
-                            yAxisIndex: 1,
+                            yAxisIndex: yIndex,
                             data: newData,
-                            smooth: true,
+                            smooth: false,
+                            symbol:'circle',
+                            symbolSize:10,
                             lineStyle: {
                                 width:2,
                                 type: 'solid',
-                                color: "#0180ff" //折线的颜色
+                                color: lineColor[yIndex] //折线的颜色
                             },
-
                        };
             option.series.push(item);
        }
 
+        function resetMacroData()
+        {
+            if(option.series.length>6)
+            {
+                option.series.splice(6, option.series.length-5);
+                option.yAxis.splice(2, option.yAxis.length-2);
+            }
+        }
+
+       function getMacroParams()
+       {
+            var params=[];
+            if($('#macroGdp').is(':checked'))
+            {
+                params.push("macroGdp");
+            }
+            if($('#macroRRR').is(':checked'))
+            {
+                params.push("macroRRR");
+            }
+            if($('#macroMondySupply').is(':checked'))
+            {
+                params.push("macroMondySupply");
+            }
+            if($('#macroCPI').is(':checked'))
+            {
+                params.push("macroCPI");
+            }
+            if($('#macroPMI').is(':checked'))
+            {
+                params.push("macroPMI");
+            }
+            if($('#macroPPI').is(':checked'))
+            {
+                params.push("macroPPI");
+            }
+            return params;
+       }
+
+       function getStockParams()
+       {
+            var params=[];
+            if($('#stockGrowthRateOfMainOperatingIncome').is(':checked'))
+            {
+                params.push("stockGrowthRateOfMainOperatingIncome");
+            }
+            if($('#stockGrossMargin').is(':checked'))
+            {
+                params.push("stockGrossMargin");
+            }
+            if($('#stockNetInterestRate').is(':checked'))
+            {
+                params.push("stockNetInterestRate");
+            }
+            if($('#stockDebtRatio').is(':checked'))
+            {
+                params.push("stockDebtRatio");
+            }
+            if($('#stockTurnOverRate').is(':checked'))
+            {
+                params.push("stockTurnOverRate");
+            }
+            return params;
+       }
            var stockData;
-            $('#update').click(function () {
-                var startDate= generateDate($('#startYear').val(),$('#startMonth').val(), $('#startDay').val());
-                var endDate= generateDate($('#endYear').val(),$('#endMonth').val(), $('#endDay').val());
-                var showMacroData = $('#showMacroData').val();
+            $('#analyse').click(function () {
+                var reg = new RegExp("-","g");
+                var startDate= $('#startDate').val().replace(reg,"");
+                var endDate= $('#endDate').val().replace(reg,"");
+                macroParams = getMacroParams();
+                stockParams = getStockParams();
                 $.ajax({
-                    url: '',
-                    type: 'post',
-                    data: {'ts_code': $('#ts_code').val(), 'startDate': startDate, 'endDate': endDate, 'endDate': endDate, 'showMacroData':showMacroData},
-                    success: function (response) {
-
-                    /////////////////////////////////////////////////////////////////
-                    //console.log(response);
-                    data2=splitData(response.newData);
-                    //makePoints(data2, response.macroData);
-
-
-                    //设置k线图数据
-                    option.xAxis[0].data = data2.categoryData;
-                    option.xAxis[1].data = data2.categoryData;
-                    option.series[0].data = data2.values;
-                    option.series[1].data = calculateMA(5,data2);
-                    option.series[2].data = calculateMA(10,data2);
-                    option.series[3].data = calculateMA(20,data2);
-                    option.series[4].data = calculateMA(30,data2);
-                    attachData(data2, response.macroData);
-
-                    //option.series.push(item);
-
-                    option.series[5].data = data2.volumes;
+                        url: '',
+                        type: 'post',
+                        traditional: true,
+                        data: {'stockCodes': stockCodes, 'startDate': startDate, 'endDate': endDate, 'macroParams': macroParams, 'stockParams':stockParams},
+                        success: function (response)
+                        {
+                            ///////////////////// attach stock data ////////////////////////////////////////////
+                            for(var stockCodeIndex=0; stockCodeIndex < response.stockCodes.length; stockCodeIndex++)
+                            {
+                                stockCode = response.stockCodes[stockCodeIndex];
+                                data2=splitData(response.tradingDatas[stockCode]);
+                                //makePoints(data2, response.macroData);
 
 
-                    //option.series.push(item);
+                                //设置k线图数据
+                                option.xAxis[0].data = data2.categoryData;
+                                option.xAxis[1].data = data2.categoryData;
+                                option.series[0].data = data2.values;
+                                option.series[1].data = calculateMA(5,data2);
+                                option.series[2].data = calculateMA(10,data2);
+                                option.series[3].data = calculateMA(20,data2);
+                                option.series[4].data = calculateMA(30,data2);
+                                option.series[5].data = data2.volumes;
+                            }
 
-                    myChart.setOption(option, true);
-                    /////////////////////////////////////////////////////////////////
-                    }
+                            ///////////////////// attach macro data ////////////////////////////////////////////
+                            resetMacroData();
+                            for(var macroDataIndex=0; macroDataIndex < response.macroParams.length; macroDataIndex++)
+                            {
+                                var macroDataType = response.macroParams[macroDataIndex];
+                                attachData(macroDataType, option.xAxis[0].data, response.macroDatas[macroDataType], true);
+                            }
+
+                            myChart.setOption(option, true);
+                        }
                 })
             })
             </script>
@@ -158,7 +310,7 @@
                 for (var i = 0; i < rawData.length; i++) {
                     categoryData.push(rawData[i].splice(0, 1)[0]);
                     values.push(rawData[i]);
-                    volumes.push([i, rawData[i][4], rawData[i][0] > rawData[i][1] ? 1 : -1]);
+                    volumes.push([i, rawData[i][4], rawData[i][0] > rawData[i][1] ? 1 : -1]); //交易量能
                 }
 
                 return {
@@ -302,14 +454,6 @@
                         },
                         {
                             scale: true,
-                            gridIndex:0,
-                            position: "right",
-                            splitArea: {
-                                                show: true
-                                            }
-                        },
-                        {
-                            scale: true,
                             gridIndex: 1,
                             splitNumber: 2,
                             axisLabel: {show: true},
@@ -341,11 +485,11 @@
                             type: 'candlestick',
                             data: data.values,
                             itemStyle: {
-                                color: upColor,
-                                color0: downColor,
-                                borderColor: null,
-                                borderColor0: null
-                            },
+                                            color: upColor,
+                                            color0: downColor,
+                                            borderColor: null,
+                                            borderColor0: null
+                                        },
                             //////////////////////////////////////
                             markPoint: {
                                         label: {
@@ -415,7 +559,7 @@
                             name: 'Volume',
                             type: 'bar',
                             xAxisIndex: 1,
-                            yAxisIndex: 2,
+                            yAxisIndex: 1,
                             data: data.volumes
                         }
 

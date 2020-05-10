@@ -11,9 +11,16 @@ class ReserveRequirementManager(models.Model):
     class Meta:
         db_table = 'reserveRequirement'
 
+class CpiSpiderManager(models.Model):
+    date = models.CharField('time',max_length=10, primary_key=True)
+    value = models.FloatField('value')
+    class Meta:
+        db_table = 'cpidatatable'
+
 class CpiManager(models.Model):
     date = models.DateField('date', primary_key=True)
     value = models.FloatField('value')
+
     publicDate = models.DateField('publicDate',null=True,blank=True)
 
     class Meta:

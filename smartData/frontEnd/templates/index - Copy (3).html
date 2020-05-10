@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+   </head>
+   <body style="height: 100%; margin: 0">
+   <link rel="stylesheet" href="/static/css/jquery-labelauty.css" />
+   <link rel="stylesheet" href="/static/css/select_style.css" />
+<style type="text/css">
+ul{list-style-type: none;}
+li{display: inline-block;}
+li{margin: 2px 0;}
+input.labelauty + label{font:12px "Microsoft Yahei";}
+.options br{ margin:0 auto;
+line-height:25px; }
+</style>
+
+
+   <script src="/static/js/jquery-3.4.1.min.js"></script>
+   <script src="/static/js/jquery-labelauty.js"></script>
+   <script src="/static/echarts/dist/echarts.js"></script>
+
+   <div id="options" class="options">
+       <ul class="select">
+           <li>
+           开始日期:<input type="date" id="startDate"/>&nbsp;</li>
+           <li>
+           截止日期:<input type="date" id="endDate"/>&nbsp;
+        <br> <li>股票代码</li>
+       <input type="text" id="ts_code" name="ts_code" list="ts_codeList" maxlength="20" onfocus=this.value=''>
+<datalist id="ts_codeList" style="display:none;">
+    <option value="000001.SH 上证指数"/>
+    <option value="399300.SZ 创业板指数"/>
+</datalist>
+       <li><button id="addCode">添加</button></li>
+           <br><li>已选股票代码</li>
+           <li class="select-result">
+			<dl>
+			</dl>
+		</li>
+
+
+
+       <br> <li>宏观数据</li>
+        <li><input id ="showMacroData" type="checkbox" name="checkbox" data-labelauty="GDP"></li>
+		<li><input type="checkbox" name="checkbox" data-labelauty="存款准备金"></li>
+		<li><input type="checkbox" name="checkbox" data-labelauty="货币供应量"></li>
+		<li><input type="checkbox" name="checkbox" data-labelauty="CPI"></li>
+		<li><input type="checkbox" name="checkbox" data-labelauty="PMI"></li>
+		<li><input type="checkbox" name="checkbox" data-labelauty="PPI"></li>
+       <br> <li>个股数据</li>
+        <li><input type="checkbox" name="checkbox" data-labelauty="主营业收入增长率"></li>
+		<li><input type="checkbox" name="checkbox" data-labelauty="毛利率"></li>
+		<li><input type="checkbox" name="checkbox" data-labelauty="扣非净利率"></li>
+		<li><input type="checkbox" name="checkbox" data-labelauty="负债率"></li>
+		<li><input type="checkbox" name="checkbox" data-labelauty="周转率"></li>
+           </ul>
+   </div>
+       <script type="text/javascript">
+       jQuery(function ($) {
+            $(function () {
+               $(':input').labelauty();
+            });
+        });
+
+        $(document).ready(function () {
+            var time = new Date();
+            var day = ("0" + time.getDate()).slice(-2);
+            var month = ("0" + (time.getMonth() + 1)).slice(-2);
+            var lastYear = time.getFullYear()-1 + "-" + (month) + "-" + (day);
+            $('#startDate').val(lastYear);
+
+            var today = time.getFullYear() + "-" + (month) + "-" + (day);
+            $('#endDate').val(today);
+
+            $("#addCode").click(function () {
+                selectedText='<a href="#">$'+$("#ts_code").val()+'</a>'
+                selectedItem='<dd onClick="removeCode(this)" id="'+ $("#ts_code").val() + '"><a href="#">'+$("#ts_code").val()+'</a></dd>'
+                $(".select-result dl").append(selectedItem);
+            });
+
+
+
+        });
+
+
+        function removeCode(obj){
+		$(obj).remove();
+	};
+</script>
+
+
+
+       <script>
+       function generateDate(year,month,day)
+       {
+        var zero="0";
+        month=((Number(month)<10)?"0":"")+month;
+        day=((Number(day)<10)?"0":"")+day;
+        return year+month+day;
+       }
+
+       function makePoints(baseData, macroData)
+       {
+            for (var i = 0; i < macroData.length; i++)
+            {
+                for(var j=0; j<(baseData.categoryData.length-1);j++)
+                {
+                    if(baseData.categoryData[j]==macroData[i][0] ||
+                        (baseData.categoryData[j]<macroData[i][0] && baseData.categoryData[j+1]>macroData[i][0]))
+                        {
+                           var item={
+                                      name: i,
+                                       coord: [String(baseData.categoryData[j]), baseData.values[j][0]],
+                                       value: macroData[i][1],
+                                       itemStyle: {
+                                           color: 'rgb(41,60,85)'
+                                                  }
+                                  };
+                                   option.series[0].markPoint.data.push(item);
+                        }
+                }
+            }
+       }
+
+       function attachData(baseData, macroData)
+       {
+            var newData = [];
+            for (var i = 0; i < macroData.length; i++)
+            {
+                for(var j=0; j<(baseData.categoryData.length-1);j++)
+                {
+                    if(baseData.categoryData[j]==macroData[i][0] ||
+                        (baseData.categoryData[j]<macroData[i][0] && baseData.categoryData[j+1]>macroData[i][0]))
+                        {
+                           newData.push([String(baseData.categoryData[j]), macroData[i][1]]);
+                           //newData.push( macroData[i][1]);
+                        }
+                }
+            }
+            var item = {
+                            name: 'newData',
+                            type: 'line',
+                            xAxisIndex: 0,
+                            yAxisIndex: 1,
+                            data: newData,
+                            smooth: true,
+                            lineStyle: {
+                                width:2,
+                                type: 'solid',
+                                color: "#0180ff" //折线的颜色
+                            },
+
+                       };
+            option.series.push(item);
+       }
+
+           var stockData;
+            $('#update').click(function () {
+                var startDate= generateDate($('#startYear').val(),$('#startMonth').val(), $('#startDay').val());
+                var endDate= generateDate($('#endYear').val(),$('#endMonth').val(), $('#endDay').val());
+                var showMacroData = $('#showMacroData').val();
+                $.ajax({
+                    url: '',
+                    type: 'post',
+                    data: {'ts_code': $('#ts_code').val(), 'startDate': startDate, 'endDate': endDate, 'endDate': endDate, 'showMacroData':showMacroData},
+                    success: function (response) {
+
+                    /////////////////////////////////////////////////////////////////
+                    //console.log(response);
+                    data2=splitData(response.newData);
+                    //makePoints(data2, response.macroData);
+
+
+                    //设置k线图数据
+                    option.xAxis[0].data = data2.categoryData;
+                    option.xAxis[1].data = data2.categoryData;
+                    option.series[0].data = data2.values;
+                    option.series[1].data = calculateMA(5,data2);
+                    option.series[2].data = calculateMA(10,data2);
+                    option.series[3].data = calculateMA(20,data2);
+                    option.series[4].data = calculateMA(30,data2);
+                    attachData(data2, response.macroData);
+
+                    //option.series.push(item);
+
+                    option.series[5].data = data2.volumes;
+
+
+                    //option.series.push(item);
+
+                    myChart.setOption(option, true);
+                    /////////////////////////////////////////////////////////////////
+                    }
+                })
+            })
+            </script>
+
+        </div>
+
+        <div id="container" style="height: 90%">
+            <script type="text/javascript">
+            var dom = document.getElementById("container");
+            var myChart = echarts.init(dom);
+            var app = {};
+            option = null;
+            var upColor = '#00da3c';
+            var downColor = '#ec0000';
+
+
+            function splitData(rawData) {
+                var categoryData = [];
+                var values = [];
+                var volumes = [];
+                for (var i = 0; i < rawData.length; i++) {
+                    categoryData.push(rawData[i].splice(0, 1)[0]);
+                    values.push(rawData[i]);
+                    volumes.push([i, rawData[i][4], rawData[i][0] > rawData[i][1] ? 1 : -1]);
+                }
+
+                return {
+                    categoryData: categoryData,
+                    values: values,
+                    volumes: volumes
+                };
+            }
+
+            function calculateMA(dayCount, data) {
+                var result = [];
+                for (var i = 0, len = data.values.length; i < len; i++) {
+                    if (i < dayCount) {
+                        result.push('-');
+                        continue;
+                    }
+                    var sum = 0;
+                    for (var j = 0; j < dayCount; j++) {
+                        sum += data.values[i - j][1];
+                    }
+                    result.push(+(sum / dayCount).toFixed(3));
+                }
+                return result;
+            }
+
+            var data = splitData({{ stockData }});
+
+            /////////////////////////////////////////////////////////
+            option = {
+                    backgroundColor: '#fff',
+                    animation: false,
+                    legend: {
+                        bottom: 10,
+                        left: 'center',
+                        data: ['Dow-Jones index', 'MA5', 'MA10', 'MA20', 'MA30']
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'cross'
+                        },
+                        backgroundColor: 'rgba(245, 245, 245, 0.8)',
+                        borderWidth: 1,
+                        borderColor: '#ccc',
+                        padding: 10,
+                        textStyle: {
+                            color: '#000'
+                        },
+                        position: function (pos, params, el, elRect, size) {
+                            var obj = {top: 10};
+                            obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 30;
+                            return obj;
+                        }
+                        // extraCssText: 'width: 170px'
+                    },
+                    axisPointer: {
+                        link: {xAxisIndex: 'all'},
+                        label: {
+                            backgroundColor: '#777'
+                        }
+                    },
+                    toolbox: {
+                        feature: {
+                            dataZoom: {
+                                yAxisIndex: false
+                            },
+                            brush: {
+                                type: ['lineX', 'clear']
+                            }
+                        }
+                    },
+                    brush: {
+                        xAxisIndex: 'all',
+                        brushLink: 'all',
+                        outOfBrush: {
+                            colorAlpha: 0.1
+                        }
+                    },
+                    visualMap: {
+                        show: false,
+                        seriesIndex: 5,
+                        dimension: 2,
+                        pieces: [{
+                            value: 1,
+                            color: downColor
+                        }, {
+                            value: -1,
+                            color: upColor
+                        }]
+                    },
+                    grid: [
+                        {
+                            left: '10%',
+                            right: '8%',
+                            height: '50%'
+                        },
+                        {
+                            left: '10%',
+                            right: '8%',
+                            top: '63%',
+                            height: '16%'
+                        }
+                    ],
+                    xAxis: [
+                        {
+                            type: 'category',
+                            data: data.categoryData,
+                            scale: true,
+                            boundaryGap: false,
+                            axisLine: {onZero: false},
+                            splitLine: {show: false},
+                            splitNumber: 20,
+                            min: 'dataMin',
+                            max: 'dataMax',
+                            axisPointer: {
+                                z: 100
+                            }
+                        },
+                        {
+                            type: 'category',
+                            gridIndex: 1,
+                            data: data.categoryData,
+                            scale: true,
+                            boundaryGap: false,
+                            axisLine: {onZero: false},
+                            axisTick: {show: false},
+                            splitLine: {show: false},
+                            axisLabel: {show: false},
+                            splitNumber: 20,
+                            min: 'dataMin',
+                            max: 'dataMax'
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            scale: true,
+                            gridIndex:0,
+                            splitArea: {
+                                show: true
+                            }
+                        },
+                        {
+                            scale: true,
+                            gridIndex:0,
+                            position: "right",
+                            splitArea: {
+                                                show: true
+                                            }
+                        },
+                        {
+                            scale: true,
+                            gridIndex: 1,
+                            splitNumber: 2,
+                            axisLabel: {show: true},
+                            axisLine: {show: true},
+                            axisTick: {show: true},
+                            splitLine: {show: true}
+                        }
+                    ],
+                    dataZoom: [
+                        {
+                            type: 'inside',
+                            xAxisIndex: [0, 1],
+                            start: 0,
+                            end: 100
+                        },
+                        {
+                            show: true,
+                            xAxisIndex: [0, 1],
+                            type: 'slider',
+                            top: '85%',
+                            start: 0,
+                            end: 100
+                        }
+                    ],
+                    series: [
+///////////////////////////////////////////////////////////
+                        {
+                            name: 'Dow-Jones index',
+                            type: 'candlestick',
+                            data: data.values,
+                            itemStyle: {
+                                color: upColor,
+                                color0: downColor,
+                                borderColor: null,
+                                borderColor0: null
+                            },
+                            //////////////////////////////////////
+                            markPoint: {
+                                        label: {
+                                                    normal: {
+                                                        formatter: function (param)
+                                                                {
+                                                                    return param != null ? Math.round(param.value) : '';
+                                                                }
+                                                            }
+                                                },
+                                        data: [
+
+                                            ]
+                                        },
+                            /////////////////////////////////////
+                            tooltip: {
+                                formatter: function (param) {
+                                    param = param[0];
+                                    return [
+                                        'Date: ' + param.name + '<hr size=1 style="margin: 3px 0">',
+                                        'Open: ' + param.data[0] + '<br/>',
+                                        'Close: ' + param.data[1] + '<br/>',
+                                        'Lowest: ' + param.data[2] + '<br/>',
+                                        'Highest: ' + param.data[3] + '<br/>'
+                                    ].join('');
+                                }
+                            }
+                        },
+//////////////////////////////////////////////////////
+                        {
+                            name: 'MA5',
+                            type: 'line',
+                            data: calculateMA(5, data),
+                            smooth: true,
+                            lineStyle: {
+                                opacity: 0.5
+                            }
+                        },
+                        {
+                            name: 'MA10',
+                            type: 'line',
+                            data: calculateMA(10, data),
+                            smooth: true,
+                            lineStyle: {
+                                opacity: 0.5
+                            }
+                        },
+                        {
+                            name: 'MA20',
+                            type: 'line',
+                            data: calculateMA(20, data),
+                            smooth: true,
+                            lineStyle: {
+                                opacity: 0.5
+                            }
+                        },
+                        {
+                            name: 'MA30',
+                            type: 'line',
+                            data: calculateMA(30, data),
+                            smooth: true,
+                            lineStyle: {
+                                opacity: 0.5
+                            }
+                        },
+                        {
+                            name: 'Volume',
+                            type: 'bar',
+                            xAxisIndex: 1,
+                            yAxisIndex: 2,
+                            data: data.volumes
+                        }
+
+
+                    ]
+                };
+            /////////////////////////////////////////////////////////
+
+            myChart.setOption(option, true);
+
+            myChart.dispatchAction({
+                type: 'brush',
+                areas: [
+                    {
+                        brushType: 'lineX',
+                        coordRange: ['2018-06-02', '2018-07-20'],
+                        xAxisIndex: 0
+                    }
+                ]
+            });
+
+            ////////////////////////////////////////////////////////////////////////////////////
+            if (option && typeof option === "object") {
+                myChart.setOption(option, true);
+            }
+         </script>
+        </div>
+   </body>
+</html>
