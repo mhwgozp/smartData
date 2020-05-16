@@ -50,8 +50,9 @@ def hello(request):
             numOfMacroParams = len(macroParams)
             for macroType in macroParams:
                 macroDatas[macroType]=getMacroDataByType(macroType, startDate, endDate)
+                print(macroDatas)
         datas['macroDatas']= macroDatas
-        print(datas)
+        #print(datas)
         #if showMacroData == '1':
         #    macroData=[[20191101,100],[20191115,120],[20191128,110],[20191201,125],[20191210,100],[20191215,130],[2020105,132]]
         return JsonResponse(datas)
@@ -79,13 +80,15 @@ def getMacroDataByType(macroType, startDate, endDate):
         return getCpi(startDate,endDate)
     if ("macroGdp" == macroType):
         return getGdp(startDate, endDate)
+    if ("macroMondySupply" == macroType):
+        return getMoneySupply(startDate, endDate)
 
 def getCpi(startDate, endDate):
 
     df = pro.cn_cpi(start_m=startDate[0:6], end_m=endDate[0:6], fields='month,nt_yoy')
     #print( "pro.cn_cpi(start_m="+ startDate[0:6]+", end_m="+endDate[0:6]+", fields='month,nt_yoy'")
     datas = df.values.tolist()
-    #print(datas)
+    print(datas)
     for i in range(len(datas)):
         datas[i][0] = int(datas[i][0]+"30")
     datas.reverse()
@@ -105,50 +108,72 @@ def getGdp(startDate, endDate):
     datas.reverse()
     return datas
 
-def getCpiSpider(format,startDate, endDate):
-    #items = CpiSpiderManager.objects.filter(time__gte=startDate)
-    items = CpiSpiderManager.objects.all().order_by("-time")
+def getMoneySupply(startDate, endDate):
+    items = MoneySupplyDb.objects.filter(time__gt=startDate[0:6], time__lt=endDate[0:6])
     recordsNum = len(items)
-    data = {}
-    data["tableData"] = list(items.values())
-    dataList = []
+    dbData = list(items.values())
+    datas = []
     for i in range(recordsNum):
-        YOYIndex = i + 12
-        YOY = -1
-        if YOYIndex < recordsNum:
-            newValue=data["tableData"][i]["value"]
-            oldValue=data["tableData"][YOYIndex]["value"]
-            YOY = format(round(((newValue - oldValue) / oldValue), 4), '.2%')
-            # aaa=data["tableData"][i]["date"]
-            # print(aaa)
-            # print(newValue)
-            # print(oldValue)
-            # print(YOY)
+        newTime = int(dbData[i]["time"]+ "30")
+        datas.append([newTime,dbData[i]["m2YOY"]])
+        #      data["tableData"][i]["m2Value"],);
+        # dataList.append(
+        #     [data["tableData"][i]["time"],
+        #      data["tableData"][i]["m2Value"],
+        #      data["tableData"][i]["m2YOY"],
+        #      data["tableData"][i]["m1Value"],
+        #      data["tableData"][i]["m1YOY"],
+        #      data["tableData"][i]["m1Value"],
+        #      data["tableData"][i]["m1YOY"]
+        #      ])
+    datas.reverse()
+    print(datas)
+    return datas
+    #return {'tableData': dataList, 'tableTitle': ["日期", "PPI", "同比", "环比", "累积", "公布日期"]}
 
-        lRRIndex = i + 1
-        linkRelativeRatio = -1
-        if lRRIndex < recordsNum:
-            newValue = data["tableData"][i]["value"]
-            oldValue = data["tableData"][lRRIndex]["value"]
-            linkRelativeRatio = format(round(((newValue - oldValue) / oldValue), 4), '.2%')
-
-        month = int(data["tableData"][i]["time"][-2:])
-        accumulative = 0
-        for j in range(month):
-            if (i + j) < recordsNum:
-                accumulative += data["tableData"][i + j]["value"]
-            else:
-                break;
-        accumulative = round(accumulative / (j+1), 1)
-
-        dataList.append(
-            [str(data["tableData"][i]["time"]), data["tableData"][i]["value"], YOY, linkRelativeRatio, accumulative])
-    if("full"==format):
-        return {'tableData': dataList, 'tableTitle': ["日期", "CPI", "同比", "环比", "累积","公布日期"]}
-    elif ("dataOnly"==format):
-        print(dataList)
-        return dataList
-
+# def getCpiSpider(format,startDate, endDate):
+#     #items = CpiSpiderManager.objects.filter(time__gte=startDate)
+#     items = CpiSpiderManager.objects.all().order_by("-time")
+#     recordsNum = len(items)
+#     data = {}
+#     data["tableData"] = list(items.values())
+#     dataList = []
+#     for i in range(recordsNum):
+#         YOYIndex = i + 12
+#         YOY = -1
+#         if YOYIndex < recordsNum:
+#             newValue=data["tableData"][i]["value"]
+#             oldValue=data["tableData"][YOYIndex]["value"]
+#             YOY = format(round(((newValue - oldValue) / oldValue), 4), '.2%')
+#             # aaa=data["tableData"][i]["date"]
+#             # print(aaa)
+#             # print(newValue)
+#             # print(oldValue)
+#             # print(YOY)
+#
+#         lRRIndex = i + 1
+#         linkRelativeRatio = -1
+#         if lRRIndex < recordsNum:
+#             newValue = data["tableData"][i]["value"]
+#             oldValue = data["tableData"][lRRIndex]["value"]
+#             linkRelativeRatio = format(round(((newValue - oldValue) / oldValue), 4), '.2%')
+#
+#         month = int(data["tableData"][i]["time"][-2:])
+#         accumulative = 0
+#         for j in range(month):
+#             if (i + j) < recordsNum:
+#                 accumulative += data["tableData"][i + j]["value"]
+#             else:
+#                 break;
+#         accumulative = round(accumulative / (j+1), 1)
+#
+#         dataList.append(
+#             [str(data["tableData"][i]["time"]), data["tableData"][i]["value"], YOY, linkRelativeRatio, accumulative])
+#     if("full"==format):
+#         return {'tableData': dataList, 'tableTitle': ["日期", "CPI", "同比", "环比", "累积","公布日期"]}
+#     elif ("dataOnly"==format):
+#         print(dataList)
+#         return dataList
 
 def getRR():
     items = ReserveRequirementManager.objects.all().order_by("-date")

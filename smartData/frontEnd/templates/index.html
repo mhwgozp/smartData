@@ -146,7 +146,7 @@ line-height:25px; }
        function attachData(dataName, xAxisDatas, data, yIndexShow)
        {
             var newData = [];
-            var lineColor = ["#93DAFF","#80E12A","#FFB6C1","#DA70D6","#828282"]
+            var lineColor = ["#80E12A","#FFB6C1","#DA70D6","#828282","#43DAFF"]
             for (var i = 0; i < data.length; i++)
             {
 
@@ -177,6 +177,7 @@ line-height:25px; }
                                 color: lineColor[yIndex] //折线的颜色
                             },
                        };
+            option.legend.data.push(dataName)
             option.series.push(item);
        }
 
@@ -186,6 +187,7 @@ line-height:25px; }
             {
                 option.series.splice(6, option.series.length-5);
                 option.yAxis.splice(2, option.yAxis.length-2);
+                option.legend.data.splice(5, option.legend.data.length-5);
             }
         }
 

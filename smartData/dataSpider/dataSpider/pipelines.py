@@ -77,6 +77,22 @@ class DataspiderPipeline(object):
             insert_sql += ")"
             print(insert_sql)
             self.cursor.execute(insert_sql)
+        elif 'moneysupplyData' == item['type']:
+            print("to update moneysupply:")
+            insert_sql = "insert into moneysupply values ("
+            index = 0
+            for key in item['data'].keys():
+                if index == 0:
+                    insert_sql += "'"
+                    insert_sql += item['data'][key]
+                    insert_sql += "'"
+                    index += 1
+                else:
+                    insert_sql += ","
+                    insert_sql += item['data'][key]
+            insert_sql += ",null)"
+            print(insert_sql)
+            self.cursor.execute(insert_sql)
 
         self.connect.commit()
         #return item
