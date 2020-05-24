@@ -27,12 +27,11 @@ line-height:25px; }
            <li>
            截止日期:<input type="date" id="endDate"/>&nbsp;
            <br> <li>股票代码</li>
-             <input type="text" id="ts_code" name="ts_code" list="ts_codeList" maxlength="20" onfocus=this.value=''>
+             <input type="text" id="ts_code" name="ts_code" list="ts_codeList" maxlength="20" onchange="addCode()" onfocus=this.value=''>
                <datalist id="ts_codeList" style="display:none;">
-                <option value="000001.SH 上证指数"/>
-                <option value="399306.SZ 创业板指数"/>
+                   <option value="000001.SH">上证指数</option>
+                   <option value="399306.SZ"> 创业板指数</option>
                </datalist>
-           <li><button id="addCode">添加</button></li>
            <br><li>已选股票代码</li>
                <li class="select-result">
 			     <dl>
@@ -74,13 +73,6 @@ line-height:25px; }
 
             var today = time.getFullYear() + "-" + (month) + "-" + (day);
             $('#endDate').val(today);
-
-            $("#addCode").click(function () {
-                var stockCode=$("#ts_code").val().split(" ");
-                selectedItem='<dd onClick="removeCode(this)" id="'+ stockCode[0] + '"><a href="#">'+stockCode[1]+'</a></dd>';
-                $(".select-result dl").append(selectedItem);
-                stockCodes.push(stockCode[0]);
-            });
         });
 
         Array.prototype.indexOf = function(val) {
@@ -101,6 +93,24 @@ line-height:25px; }
             stockCodes.remove(obj.id);
             $(obj).remove();
 	    };
+
+	    function addCode()
+	    {
+                var stockCode=$("#ts_code").val().trim();
+                var stockText=stockCode;
+                var isInCodeList=0;
+                var $options=$("#ts_codeList").children();
+                for(var i=0;i<$options.length;i++){
+                    if($options.eq(i).val().trim()==$("#ts_code").val().trim())
+                    {
+                        stockText=$options.eq(i).text();
+                        break;
+                    }
+                }
+                selectedItem='<dd onClick="removeCode(this)" id="'+ stockCode + '"><a href="#">'+stockText+'</a></dd>';
+                $(".select-result dl").append(selectedItem);
+                stockCodes.push(stockCode[0]);
+            }
    </script>
 
 
