@@ -92,6 +92,8 @@ def getMacroDataByType(macroType, startDate, endDate):
         return getGdp(startDate, endDate)
     if ("macroMondySupply" == macroType):
         return getMoneySupply(startDate, endDate)
+    if ("macroLPR" == macroType):
+        return getLPR(startDate, endDate)
 
 def getCpi(startDate, endDate):
 
@@ -140,6 +142,16 @@ def getMoneySupply(startDate, endDate):
     print(datas)
     return datas
     #return {'tableData': dataList, 'tableTitle': ["日期", "PPI", "同比", "环比", "累积", "公布日期"]}
+
+def getLPR(startDate, endDate):
+    print (int(startDate[4:6]))
+    df = pro.shibor_lpr(start_date=startDate, end_date=endDate)
+    datas = df.values.tolist()
+    print(datas)
+    for i in range(len(datas)):
+        datas[i][0] = int(datas[i][0]);
+    datas.reverse()
+    return datas
 
 # def getCpiSpider(format,startDate, endDate):
 #     #items = CpiSpiderManager.objects.filter(time__gte=startDate)

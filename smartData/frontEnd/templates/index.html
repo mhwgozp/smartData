@@ -50,11 +50,11 @@ line-height:25px; }
              <li><input id ="macroMondySupply" type="checkbox" name="checkbox" data-labelauty="货币供应量"></li>
              <li><input id ="macroCPI" type="checkbox" name="checkbox" data-labelauty="CPI"></li>
            <li><input id ="macroLPR" type="checkbox" name="checkbox" data-labelauty="LPR贷款基础利率"></li>
-           <li><input id ="macroCPI" type="checkbox" name="checkbox" data-labelauty="CPI"></li>
-           <li><input id ="macroCPI" type="checkbox" name="checkbox" data-labelauty="CPI"></li>
 <!--             <li><input id ="macroPMI" type="checkbox" name="checkbox" data-labelauty="PMI"></li>-->
 <!--             <li><input id ="macroPPI" type="checkbox" name="checkbox" data-labelauty="PPI"></li>-->
            <br> <li>个股数据</li>
+             <li><input id ="stockDynamicPE" type="checkbox" name="checkbox" data-labelauty="动态PE"></li>
+             <li><input id ="stockROE" type="checkbox" name="checkbox" data-labelauty="ROE"></li>
              <li><input id ="stockGrowthRateOfMainOperatingIncome" type="checkbox" name="checkbox" data-labelauty="主营业收入增长率"></li>
              <li><input id ="stockGrossMargin" type="checkbox" name="checkbox" data-labelauty="毛利率"></li>
              <li><input id ="stockNetInterestRate" type="checkbox" name="checkbox" data-labelauty="扣非净利率"></li>
@@ -153,10 +153,7 @@ line-height:25px; }
             {
                 params.push("macroGdp");
             }
-            if($('#macroRRR').is(':checked'))
-            {
-                params.push("macroRRR");
-            }
+
             if($('#macroMondySupply').is(':checked'))
             {
                 params.push("macroMondySupply");
@@ -164,6 +161,14 @@ line-height:25px; }
             if($('#macroCPI').is(':checked'))
             {
                 params.push("macroCPI");
+            }
+            if($('#macroLPR').is(':checked'))
+            {
+                params.push("macroLPR");
+            }
+            if($('#macroRRR').is(':checked'))
+            {
+                params.push("macroRRR");
             }
             if($('#macroPMI').is(':checked'))
             {
@@ -231,15 +236,43 @@ line-height:25px; }
 
        function addYAxis(isShow)
        {
-            var item = {
+           var itemShow = {
                         scale: true,
                         gridIndex:0,
                         position: "right",
-                        splitArea: {
-                                            show: isShow
-                                   }
+                        "axisLine":{       //y轴
+                          "show":true
+                        },
+                        "axisTick":{       //y轴刻度线
+                          "show":true
+                        }
                        };
-            option.yAxis.push(item);
+
+           var itemHide = {
+                        scale: true,
+                        gridIndex:0,
+                        position: "right",
+                        "axisLine":{       //y轴
+                          "show":false
+                        },
+                        "axisTick":{       //y轴刻度线
+                          "show":false
+                        },
+                        axisLabel : {
+                            formatter: function(){
+                                  return "";
+                            }
+                       }
+                };
+           if(isShow)
+           {
+           option.yAxis.push(itemShow);
+           }
+           else
+           {
+           option.yAxis.push(itemHide);
+           }
+
            return (option.yAxis.length-1);
        }
 
@@ -464,7 +497,7 @@ line-height:25px; }
                             for(var macroDataIndex=0; macroDataIndex < response.macroParams.length; macroDataIndex++)
                             {
                                 var macroDataType = response.macroParams[macroDataIndex];
-                                attachLineData(macroDataType, option.xAxis[0].data, response.macroDatas[macroDataType], true);
+                                attachLineData(macroDataType, option.xAxis[0].data, response.macroDatas[macroDataType], (response.macroParams.length<2));
                             }
 
                             myChart.setOption(option, true);
