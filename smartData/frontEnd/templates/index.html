@@ -26,13 +26,19 @@ line-height:25px; }
            开始日期:<input type="date" id="startDate"/>&nbsp;</li>
            <li>
            截止日期:<input type="date" id="endDate"/>&nbsp;
-           <br> <li>股票代码</li>
-             <input type="text" id="ts_code" name="ts_code" list="ts_codeList" maxlength="20" onchange="addCode()" onfocus=this.value=''>
-               <datalist id="ts_codeList" style="display:none;">
+           <br> <li>指数代码</li>
+             <input type="text" id="indexCode" name="indexCode" list="indexCodeList" maxlength="20" onchange="addIndexCode()" onfocus=this.value=''>
+               <datalist id="indexCodeList" style="display:none;">
                    <option value="000001.SH">上证指数</option>
                    <option value="399306.SZ"> 创业板指数</option>
                </datalist>
-           <br><li>已选股票代码</li>
+           <li>股票代码</li>
+             <input type="text" id="stockCode" name="stockCode" list="stockCodeList" maxlength="20" onchange="addCode()" onfocus=this.value=''>
+               <datalist id="stockCodeList" style="display:none;">
+                   <option value="300059.SZ">东方财富</option>
+                   <option value="600519.SH">贵州茅台</option>
+               </datalist>
+           <br><li>已选代码</li>
                <li class="select-result">
 			     <dl>
 			     </dl>
@@ -40,11 +46,14 @@ line-height:25px; }
 
            <br> <li>宏观数据</li>
              <li><input id ="macroGdp" type="checkbox" name="checkbox" data-labelauty="GDP"></li>
-             <li><input id ="macroRRR" type="checkbox" name="checkbox" data-labelauty="存款准备金"></li>
+<!--             <li><input id ="macroRRR" type="checkbox" name="checkbox" data-labelauty="存款准备金"></li>-->
              <li><input id ="macroMondySupply" type="checkbox" name="checkbox" data-labelauty="货币供应量"></li>
              <li><input id ="macroCPI" type="checkbox" name="checkbox" data-labelauty="CPI"></li>
-             <li><input id ="macroPMI" type="checkbox" name="checkbox" data-labelauty="PMI"></li>
-             <li><input id ="macroPPI" type="checkbox" name="checkbox" data-labelauty="PPI"></li>
+           <li><input id ="macroLPR" type="checkbox" name="checkbox" data-labelauty="LPR贷款基础利率"></li>
+           <li><input id ="macroCPI" type="checkbox" name="checkbox" data-labelauty="CPI"></li>
+           <li><input id ="macroCPI" type="checkbox" name="checkbox" data-labelauty="CPI"></li>
+<!--             <li><input id ="macroPMI" type="checkbox" name="checkbox" data-labelauty="PMI"></li>-->
+<!--             <li><input id ="macroPPI" type="checkbox" name="checkbox" data-labelauty="PPI"></li>-->
            <br> <li>个股数据</li>
              <li><input id ="stockGrowthRateOfMainOperatingIncome" type="checkbox" name="checkbox" data-labelauty="主营业收入增长率"></li>
              <li><input id ="stockGrossMargin" type="checkbox" name="checkbox" data-labelauty="毛利率"></li>
@@ -61,6 +70,7 @@ line-height:25px; }
             });
         });
 
+       var indexCodes=[];
        var stockCodes=[];
        var macroParams=[];
        var stockParams=[];
@@ -96,12 +106,12 @@ line-height:25px; }
 
 	    function addCode()
 	    {
-                var stockCode=$("#ts_code").val().trim();
+                var stockCode=$("#stockCode").val().trim();
                 var stockText=stockCode;
                 var isInCodeList=0;
-                var $options=$("#ts_codeList").children();
+                var $options=$("#stockCodeList").children();
                 for(var i=0;i<$options.length;i++){
-                    if($options.eq(i).val().trim()==$("#ts_code").val().trim())
+                    if($options.eq(i).val().trim()==$("#stockCode").val().trim())
                     {
                         stockText=$options.eq(i).text();
                         break;
@@ -109,99 +119,34 @@ line-height:25px; }
                 }
                 selectedItem='<dd onClick="removeCode(this)" id="'+ stockCode + '"><a href="#">'+stockText+'</a></dd>';
                 $(".select-result dl").append(selectedItem);
-                stockCodes.push(stockCode[0]);
-            }
-   </script>
-
-
-
-   <script>
-       function makePoints(baseData, macroData)
-       {
-            for (var i = 0; i < macroData.length; i++)
-            {
-                for(var j=0; j<(baseData.categoryData.length-1);j++)
-                {
-                    if(baseData.categoryData[j]==macroData[i][0] ||
-                        (baseData.categoryData[j]<macroData[i][0] && baseData.categoryData[j+1]>macroData[i][0]))
-                        {
-                           var item={
-                                      name: i,
-                                       coord: [String(baseData.categoryData[j]), baseData.values[j][0]],
-                                       value: macroData[i][1],
-                                       itemStyle: {
-                                           color: 'rgb(41,60,85)'
-                                                  }
-                                  };
-                                   option.series[0].markPoint.data.push(item);
-                        }
-                }
-            }
-       }
-
-       function addYAxis(show)
-       {
-            var item = {
-                        scale: true,
-                        gridIndex:0,
-                        position: "right",
-                        splitArea: {
-                                            show: true
-                                   }
-                       };
-            option.yAxis.push(item);
-           return (option.yAxis.length-1);
-       }
-
-       function attachData(dataName, xAxisDatas, data, yIndexShow)
-       {
-            var newData = [];
-            var lineColor = ["#80E12A","#FFB6C1","#DA70D6","#828282","#43DAFF"]
-            for (var i = 0; i < data.length; i++)
-            {
-
-                for(var j=0; j<(xAxisDatas.length-1);j++)
-                {
-                    if(xAxisDatas[j]==data[i][0] ||
-                        (xAxisDatas[j]<data[i][0] && xAxisDatas[j+1]>data[i][0]))
-                        {
-                           newData.push([String(xAxisDatas[j]), data[i][1]]);
-                           break;
-                           //newData.push( data[i][1]);
-                        }
-                }
-            }
-            yIndex = addYAxis(yIndexShow);
-            var item = {
-                            name: dataName,
-                            type: 'line',
-                            xAxisIndex: 0,
-                            yAxisIndex: yIndex,
-                            data: newData,
-                            smooth: false,
-                            symbol:'circle',
-                            symbolSize:10,
-                            lineStyle: {
-                                width:2,
-                                type: 'solid',
-                                color: lineColor[yIndex] //折线的颜色
-                            },
-                       };
-            option.legend.data.push(dataName)
-            option.series.push(item);
-       }
-
-        function resetMacroData()
-        {
-            if(option.series.length>6)
-            {
-                option.series.splice(6, option.series.length-5);
-                option.yAxis.splice(2, option.yAxis.length-2);
-                option.legend.data.splice(5, option.legend.data.length-5);
-            }
+                stockCodes.push(stockCode);
         }
 
-       function getMacroParams()
+        function removeIndexCode(obj){
+            indexCodes.remove(obj.id);
+            $(obj).remove();
+	    };
+
+            function addIndexCode()
+	    {
+                var indexCode=$("#indexCode").val().trim();
+                var indexText=indexCode;
+                var isInCodeList=0;
+                var $options=$("#indexCodeList").children();
+                for(var i=0;i<$options.length;i++){
+                    if($options.eq(i).val().trim()==$("#indexCode").val().trim())
+                    {
+                        indexText=$options.eq(i).text();
+                        break;
+                    }
+                }
+                selectedItem='<dd onClick="removeIndexCode(this)" id="'+ indexCode + '"><a href="#">'+indexText+'</a></dd>';
+                $(".select-result dl").append(selectedItem);
+                indexCodes.push(indexCode);
+            }
+
+
+        function getMacroParams()
        {
             var params=[];
             if($('#macroGdp').is(':checked'))
@@ -256,6 +201,194 @@ line-height:25px; }
             }
             return params;
        }
+   </script>
+
+
+
+   <script>
+       function makePoints(baseData, macroData)
+       {
+            for (var i = 0; i < macroData.length; i++)
+            {
+                for(var j=0; j<(baseData.categoryData.length-1);j++)
+                {
+                    if(baseData.categoryData[j]==macroData[i][0] ||
+                        (baseData.categoryData[j]<macroData[i][0] && baseData.categoryData[j+1]>macroData[i][0]))
+                        {
+                           var item={
+                                      name: i,
+                                       coord: [String(baseData.categoryData[j]), baseData.values[j][0]],
+                                       value: macroData[i][1],
+                                       itemStyle: {
+                                           color: 'rgb(41,60,85)'
+                                                  }
+                                  };
+                                   option.series[0].markPoint.data.push(item);
+                        }
+                }
+            }
+       }
+
+       function addYAxis(isShow)
+       {
+            var item = {
+                        scale: true,
+                        gridIndex:0,
+                        position: "right",
+                        splitArea: {
+                                            show: isShow
+                                   }
+                       };
+            option.yAxis.push(item);
+           return (option.yAxis.length-1);
+       }
+
+       function attachLineData(dataName, xAxisDatas, data, yIndexShow)
+       {   //添加简单的折线
+            var newData = [];
+            var lineColor = ["#80E12A","#FFB6C1","#DA70D6","#828282","#43DAFF"]
+            for (var i = 0; i < data.length; i++)
+            {
+
+                for(var j=0; j<(xAxisDatas.length-1);j++)
+                {
+                    if(xAxisDatas[j]==data[i][0] ||
+                        (xAxisDatas[j]<data[i][0] && xAxisDatas[j+1]>data[i][0]))
+                        {
+                           newData.push([String(xAxisDatas[j]), data[i][1]]);
+                           break;
+                           //newData.push( data[i][1]);
+                        }
+                }
+            }
+
+            yIndex = addYAxis(yIndexShow);
+            var item = {
+                            name: dataName,
+                            type: 'line',
+                            xAxisIndex: 0,
+                            yAxisIndex: yIndex,
+                            data: newData,
+                            smooth: false,
+                            symbol:'circle',
+                            symbolSize:10,
+                            lineStyle: {
+                                width:2,
+                                type: 'solid',
+                                color: lineColor[yIndex] //折线的颜色
+                            },
+                       };
+            option.legend.data.push(dataName)
+            option.series.push(item);
+       }
+
+       function attachStockLineData(dataName, codeData, lineIndex)
+       {    //为股票添加简单的折线
+            var lineColor = ["#80E12A","#FFB6C1","#DA70D6","#828282","#43DAFF"]
+            var item = {
+                            name: dataName,
+                            type: 'line',
+                            xAxisIndex: 0,
+                            yAxisIndex: 0,
+                            data: codeData,
+                            smooth: false,
+                            symbol:'circle',
+                            symbolSize:10,
+                            lineStyle: {
+                                width:2,
+                                type: 'solid',
+                                color: lineColor[lineIndex] //折线的颜色
+                            },
+                       };
+            option.legend.data.push(dataName)
+            option.series.push(item);
+       }
+
+       function attachStockData(dataName, codeData)
+       {    //1,添加蜡烛图k线 （当前它只显示在第一个x,y轴上）
+            var candlestickItem = {
+                            name: dataName,
+                            type: 'candlestick',
+                            data: codeData.values,
+                            itemStyle: {
+                                            color: upColor,
+                                            color0: downColor,
+                                            borderColor: null,
+                                            borderColor0: null
+                                        },
+                            //////////////////////////////////////
+                            markPoint: {
+                                        label: {
+                                                    normal: {
+                                                        formatter: function (param)
+                                                                {
+                                                                    return param != null ? Math.round(param.value) : '';
+                                                                }
+                                                            }
+                                                },
+                                        data: [
+
+                                            ]
+                                        },
+                            /////////////////////////////////////
+                            tooltip: {
+                                formatter: function (param) {
+                                    param = param[0];
+                                    return [
+                                        'Date: ' + param.name + '<hr size=1 style="margin: 3px 0">',
+                                        'Open: ' + param.data[0] + '<br/>',
+                                        'Close: ' + param.data[1] + '<br/>',
+                                        'Lowest: ' + param.data[2] + '<br/>',
+                                        'Highest: ' + param.data[3] + '<br/>'
+                                    ].join('');
+                                }
+                            }
+                        };
+            option.series.push(candlestickItem);
+
+            //2,设置均线
+            var maItemsType=[5,10,20,30];
+            for(var i=0; i<maItemsType.length; i++)
+            {
+                var maItem = {
+                            name: maItemsType[i].toString(),
+                            type: 'line',
+                            data: calculateMA(maItemsType[i], codeData),
+                            smooth: true,
+                            lineStyle: {
+                                opacity: 0.5
+                            }
+                        };
+                option.series.push(maItem);
+            }
+            //3,设置量能副图
+            var volumesItem = {
+                            name: 'Volume',
+                            type: 'bar',
+                            xAxisIndex: 1,
+                            yAxisIndex: 1,
+                            data: codeData.volumes
+                        };
+            option.series.push(volumesItem);
+       }
+
+       function resetSeriesData()
+        {
+                option.series.splice(0, option.series.length);
+                option.yAxis.splice(2, option.yAxis.length-2);
+                option.legend.data.splice(0, option.legend.data.length);
+        }
+
+        function resetMacroData()
+        {
+            if(option.series.length>6)
+            {
+                option.series.splice(6, option.series.length-5);
+                option.yAxis.splice(2, option.yAxis.length-2);
+                option.legend.data.splice(5, option.legend.data.length-5);
+            }
+        }
+
            var stockData;
             $('#analyse').click(function () {
                 var reg = new RegExp("-","g");
@@ -267,34 +400,71 @@ line-height:25px; }
                         url: '',
                         type: 'post',
                         traditional: true,
-                        data: {'stockCodes': stockCodes, 'startDate': startDate, 'endDate': endDate, 'macroParams': macroParams, 'stockParams':stockParams},
+                        data: {'indexCodes': indexCodes,'stockCodes': stockCodes,'startDate': startDate, 'endDate': endDate, 'macroParams': macroParams, 'stockParams':stockParams},
                         success: function (response)
                         {
-                            ///////////////////// attach stock data ////////////////////////////////////////////
-                            for(var stockCodeIndex=0; stockCodeIndex < response.stockCodes.length; stockCodeIndex++)
+                            var numOfCodes = (response.indexCodes.length + response.stockCodes.length);
+                            var isMultiCodes = (numOfCodes>1);
+                            var haveBasicData = false;
+                            var xAxisData = [];
+
+                            resetSeriesData();//清空数据
+                            ///////////////////// attach index data ////////////////////////////////////////////
+                            if(isMultiCodes)
                             {
-                                stockCode = response.stockCodes[stockCodeIndex];
-                                data2=splitData(response.tradingDatas[stockCode]);
-                                //makePoints(data2, response.macroData);
+                            option.yAxis[0].axisLabel.formatter='{value} %';
+                            }
+                            else
+                            {
+                            option.yAxis[0].axisLabel.formatter='{value}';
+                            }
 
+                            for(var index=0; index < response.indexCodes.length; index++)
+                            {
+                                indexCode = response.indexCodes[index];
+                                var codeData = splitDataByType(response.indexTradingDatas[indexCode], isMultiCodes);
 
-                                //设置k线图数据
-                                option.xAxis[0].data = data2.categoryData;
-                                option.xAxis[1].data = data2.categoryData;
-                                option.series[0].data = data2.values;
-                                option.series[1].data = calculateMA(5,data2);
-                                option.series[2].data = calculateMA(10,data2);
-                                option.series[3].data = calculateMA(20,data2);
-                                option.series[4].data = calculateMA(30,data2);
-                                option.series[5].data = data2.volumes;
+                                if(false == haveBasicData)
+                                 {  //如果还没有画线(没有添加任何数据)，则设置一下x轴的时间数据
+                                    haveBasicData=true;
+                                    setXAxisData(codeData.categoryData);
+                                 }
+                                 if(isMultiCodes)
+                                 {  //如果有(股票+指数)有多个，则不用蜡烛图，而用普通的折线画
+                                    attachStockLineData(indexCode, codeData.values, index);
+                                 }
+                                 else
+                                 {
+                                    //如果只有一个股票和指数相加只有一个，则用蜡烛图
+                                    attachStockData(indexCode, codeData);
+                                 }
+                            }
+
+                             ///////////////////// attach stock data ////////////////////////////////////////////
+                            for(var index=0; index < response.stockCodes.length; index++)
+                            {
+                                stockCode = response.stockCodes[index];
+                                codeData=splitDataByType(response.tradingDatas[stockCode], isMultiCodes);
+                                if(false == haveBasicData)
+                                 {
+                                    haveBasicData=true;
+                                    setXAxisData(codeData.categoryData);
+                                 }
+                                if(isMultiCodes)
+                                {
+                                    attachStockLineData(stockCode, codeData.values,(index+response.indexCodes.length) );
+                                 }
+                                 else
+                                 {
+                                    attachStockData(stockCode, codeData);
+                                 }
                             }
 
                             ///////////////////// attach macro data ////////////////////////////////////////////
-                            resetMacroData();
                             for(var macroDataIndex=0; macroDataIndex < response.macroParams.length; macroDataIndex++)
                             {
                                 var macroDataType = response.macroParams[macroDataIndex];
-                                attachData(macroDataType, option.xAxis[0].data, response.macroDatas[macroDataType], true);
+                                attachLineData(macroDataType, option.xAxis[0].data, response.macroDatas[macroDataType], true);
                             }
 
                             myChart.setOption(option, true);
@@ -332,6 +502,36 @@ line-height:25px; }
                 };
             }
 
+            function splitDataByType(rawData,isPercent) {
+                var categoryData = [];
+                var values = [];
+                var volumes = [];
+                if(false == isPercent)
+                {   //只有一个股票时，显示股价蜡烛图
+                    for (var i = 0; i < rawData.length; i++) {
+                        categoryData.push(rawData[i].splice(0, 1)[0]);
+                        values.push(rawData[i]);
+                        volumes.push([i, rawData[i][4], rawData[i][0] > rawData[i][1] ? 1 : -1]); //交易量能
+                    }
+                }
+                else
+                {   //多股同列时,显示收盘价相对于第一天开盘价的百分比折线图
+                    var basicValue=rawData[0][1]; //第一天的开盘价作为基准价
+                    for (var i = 0; i < rawData.length; i++) {
+                        var time = rawData[i][0];
+                        categoryData.push(rawData[i].splice(0, 1)[0]);
+                        volumes.push([i, rawData[i][4], rawData[i][0] > rawData[i][1] ? 1 : -1]); //交易量能
+                        values.push([String(time), (rawData[i][1]-basicValue)*100/basicValue]);   //收盘价相对于第一天开盘价的涨幅
+                    }
+                }
+
+                return {
+                    categoryData: categoryData,
+                    values: values,
+                    volumes: volumes
+                };
+            }
+
             function calculateMA(dayCount, data) {
                 var result = [];
                 for (var i = 0, len = data.values.length; i < len; i++) {
@@ -348,16 +548,19 @@ line-height:25px; }
                 return result;
             }
 
-            var data = splitData({{ stockData }});
-
-            /////////////////////////////////////////////////////////
+       function setXAxisData(xAxisData)
+       {
+             option.xAxis[0].data = xAxisData;
+             option.xAxis[1].data = xAxisData;
+       }
+         /////////////////////////////////////////////////////////
             option = {
                     backgroundColor: '#fff',
                     animation: false,
                     legend: {
                         bottom: 10,
                         left: 'center',
-                        data: ['Dow-Jones index', 'MA5', 'MA10', 'MA20', 'MA30']
+                        data: []
                     },
                     tooltip: {
                         trigger: 'axis',
@@ -429,7 +632,7 @@ line-height:25px; }
                     xAxis: [
                         {
                             type: 'category',
-                            data: data.categoryData,
+                            data: 0,
                             scale: true,
                             boundaryGap: false,
                             axisLine: {onZero: false},
@@ -444,7 +647,7 @@ line-height:25px; }
                         {
                             type: 'category',
                             gridIndex: 1,
-                            data: data.categoryData,
+                            data: 0,
                             scale: true,
                             boundaryGap: false,
                             axisLine: {onZero: false},
@@ -462,6 +665,9 @@ line-height:25px; }
                             gridIndex:0,
                             splitArea: {
                                 show: true
+                            },
+                            axisLabel: {
+                            formatter: '{value}'
                             }
                         },
                         {
@@ -490,95 +696,13 @@ line-height:25px; }
                             end: 100
                         }
                     ],
-                    series: [
-///////////////////////////////////////////////////////////
-                        {
-                            name: 'Dow-Jones index',
-                            type: 'candlestick',
-                            data: data.values,
-                            itemStyle: {
-                                            color: upColor,
-                                            color0: downColor,
-                                            borderColor: null,
-                                            borderColor0: null
-                                        },
-                            //////////////////////////////////////
-                            markPoint: {
-                                        label: {
-                                                    normal: {
-                                                        formatter: function (param)
-                                                                {
-                                                                    return param != null ? Math.round(param.value) : '';
-                                                                }
-                                                            }
-                                                },
-                                        data: [
-
-                                            ]
-                                        },
-                            /////////////////////////////////////
-                            tooltip: {
-                                formatter: function (param) {
-                                    param = param[0];
-                                    return [
-                                        'Date: ' + param.name + '<hr size=1 style="margin: 3px 0">',
-                                        'Open: ' + param.data[0] + '<br/>',
-                                        'Close: ' + param.data[1] + '<br/>',
-                                        'Lowest: ' + param.data[2] + '<br/>',
-                                        'Highest: ' + param.data[3] + '<br/>'
-                                    ].join('');
-                                }
-                            }
-                        },
-//////////////////////////////////////////////////////
-                        {
-                            name: 'MA5',
-                            type: 'line',
-                            data: calculateMA(5, data),
-                            smooth: true,
-                            lineStyle: {
-                                opacity: 0.5
-                            }
-                        },
-                        {
-                            name: 'MA10',
-                            type: 'line',
-                            data: calculateMA(10, data),
-                            smooth: true,
-                            lineStyle: {
-                                opacity: 0.5
-                            }
-                        },
-                        {
-                            name: 'MA20',
-                            type: 'line',
-                            data: calculateMA(20, data),
-                            smooth: true,
-                            lineStyle: {
-                                opacity: 0.5
-                            }
-                        },
-                        {
-                            name: 'MA30',
-                            type: 'line',
-                            data: calculateMA(30, data),
-                            smooth: true,
-                            lineStyle: {
-                                opacity: 0.5
-                            }
-                        },
-                        {
-                            name: 'Volume',
-                            type: 'bar',
-                            xAxisIndex: 1,
-                            yAxisIndex: 1,
-                            data: data.volumes
-                        }
-
-
-                    ]
+                    series: []
                 };
             /////////////////////////////////////////////////////////
+
+            var codeData = splitDataByType({{ stockData }},false);
+            setXAxisData(codeData.categoryData);
+            attachStockData("上证指数", codeData);
 
             myChart.setOption(option, true);
 

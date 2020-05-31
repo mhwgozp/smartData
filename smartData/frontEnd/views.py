@@ -9,7 +9,7 @@ from .models import *
 
 import pandas as pd
 
-ts.set_token('5bc67278bb0450c5077b5deca6277ebb5171e9f97507d1c588560979')
+ts.set_token('abc23dc1908af03d82e14f830e52e28300ef5ac69bb5fe14e2ba8630')
 pro = ts.pro_api()
 
 def hello(request):
@@ -18,32 +18,42 @@ def hello(request):
 
     if request.method == 'POST':
         #json.loads(request.POST.get('stockCodes'))
+        indexCodes = request.POST.getlist('indexCodes')
         stockCodes = request.POST.getlist('stockCodes')
         startDate = request.POST.get('startDate')
         endDate = request.POST.get('endDate')
         macroParams=request.POST.getlist('macroParams')
         stockParams=request.POST.getlist('stockParams')
-        datas = {'stockCodes':stockCodes,'startDate':startDate,'macroParams':macroParams,'stockParams':stockParams,
-                 'tradingDatas':{},'macroDatas':{},'stockDatas':{}}
+        datas = {'indexCodes':indexCodes,'stockCodes':stockCodes,'startDate':startDate,'macroParams':macroParams,'stockParams':stockParams,
+                 'indexTradingDatas':{},'tradingDatas':{},'macroDatas':{},'stockDatas':{}}
+        indexTradingDatas = {}
         tradingDatas={}
         macroDatas={}
         print(datas)
         numOfStockCodes = len(stockCodes)
-        for ts_code in stockCodes:
+        fieldStr = 'trade_date,open,close,low,high,vol'
 
-            if(numOfStockCodes==1):
-                fieldStr='trade_date,open,close,low,high,vol'
-            else:
-                fieldStr = 'trade_date,close'
+        for ts_code in indexCodes:
             df = pro.index_daily(ts_code=ts_code, start_date=startDate, end_date=endDate, fields=fieldStr)
             curCodeData = df.values.tolist()
             for i in range(len(curCodeData)):
                 curCodeData[i][0] = int(curCodeData[i][0])
             curCodeData.reverse()
+            indexTradingDatas[ts_code]=curCodeData;
+            print(indexTradingDatas[ts_code]);
+
+        for ts_code in stockCodes:
+            df = pro.daily(ts_code=ts_code, start_date=startDate, end_date=endDate, fields=fieldStr)
+            curCodeData = df.values.tolist()
+            for i in range(len(curCodeData)):
+                curCodeData[i][0] = int(curCodeData[i][0])
+            curCodeData.reverse()
             tradingDatas[ts_code]=curCodeData;
+            print(tradingDatas[ts_code]);
         print('===================================')
         #print(tradingDatas)
         print('***********************************')
+        datas['indexTradingDatas'] = indexTradingDatas
         datas['tradingDatas']=tradingDatas
 
         if(macroParams):
