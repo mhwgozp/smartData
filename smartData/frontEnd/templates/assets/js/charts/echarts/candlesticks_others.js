@@ -44,7 +44,6 @@ $(function () {
 
             // Initialize charts
             // ------------------------------
-
             var candlestick_basic = ec.init(document.getElementById('candlestick_basic'), limitless);
             var candlestick_line = ec.init(document.getElementById('candlestick_line'), limitless);
             var candlestick_scatter = ec.init(document.getElementById('candlestick_scatter'), limitless);
