@@ -21,10 +21,10 @@ from frontEnd import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('rr', views.dataManagerReserveRequirement),
-    path('cpi', views.dataManagerCpi),
-    path('ppi', views.dataManagerPpi),
-    path('pmi', views.dataManagerPmi),
-    path('', views.hello),
-    path('vue/', TemplateView.as_view(template_name="vue.html")),
+    #path('rr', views.dataManagerReserveRequirement),
+    #path('cpi', views.dataManagerCpi),
+    #path('ppi', views.dataManagerPpi),
+    #path('pmi', views.dataManagerPmi),
+    path('', views.homepage),
+    #path('vue/', TemplateView.as_view(template_name="vue.html")),
 ]

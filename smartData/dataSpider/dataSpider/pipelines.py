@@ -10,8 +10,8 @@ class DataspiderPipeline(object):
 
     def __init__(self):
         # connection database
-        self.connect = pymysql.connect(host='127.0.0.1', user='root', passwd='88888888',
-                                       db='smartDataDb')
+        self.connect = pymysql.connect(host='rm-bp1f9o31xc7536tz8125010.mysql.rds.aliyuncs.com', user='dbadmin', passwd='smartdatagogo',
+                                       db='smartdata')
         # get cursor
         self.cursor = self.connect.cursor()
         print("�������ݿ�ɹ�")

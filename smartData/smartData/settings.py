@@ -25,7 +25,7 @@ SECRET_KEY = '8-=8^zequ4_&2(kx7jhlhvsc$b9n6o^pf=3xm&)a=yi81ux!_j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*',]
 
 
 # Application definition
@@ -82,11 +82,11 @@ DATABASES = {
     # }
     'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'HOST': '127.0.0.1',
+            'HOST': 'rm-bp1f9o31xc7536tz8125010.mysql.rds.aliyuncs.com',
             'PORT': 3306,
-            'NAME': 'smartDataDb',
-            'USER': 'root',
-            'PASSWORD': '88888888',
+            'NAME': 'smartdata',
+            'USER': 'dbadmin',
+            'PASSWORD': 'smartdatagogo',
         }
 }
 
@@ -131,7 +131,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static').replace('\\', '/')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'node_modules'),
-    #os.path.join(BASE_DIR, "vue_frontend/dist"),
+    os.path.join(BASE_DIR, "frontEnd/templates"),
 )
 
 # # Add for vue.js
