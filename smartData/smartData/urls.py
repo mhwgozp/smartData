@@ -25,6 +25,6 @@ urlpatterns = [
     #path('cpi', views.dataManagerCpi),
     #path('ppi', views.dataManagerPpi),
     #path('pmi', views.dataManagerPmi),
-    path('', views.homepage),
+    path('', views.homePage),
     #path('vue/', TemplateView.as_view(template_name="vue.html")),
 ]

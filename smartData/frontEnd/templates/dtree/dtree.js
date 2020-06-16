@@ -55,7 +55,7 @@ function dTree(objName, objbool) {        // void ���췽������
     }
     this.icon = {
         root:        '/static/dtree/img/base.gif',         // Node ���ڵ㡣
-        folder:      '/static/dtree/img/folder.gif',       // Node ���ڵ㡣
+        folder:      '/static/dtree/img/folder.gif',       // Node ���ڵ㡣ulSelected
         folderOpen:  '/static/dtree/img/folderopen.gif',   // �򿪵��ļ���,Ĭ��'img/folderOpen.gif'
         node:        '/static/dtree/img/page.gif',         // �򿪵��ļ���,Ĭ��'img/folderOpen.gif'
         empty:       '/static/dtree/img/empty.gif',        // �򿪵��ļ���,Ĭ��'img/folderOpen.gif'
@@ -295,18 +295,18 @@ dTree.prototype.checkNode = function (id, pid, _hc, checked) {
     //    }
     //}
 
-    ////2��������м��㣬���ж��ӣ��ݹ�ѡ�ӽڵ����		
+    ////2��������м��㣬���ж��ӣ��ݹ�ѡ�ӽڵ����
     //if (_hc)
     //    this.checkSNodeRecursion(id, checked);
     var count = 0;
-    var obj = document.all.authority;
+    var obj = document.all.MacroParams;
 
-    for (i = 0; i < obj.length; i++) {        
-        if (obj[i].checked) {            
+    for (i = 0; i < obj.length; i++) {
+        if (obj[i].checked) {
             if (!this.RadioRocheckbox) {
                 $("#ulSelected").empty();
-            }            
-            if ($("#ulSelected #user_" + obj[i].value + "").length>0) {               
+            }
+            if ($("#ulSelected #user_" + obj[i].value + "").length>0) {
             }
             else {
                 var strU = '<li id="user_' + obj[i].value + '"  uid="' + obj[i].value + '" name="' + obj[i].getAttribute("cshow") + '" mytype="2"> <div class="selectedUser" onmouseover="showRemove(this)" onmouseout="hideRemove(this)" onmousemove="setRemove(this,event)" onclick="javascript: ' + this.obj + '.doRemove(this,event);" style="cursor: pointer;">' + obj[i].getAttribute("cshow") + ' </div></li>';
@@ -318,6 +318,7 @@ dTree.prototype.checkNode = function (id, pid, _hc, checked) {
             $("#ulSelected #user_" + obj[i].value + "").remove();
         }
     }
+
 }
 
 //===============================
