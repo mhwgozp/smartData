@@ -4,8 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>smartData</title>
-
+	<title>js代码（www.jsdaima.com）</title>
 
 	<!-- Global stylesheets -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
@@ -14,10 +13,7 @@
 	<link href="/static/assets/css/minified/core.min.css" rel="stylesheet" type="text/css">
 	<link href="/static/assets/css/minified/components.min.css" rel="stylesheet" type="text/css">
 	<link href="/static/assets/css/minified/colors.min.css" rel="stylesheet" type="text/css">
-
-
-	<link rel="stylesheet" type="text/css" media="all" href="/static/treeSelect/ztree/css/zTreeStyle.css"/>
-	<link rel="stylesheet" type="text/css" media="all" href="/static/treeSelect/core/treeSelect.css"/>
+	<link href="/static/dtree/dtree.css" rel="StyleSheet" type="text/css">
 	<!-- /global stylesheets -->
 
 	<!-- Core JS files -->
@@ -25,37 +21,23 @@
 	<script type="text/javascript" src="/static/assets/js/core/libraries/jquery.min.js"></script>
 	<script type="text/javascript" src="/static/assets/js/core/libraries/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/static/assets/js/plugins/loaders/blockui.min.js"></script>
+
 	<!-- /core JS files -->
 
 	<!-- Theme JS files -->
-	<script type="text/javascript" src="/static/assets/js/core/libraries/jquery_ui/interactions.min.js"></script>
+	<!--script type="text/javascript" src="/static/assets/js/plugins/forms/styling/switchery.min.js"></script-->
 	<script type="text/javascript" src="/static/assets/js/plugins/forms/selects/select2.min.js"></script>
-
 	<script type="text/javascript" src="/static/assets/js/plugins/ui/prism.min.js"></script>
 
 	<script type="text/javascript" src="/static/assets/js/core/app.js"></script>
 	<script type="text/javascript" src="/static/assets/js/pages/sidebar_dual.js"></script>
 	<script type="text/javascript" src="/static/echarts/dist/echarts.min.js"></script>
-<!--	<script type="text/javascript" src="/static/assets/js/charts/echarts/test.js"></script>-->
-
-	<!--script type="text/javascript" src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script-->
-	<!--script type="text/javascript" src="/static/treeSelect/ztree/js/jquery.ztree.all.min.js"></script>
-	<script type="text/javascript" src="/static/treeSelect/core/treeSelect.js"></script-->
-
+	<script type="text/javascript" src="/static/dtree/dtree.js"></script>
 	<!-- /theme JS files -->
-
-	<!-- temp add start -->
-<!--	<script type="text/javascript" src="/static/assets/js/charts/echarts/test2.js"></script>-->
-<!--	<script type="text/javascript" src="/static/assets/js/plugins/visualization/echarts/echarts.js"></script>-->
-<!--	<script type="text/javascript" src="static/assets/js/plugins/visualization/echarts/theme/smartDataCandlestickTheme.js"></script>-->
-	<!-- temp add end-->
-
-<!--	<link rel="StyleSheet" href="/static/dtree/dtree.css" type="text/css" />-->
-    <script type="text/javascript" src="/static/dtree/dtree.js"></script>
 
 </head>
 
-<body>
+<body class="sidebar-xs">
 
 	<!-- Main navbar -->
 	<div class="navbar navbar-default header-highlight">
@@ -72,14 +54,14 @@
 		<div class="navbar-collapse collapse" id="navbar-mobile">
 			<ul class="nav navbar-nav">
 				<li>
-					<a class="sidebar-control sidebar-main-toggle hidden-xs" data-popup="tooltip" title="Collapse main" data-placement="bottom" data-container="body">
+					<a class="sidebar-control sidebar-main-hide hidden-xs" data-popup="tooltip" title="Hide main" data-placement="bottom" data-container="body">
 						<i class="icon-paragraph-justify3"></i>
 					</a>
 				</li>
-
+				
 				<li>
-					<a class="sidebar-control sidebar-opposite-toggle hidden-xs" data-popup="tooltip" title="Opposite - collapse main" data-placement="bottom" data-container="body">
-						<i class="icon-indent-decrease2"></i>
+					<a class="sidebar-control sidebar-opposite-fix hidden-xs" data-popup="tooltip" title="Opposite - fix main" data-placement="bottom" data-container="body">
+						<i class="icon-lan3"></i>
 					</a>
 				</li>
 
@@ -611,10 +593,10 @@
 										<li>
 											<a href="#">Double sidebar</a>
 											<ul>
-												<li class="active"><a href="sidebar_double_collapse.html">Collapse main sidebar</a></li>
+												<li><a href="sidebar_double_collapse.html">Collapse main sidebar</a></li>
 												<li><a href="sidebar_double_hide.html">Hide main sidebar</a></li>
 												<li><a href="sidebar_double_fix_default.html">Fix default width</a></li>
-												<li><a href="sidebar_double_fix_mini.html">Fix mini width</a></li>
+												<li class="active"><a href="sidebar_double_fix_mini.html">Fix mini width</a></li>
 												<li><a href="sidebar_double_visible.html">Opposite sidebar visible</a></li>
 											</ul>
 										</li>
@@ -982,6 +964,7 @@
 			</div>
 			<!-- /main sidebar -->
 
+
 			<!-- Main content -->
 			<div class="content-wrapper">
 
@@ -990,9 +973,9 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="panel panel-flat">
-								<div class="panel-heading">
-									<h6 class="panel-title">K线图</h6>
-								</div>
+<!--								<div class="panel-heading">-->
+<!--									<h6 class="panel-title">K线图</h6>-->
+<!--								</div>-->
 
 								<div class="panel-body">
 									<!-- Stock Search -->
@@ -1046,12 +1029,9 @@
 
 											<!-- Candlestick with line -->
 											<div class="panel panel-flat">
-												<div class="panel-heading">
-													<h5 class="panel-title">Candlestick with line</h5>
-													<div class="panel-body">
-														<div class="chart-container">
+												<div class="panel-body">
+													<div class="chart-container">
 															<div class="chart has-fixed-height" id="candlestick_line"></div>
-														</div>
 													</div>
 												</div>
 											</div>
@@ -1076,6 +1056,7 @@
 
 			</div>
 			<!-- /main content -->
+
 
 			<!-- Opposite sidebar -->
 			<div class="sidebar sidebar-opposite sidebar-default">
@@ -1136,6 +1117,7 @@
 	</div>
 	<!-- /page container -->
 
+	<!-- Chart script  -->
 	<script type="text/javascript">
        var indexCodes=[];
        var stockCodes=[];
@@ -1274,10 +1256,10 @@
 		var myChart = echarts.init(dom);
 		var app = {};
 		var option = smartDataCandlesticks.option;
-		var upColor = '#66BB6A';
-		var downColor = '#FF7043';
-		var upColorBorder = upColor;
-		var downColorBorder = downColor;
+		// var upColor = '#66BB6A';
+		// var downColor = '#FF7043';
+		// var upColorBorder = upColor;
+		// var downColorBorder = downColor;
 
 		var codeData = smartDataCandlesticks.splitDataByType({{ stockData }},false);
 		smartDataCandlesticks.setXAxisData(option, codeData.categoryData);
@@ -1309,7 +1291,6 @@
 			var endDate= $('#endDate').val().replace(reg,"");
 			macroParams = getMacroParams();
 			stockParams = getStockParams();
-			alert(macroParams);
 			$.ajax({
 					url: '',
 					type: 'post',
@@ -1384,7 +1365,12 @@
 					}
 			})
 		})
+
+		//窗口自动缩放
+		window.addEventListener('resize',function () {
+		if(myChart){myChart.resize();}})
 	</script>
+    <!-- /Chart script  -->
 
 </body>
 </html>
