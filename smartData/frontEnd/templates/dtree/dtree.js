@@ -19,7 +19,7 @@
 //
 //==================================================
 //�ڵ����  -- Node object
-function Node(id, pid, cname, cvalue, cshow, cchecked, cdisabled, url, title, target, icon, iconOpen, open) {
+function Node(id, pid, cname, cvalue, cshow, cchecked, cdisabled, highLight, url, title, target, icon, iconOpen, open) {
     this.id = id;                        // int ÿ���ڵ㶼��ΨһID�����ӽڵ�ʱ��Ҫ�ֹ�����һ��ID�� 
     this.pid = pid;                      // int ���ڵ�ID�����ڵ�ĸ��ڵ���-1�� 
     this.cname = cname;                  // chechbox������    
@@ -27,7 +27,8 @@ function Node(id, pid, cname, cvalue, cshow, cchecked, cdisabled, url, title, ta
     this.cshow = cshow;                  // chechbox����ʾ    
     this.cchecked = cchecked || false;   // chechbox�Ƿ�ѡ�У�Ĭ���ǲ�ѡ   
     this.cdisabled = cdisabled || false; // chechbox�Ƿ���ã�Ĭ���ǿ���    
-    this.url = url || '#';               // �ڵ����ӣ�Ĭ����������  String �ڵ�URL���������ת��ַ�� 
+    this.highLight = highLight || false;
+    this.url = url || '#';               // �ڵ����ӣ�Ĭ����������  String �ڵ�URL���������ת��ַ��
     this.title = title;                  // ����ƶ����ڵ�����ʾ������ 
     this.target = target;                // String ҳ����ת���ڵ�frame 
     this.icon = icon;                    // String �ڵ�ر�ʱ��ʾ��ͼ���ַ 
@@ -80,8 +81,8 @@ function dTree(objName, objbool) {        // void ���췽������
 };
 
 //���һ���½ڵ㵽�ڵ�������   --Adds a new node to the node array
-dTree.prototype.add = function (id, pid, cname, cvalue, cshow, cchecked, cdisabled, url, title, target, icon, iconOpen, open) {
-    this.aNodes[this.aNodes.length] = new Node(id, pid, cname, cvalue, cshow, cchecked, cdisabled, url, title, target, icon, iconOpen, open);
+dTree.prototype.add = function (id, pid, cname, cvalue, cshow, cchecked, cdisabled, highLight,url, title, target, icon, iconOpen, open) {
+    this.aNodes[this.aNodes.length] = new Node(id, pid, cname, cvalue, cshow, cchecked, cdisabled, highLight, url, title, target, icon, iconOpen, open);
 };
 
 //��/�ر����нڵ�   Open/close all nodes
@@ -193,7 +194,11 @@ dTree.prototype.node = function (node, nodeId) {
             if (node.cdisabled)
                 checkboxSyntax += " disabled ";
 
-            checkboxSyntax += ">" + "<span class='dtree_node' node_id='" + node.id + "'>" + node.cshow + "</span>";
+            if(node.highLight)
+            {checkboxSyntax += ">" + "<span class='dtree_node' style='color:red' node_id='" + node.id + "'>" + node.cshow + "</span>";}
+            else
+             {checkboxSyntax += ">" + "<span class='dtree_node' node_id='" + node.id + "'>" + node.cshow + "</span>";}
+
             /**��װcheckbox����*/
         }
         str += checkboxSyntax;

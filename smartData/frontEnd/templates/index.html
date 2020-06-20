@@ -1071,20 +1071,176 @@
 							//d.add(NodeId, FatherId, Checkbox Name, Checkbox Value, Checkbox Dispaly Name,
 							//      true/false:Checkbox不可选/可选, true/flase:Checkbox默认选中/没选中
 							d.add(0, -1, 'Compare Multi selection');
-							d.add(1, 0, 'MacroParams', 'macro', '宏观数据', true, false);
-							d.add(2, 1, 'MacroParams', 'macroGdp', 'GDP', false, false);
-							d.add(3, 1, 'MacroParams', 'macroMondySupply', '货币供应量', false, false);
-							d.add(4, 1, 'MacroParams', 'macroCPI', 'CPI', false, false);
-							d.add(5, 1, 'MacroParams', 'macroLPR', 'LPR贷款基础利率', false, false);
+							d.add(10, 0, 'MacroParams', 'macro', '宏观数据', true, false,true);
+							d.add(100, 10, 'MacroParams', 'macroGdp', 'GDP', false, false);
+							d.add(101, 10, 'MacroParams', 'macroMondySupply', '货币供应量', false, false);
+							d.add(102, 10, 'MacroParams', 'macroCPI', 'CPI', false, false);
+							d.add(103, 10, 'MacroParams', 'macroLPR', 'LPR贷款基础利率', false, false);
 
-							d.add(6, 0, 'StockParams', '0006', '个股数据', true, false);
-							d.add(7, 6, 'StockParams', '0007', 'PE TTM', false, false);
-							d.add(8, 6, 'StockParams', '0008', 'ROE', false, false);
-							d.add(9, 6, 'StockParams', '0009', '主营业收入增长率', false, false);
-							d.add(10, 6, 'StockParams', '0010', '毛利率', false, false);
-							d.add(11, 6, 'StockParams', '0011', '扣非净利率', false, false);
-							d.add(12, 6, 'StockParams', '0012', '负债率', false, false);
-							d.add(13, 6, 'StockParams', '0013', '周转率', false, false);
+							d.add(20, 0, 'FinancialIndexParams', '0006', '财务指标数据', true, false,true);
+							d.add(200, 20, 'FinancialIndexParams', 'eps', '基本每股收益', false, false);
+							d.add(201, 20, 'FinancialIndexParams', 'dt_eps', '稀释每股收益', false, false);
+							d.add(202, 20, 'FinancialIndexParams', 'total_revenue_ps', '每股营业总收入', false, false);
+							d.add(203, 20, 'FinancialIndexParams', 'revenue_ps', '每股营业收入', false, false);
+							d.add(204, 20, 'FinancialIndexParams', 'capital_rese_ps', '每股资本公积', false, false);
+							d.add(205, 20, 'FinancialIndexParams', 'surplus_rese_ps', '每股盈余公积', false, false);
+							d.add(206, 20, 'FinancialIndexParams', 'undist_profit_ps', '每股未分配利润', false, false);
+							d.add(207, 20, 'FinancialIndexParams', 'extra_item', '非经常性损益', false, false);
+							d.add(208, 20, 'FinancialIndexParams', 'profit_dedt', '扣除非经常性损益后的净利润', false, false);
+							d.add(209, 20, 'FinancialIndexParams', 'gross_margin', '毛利', false, false);
+							d.add(210, 20, 'FinancialIndexParams', 'current_ratio', '流动比率', false, false);
+							d.add(211, 20, 'FinancialIndexParams', 'quick_ratio', '速动比率', false, false);
+							d.add(212, 20, 'FinancialIndexParams', 'cash_ratio', '保守速动比率', false, false);
+							d.add(213, 20, 'FinancialIndexParams', 'invturn_days', '存货周转天数', false, false);
+							d.add(214, 20, 'FinancialIndexParams', 'arturn_days', '应收账款周转天数', false, false);
+							d.add(215, 20, 'FinancialIndexParams', 'inv_turn', '存货周转率', false, false);
+							d.add(216, 20, 'FinancialIndexParams', 'ar_turn', '应收账款周转率', false, false);
+							d.add(217, 20, 'FinancialIndexParams', 'ca_turn', '流动资产周转率', false, false);
+							d.add(218, 20, 'FinancialIndexParams', 'fa_turn', '固定资产周转率', false, false);
+							d.add(219, 20, 'FinancialIndexParams', 'assets_turn', '总资产周转率', false, false);
+							d.add(220, 20, 'FinancialIndexParams', 'op_income', '经营活动净收益', false, false);
+							d.add(221, 20, 'FinancialIndexParams', 'valuechange_income', '价值变动净收益', false, false);
+							d.add(222, 20, 'FinancialIndexParams', 'interst_income', '利息费用', false, false);
+							d.add(223, 20, 'FinancialIndexParams', 'daa', '折旧与摊销', false, false);
+							d.add(224, 20, 'FinancialIndexParams', 'ebit', '息税前利润', false, false);
+							d.add(225, 20, 'FinancialIndexParams', 'ebitda', '息税折旧摊销前利润', false, false);
+							d.add(226, 20, 'FinancialIndexParams', 'fcff', '企业自由现金流量', false, false);
+							d.add(227, 20, 'FinancialIndexParams', 'fcfe', '股权自由现金流量', false, false);
+							d.add(228, 20, 'FinancialIndexParams', 'current_exint', '无息流动负债', false, false);
+							d.add(229, 20, 'FinancialIndexParams', 'noncurrent_exint', '无息非流动负债', false, false);
+							d.add(230, 20, 'FinancialIndexParams', 'interestdebt', '带息债务', false, false);
+							d.add(231, 20, 'FinancialIndexParams', 'netdebt', '净债务', false, false);
+							d.add(232, 20, 'FinancialIndexParams', 'tangible_asset', '有形资产', false, false);
+							d.add(233, 20, 'FinancialIndexParams', 'working_capital', '营运资金', false, false);
+							d.add(234, 20, 'FinancialIndexParams', 'networking_capital', '营运流动资本', false, false);
+							d.add(235, 20, 'FinancialIndexParams', 'invest_capital', '全部投入资本', false, false);
+							d.add(236, 20, 'FinancialIndexParams', 'retained_earnings', '留存收益', false, false);
+							d.add(237, 20, 'FinancialIndexParams', 'diluted2_eps', '期末摊薄每股收益', false, false);
+							d.add(238, 20, 'FinancialIndexParams', 'bps', '每股净资产', false, false);
+							d.add(239, 20, 'FinancialIndexParams', 'ocfps', '每股经营活动产生的现金流量净额', false, false);
+							d.add(240, 20, 'FinancialIndexParams', 'retainedps', '每股留存收益', false, false);
+							d.add(241, 20, 'FinancialIndexParams', 'cfps', '每股现金流量净额', false, false);
+							d.add(242, 20, 'FinancialIndexParams', 'ebit_ps', '每股息税前利润', false, false);
+							d.add(243, 20, 'FinancialIndexParams', 'fcff_ps', '每股企业自由现金流量', false, false);
+							d.add(244, 20, 'FinancialIndexParams', 'fcfe_ps', '每股股东自由现金流量', false, false);
+							d.add(245, 20, 'FinancialIndexParams', 'netprofit_margin', '销售净利率', false, false,true);
+							d.add(246, 20, 'FinancialIndexParams', 'grossprofit_margin', '销售毛利率', false, false,true);
+							d.add(247, 20, 'FinancialIndexParams', 'cogs_of_sales', '销售成本率', false, false);
+							d.add(248, 20, 'FinancialIndexParams', 'expense_of_sales', '销售期间费用率', false, false);
+							d.add(249, 20, 'FinancialIndexParams', 'profit_to_gr', '净利润/营业总收入', false, false);
+							d.add(250, 20, 'FinancialIndexParams', 'saleexp_to_gr', '销售费用/营业总收入', false, false);
+							d.add(251, 20, 'FinancialIndexParams', 'adminexp_of_gr', '管理费用/营业总收入', false, false);
+							d.add(252, 20, 'FinancialIndexParams', 'finaexp_of_gr', '财务费用/营业总收入', false, false);
+							d.add(253, 20, 'FinancialIndexParams', 'impai_ttm', '资产减值损失/营业总收入', false, false);
+							d.add(254, 20, 'FinancialIndexParams', 'gc_of_gr', '营业总成本/营业总收入', false, false);
+							d.add(255, 20, 'FinancialIndexParams', 'op_of_gr', '营业利润/营业总收入', false, false);
+							d.add(256, 20, 'FinancialIndexParams', 'ebit_of_gr', '息税前利润/营业总收入', false, false);
+							d.add(257, 20, 'FinancialIndexParams', 'roe', '净资产收益率', false, false);
+							d.add(258, 20, 'FinancialIndexParams', 'roe_waa', '加权平均净资产收益率', false, false);
+							d.add(259, 20, 'FinancialIndexParams', 'roe_dt', '净资产收益率(扣除非经常损益)', false, false,true);
+							d.add(260, 20, 'FinancialIndexParams', 'roa', '总资产报酬率', false, false);
+							d.add(261, 20, 'FinancialIndexParams', 'npta', '总资产净利润', false, false);
+							d.add(262, 20, 'FinancialIndexParams', 'roic', '投入资本回报率', false, false);
+							d.add(263, 20, 'FinancialIndexParams', 'roe_yearly', '年化净资产收益率', false, false);
+							d.add(264, 20, 'FinancialIndexParams', 'roa2_yearly', '年化总资产报酬率', false, false);
+							d.add(265, 20, 'FinancialIndexParams', 'roe_avg', '平均净资产收益率(增发条件)', false, false);
+							d.add(266, 20, 'FinancialIndexParams', 'opincome_of_ebt', '经营活动净收益/利润总额', false, false);
+							d.add(267, 20, 'FinancialIndexParams', 'investincome_of_ebt', '价值变动净收益/利润总额', false, false);
+							d.add(268, 20, 'FinancialIndexParams', 'n_op_profit_of_ebt', '营业外收支净额/利润总额', false, false);
+							d.add(269, 20, 'FinancialIndexParams', 'tax_to_ebt', '所得税/利润总额', false, false);
+							d.add(270, 20, 'FinancialIndexParams', 'dtprofit_to_profit', '扣除非经常损益后的净利润/净利润', false, false);
+							d.add(271, 20, 'FinancialIndexParams', 'salescash_to_or', '销售商品提供劳务收到的现金/营业收入', false, false);
+							d.add(272, 20, 'FinancialIndexParams', 'ocf_to_or', '经营活动产生的现金流量净额/营业收入', false, false);
+							d.add(273, 20, 'FinancialIndexParams', 'ocf_to_opincome', '经营活动产生的现金流量净额/经营活动净收益', false, false);
+							d.add(274, 20, 'FinancialIndexParams', 'capitalized_to_da', '资本支出/折旧和摊销', false, false);
+							d.add(275, 20, 'FinancialIndexParams', 'debt_to_assets', '资产负债率', false, false);
+							d.add(276, 20, 'FinancialIndexParams', 'assets_to_eqt', '权益乘数', false, false);
+							d.add(277, 20, 'FinancialIndexParams', 'dp_assets_to_eqt', '权益乘数(杜邦分析)', false, false);
+							d.add(278, 20, 'FinancialIndexParams', 'ca_to_assets', '流动资产/总资产', false, false);
+							d.add(279, 20, 'FinancialIndexParams', 'nca_to_assets', '非流动资产/总资产', false, false);
+							d.add(280, 20, 'FinancialIndexParams', 'tbassets_to_totalassets', '有形资产/总资产', false, false);
+							d.add(281, 20, 'FinancialIndexParams', 'int_to_talcap', '带息债务/全部投入资本', false, false);
+							d.add(282, 20, 'FinancialIndexParams', 'eqt_to_talcapital', '归属于母公司的股东权益/全部投入资本', false, false);
+							d.add(283, 20, 'FinancialIndexParams', 'currentdebt_to_debt', '流动负债/负债合计', false, false);
+							d.add(284, 20, 'FinancialIndexParams', 'longdeb_to_debt', '非流动负债/负债合计', false, false);
+							d.add(285, 20, 'FinancialIndexParams', 'ocf_to_shortdebt', '经营活动产生的现金流量净额/流动负债', false, false);
+							d.add(286, 20, 'FinancialIndexParams', 'debt_to_eqt', '产权比率', false, false);
+							d.add(287, 20, 'FinancialIndexParams', 'eqt_to_debt', '归属于母公司的股东权益/负债合计', false, false);
+							d.add(288, 20, 'FinancialIndexParams', 'eqt_to_interestdebt', '归属于母公司的股东权益/带息债务', false, false);
+							d.add(289, 20, 'FinancialIndexParams', 'tangibleasset_to_debt', '有形资产/负债合计', false, false);
+							d.add(290, 20, 'FinancialIndexParams', 'tangasset_to_intdebt', '有形资产/带息债务', false, false);
+							d.add(291, 20, 'FinancialIndexParams', 'tangibleasset_to_netdebt', '有形资产/净债务', false, false);
+							d.add(292, 20, 'FinancialIndexParams', 'ocf_to_debt', '经营活动产生的现金流量净额/负债合计', false, false);
+							d.add(293, 20, 'FinancialIndexParams', 'ocf_to_interestdebt', '经营活动产生的现金流量净额/带息债务', false, false);
+							d.add(294, 20, 'FinancialIndexParams', 'ocf_to_netdebt', '经营活动产生的现金流量净额/净债务', false, false);
+							d.add(295, 20, 'FinancialIndexParams', 'ebit_to_interest', '已获利息倍数(EBIT/利息费用)', false, false);
+							d.add(296, 20, 'FinancialIndexParams', 'longdebt_to_workingcapital', '长期债务与营运资金比率', false, false);
+							d.add(297, 20, 'FinancialIndexParams', 'ebitda_to_debt', '息税折旧摊销前利润/负债合计', false, false);
+							d.add(298, 20, 'FinancialIndexParams', 'turn_days', '营业周期', false, false);
+							d.add(299, 20, 'FinancialIndexParams', 'roa_yearly', '年化总资产净利率', false, false);
+							d.add(300, 20, 'FinancialIndexParams', 'roa_dp', '总资产净利率(杜邦分析)', false, false);
+							d.add(301, 20, 'FinancialIndexParams', 'fixed_assets', '固定资产合计', false, false);
+							d.add(302, 20, 'FinancialIndexParams', 'profit_prefin_exp', '扣除财务费用前营业利润', false, false);
+							d.add(303, 20, 'FinancialIndexParams', 'non_op_profit', '非营业利润', false, false);
+							d.add(304, 20, 'FinancialIndexParams', 'op_to_ebt', '营业利润／利润总额', false, false);
+							d.add(305, 20, 'FinancialIndexParams', 'nop_to_ebt', '非营业利润／利润总额', false, false);
+							d.add(306, 20, 'FinancialIndexParams', 'ocf_to_profit', '经营活动产生的现金流量净额／营业利润', false, false);
+							d.add(307, 20, 'FinancialIndexParams', 'cash_to_liqdebt', '货币资金／流动负债', false, false);
+							d.add(308, 20, 'FinancialIndexParams', 'cash_to_liqdebt_withinterest', '货币资金／带息流动负债', false, false);
+							d.add(309, 20, 'FinancialIndexParams', 'op_to_liqdebt', '营业利润／流动负债', false, false);
+							d.add(310, 20, 'FinancialIndexParams', 'op_to_debt', '营业利润／负债合计', false, false);
+							d.add(311, 20, 'FinancialIndexParams', 'roic_yearly', '年化投入资本回报率', false, false);
+							d.add(312, 20, 'FinancialIndexParams', 'total_fa_trun', '固定资产合计周转率', false, false);
+							d.add(313, 20, 'FinancialIndexParams', 'profit_to_op', '利润总额／营业收入', false, false);
+							d.add(314, 20, 'FinancialIndexParams', 'q_opincome', '经营活动单季度净收益', false, false);
+							d.add(315, 20, 'FinancialIndexParams', 'q_investincome', '价值变动单季度净收益', false, false);
+							d.add(316, 20, 'FinancialIndexParams', 'q_dtprofit', '扣除非经常损益后的单季度净利润', false, false);
+							d.add(317, 20, 'FinancialIndexParams', 'q_eps', '每股收益(单季度)', false, false);
+							d.add(318, 20, 'FinancialIndexParams', 'q_netprofit_margin', '销售净利率(单季度)', false, false);
+							d.add(319, 20, 'FinancialIndexParams', 'q_gsprofit_margin', '销售毛利率(单季度)', false, false);
+							d.add(320, 20, 'FinancialIndexParams', 'q_exp_to_sales', '销售期间费用率(单季度)', false, false);
+							d.add(321, 20, 'FinancialIndexParams', 'q_profit_to_gr', '净利润／营业总收入(单季度)', false, false);
+							d.add(322, 20, 'FinancialIndexParams', 'q_saleexp_to_gr', '销售费用／营业总收入 (单季度)', false, false);
+							d.add(323, 20, 'FinancialIndexParams', 'q_adminexp_to_gr', '管理费用／营业总收入 (单季度)', false, false);
+							d.add(324, 20, 'FinancialIndexParams', 'q_finaexp_to_gr', '财务费用／营业总收入 (单季度)', false, false);
+							d.add(325, 20, 'FinancialIndexParams', 'q_impair_to_gr_ttm', '资产减值损失／营业总收入(单季度)', false, false);
+							d.add(326, 20, 'FinancialIndexParams', 'q_gc_to_gr', '营业总成本／营业总收入 (单季度)', false, false);
+							d.add(327, 20, 'FinancialIndexParams', 'q_op_to_gr', '营业利润／营业总收入(单季度)', false, false);
+							d.add(328, 20, 'FinancialIndexParams', 'q_roe', '净资产收益率(单季度)', false, false);
+							d.add(329, 20, 'FinancialIndexParams', 'q_dt_roe', '净资产单季度收益率(扣除非经常损益)', false, false);
+							d.add(330, 20, 'FinancialIndexParams', 'q_npta', '总资产净利润(单季度)', false, false);
+							d.add(331, 20, 'FinancialIndexParams', 'q_opincome_to_ebt', '经营活动净收益／利润总额(单季度)', false, false);
+							d.add(332, 20, 'FinancialIndexParams', 'q_investincome_to_ebt', '价值变动净收益／利润总额(单季度)', false, false);
+							d.add(333, 20, 'FinancialIndexParams', 'q_dtprofit_to_profit', '扣除非经常损益后的净利润／净利润(单季度)', false, false);
+							d.add(334, 20, 'FinancialIndexParams', 'q_salescash_to_or', '销售商品提供劳务收到的现金／营业收入(单季度)', false, false);
+							d.add(335, 20, 'FinancialIndexParams', 'q_ocf_to_sales', '经营活动产生的现金流量净额／营业收入(单季度)', false, false);
+							d.add(336, 20, 'FinancialIndexParams', 'q_ocf_to_or', '经营活动产生的现金流量净额／经营活动净收益(单季度)', false, false);
+							d.add(337, 20, 'FinancialIndexParams', 'basic_eps_yoy', '基本每股收益同比增长率(%)', false, false,true);
+							d.add(338, 20, 'FinancialIndexParams', 'dt_eps_yoy', '稀释每股收益同比增长率(%)', false, false);
+							d.add(339, 20, 'FinancialIndexParams', 'cfps_yoy', '每股经营活动产生的现金流量净额同比增长率(%)', false, false);
+							d.add(340, 20, 'FinancialIndexParams', 'op_yoy', '营业利润同比增长率(%)', false, false,true);
+							d.add(341, 20, 'FinancialIndexParams', 'ebt_yoy', '利润总额同比增长率(%)', false, false);
+							d.add(342, 20, 'FinancialIndexParams', 'netprofit_yoy', '归属母公司股东的净利润同比增长率(%)', false, false,true);
+							d.add(343, 20, 'FinancialIndexParams', 'dt_netprofit_yoy', '归属母公司股东的净利润-扣除非经常损益同比增长率(%)', false, false,true);
+							d.add(344, 20, 'FinancialIndexParams', 'ocf_yoy', '经营活动产生的现金流量净额同比增长率(%)', false, false);
+							d.add(345, 20, 'FinancialIndexParams', 'roe_yoy', '净资产收益率(摊薄)同比增长率(%)', false, false);
+							d.add(346, 20, 'FinancialIndexParams', 'bps_yoy', '每股净资产相对年初增长率(%)', false, false);
+							d.add(347, 20, 'FinancialIndexParams', 'assets_yoy', '资产总计相对年初增长率(%)', false, false);
+							d.add(348, 20, 'FinancialIndexParams', 'eqt_yoy', '归属母公司的股东权益相对年初增长率(%)', false, false);
+							d.add(349, 20, 'FinancialIndexParams', 'tr_yoy', '营业总收入同比增长率(%)', false, false,true);
+							d.add(350, 20, 'FinancialIndexParams', 'or_yoy', '营业收入同比增长率(%)', false, false,true);
+							d.add(351, 20, 'FinancialIndexParams', 'q_gr_yoy', '营业总收入同比增长率(%)(单季度)', false, false);
+							d.add(352, 20, 'FinancialIndexParams', 'q_gr_qoq', '营业总收入环比增长率(%)(单季度)', false, false);
+							d.add(353, 20, 'FinancialIndexParams', 'q_sales_yoy', '营业收入同比增长率(%)(单季度)', false, false);
+							d.add(354, 20, 'FinancialIndexParams', 'q_sales_qoq', '营业收入环比增长率(%)(单季度)', false, false);
+							d.add(355, 20, 'FinancialIndexParams', 'q_op_yoy', '营业利润同比增长率(%)(单季度)', false, false);
+							d.add(356, 20, 'FinancialIndexParams', 'q_op_qoq', '营业利润环比增长率(%)(单季度)', false, false);
+							d.add(357, 20, 'FinancialIndexParams', 'q_profit_yoy', '净利润同比增长率(%)(单季度)', false, false,true);
+							d.add(358, 20, 'FinancialIndexParams', 'q_profit_qoq', '净利润环比增长率(%)(单季度)', false, false);
+							d.add(359, 20, 'FinancialIndexParams', 'q_netprofit_yoy', '归属母公司股东的净利润同比增长率(%)(单季度)', false, false);
+							d.add(360, 20, 'FinancialIndexParams', 'q_netprofit_qoq', '归属母公司股东的净利润环比增长率(%)(单季度)', false, false);
+							d.add(361, 20, 'FinancialIndexParams', 'equity_yoy', '净资产同比增长率', false, false,true);
+							d.add(362, 20, 'FinancialIndexParams', 'rd_exp', '研发费用', false, false);
 
 							document.write(d);
 							d.openAll();
@@ -1122,7 +1278,7 @@
        var indexCodes=[];
        var stockCodes=[];
        var macroParams=[];
-       var stockParams=[];
+       var financialIndexParams=[];
         $(document).ready(function () {
             var time = new Date();
             var day = ("0" + time.getDate()).slice(-2);
@@ -1208,11 +1364,10 @@
 
 		}
 
-	   function getStockParams()
+	   function getFinancialIndexParams()
 		{
 			var params=[];
-			var checkBoxObj = document.all.StockParams;
-
+			var checkBoxObj = document.all.FinancialIndexParams;
 			for (i = 0; i < checkBoxObj.length; i++) {
 				if (checkBoxObj[i].checked) {
 					params.push(checkBoxObj[i].value);
@@ -1221,32 +1376,6 @@
 			return params;
 		}
 
-
-        // // function getStockParams()
-        // {
-        //     var params=[];
-        //     if($('#stockGrowthRateOfMainOperatingIncome').is(':checked'))
-        //     {
-        //         params.push("stockGrowthRateOfMainOperatingIncome");
-        //     }
-        //     if($('#stockGrossMargin').is(':checked'))
-        //     {
-        //         params.push("stockGrossMargin");
-        //     }
-        //     if($('#stockNetInterestRate').is(':checked'))
-        //     {
-        //         params.push("stockNetInterestRate");
-        //     }
-        //     if($('#stockDebtRatio').is(':checked'))
-        //     {
-        //         params.push("stockDebtRatio");
-        //     }
-        //     if($('#stockTurnOverRate').is(':checked'))
-        //     {
-        //         params.push("stockTurnOverRate");
-        //     }
-        //     return params;
-        // }
    </script>
 
 	<script type="module">
@@ -1290,12 +1419,12 @@
 			var startDate= $('#startDate').val().replace(reg,"");
 			var endDate= $('#endDate').val().replace(reg,"");
 			macroParams = getMacroParams();
-			stockParams = getStockParams();
+			financialIndexParams = getFinancialIndexParams();
 			$.ajax({
 					url: '',
 					type: 'post',
 					traditional: true,
-					data: {'indexCodes': indexCodes,'stockCodes': stockCodes,'startDate': startDate, 'endDate': endDate, 'macroParams': macroParams, 'stockParams':stockParams},
+					data: {'indexCodes': indexCodes,'stockCodes': stockCodes,'startDate': startDate, 'endDate': endDate, 'macroParams': macroParams, 'financialIndexParams':financialIndexParams},
 					success: function (response)
 					{
 						var numOfCodes = (response.indexCodes.length + response.stockCodes.length);
@@ -1360,6 +1489,20 @@
 							var macroDataType = response.macroParams[macroDataIndex];
 							smartDataCandlesticks.attachLineData(option, macroDataType, option.xAxis[0].data, response.macroDatas[macroDataType], (response.macroParams.length<2));
 						}
+
+						///////////////////// attach financial Index data ////////////////////////////////////////////
+						for(var index=0; index < response.financialIndexParams.length; index++)
+						{
+							var financialIndexParam = response.financialIndexParams[index];
+							var datas = [];
+							for(var i=0; i < response.financialIndexDatas.length; i++)
+							{
+								datas.push([response.financialIndexDatas[i][0],response.financialIndexDatas[i][index+2]]);
+							}
+
+							smartDataCandlesticks.attachLineData(option, financialIndexParam, option.xAxis[0].data, datas, true);
+						}
+
 
 						myChart.setOption(option, true);
 					}

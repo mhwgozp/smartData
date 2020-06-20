@@ -23,9 +23,9 @@ def homePage(request):
         startDate = request.POST.get('startDate')
         endDate = request.POST.get('endDate')
         macroParams=request.POST.getlist('macroParams')
-        stockParams=request.POST.getlist('stockParams')
-        datas = {'indexCodes':indexCodes,'stockCodes':stockCodes,'startDate':startDate,'macroParams':macroParams,'stockParams':stockParams,
-                 'indexTradingDatas':{},'tradingDatas':{},'macroDatas':{},'stockDatas':{}}
+        financialIndexParams=request.POST.getlist('financialIndexParams')
+        datas = {'indexCodes':indexCodes,'stockCodes':stockCodes,'startDate':startDate,'macroParams':macroParams,'financialIndexParams':financialIndexParams,
+                 'indexTradingDatas':{},'tradingDatas':{},'macroDatas':{},'financialIndexDatas':{}}
         indexTradingDatas = {}
         tradingDatas={}
         macroDatas={}
@@ -40,7 +40,7 @@ def homePage(request):
                 curCodeData[i][0] = int(curCodeData[i][0])
             curCodeData.reverse()
             indexTradingDatas[ts_code]=curCodeData;
-            print(indexTradingDatas[ts_code]);
+            #print(indexTradingDatas[ts_code]);
 
         for ts_code in stockCodes:
             df = pro.daily(ts_code=ts_code, start_date=startDate, end_date=endDate, fields=fieldStr)
@@ -49,7 +49,7 @@ def homePage(request):
                 curCodeData[i][0] = int(curCodeData[i][0])
             curCodeData.reverse()
             tradingDatas[ts_code]=curCodeData;
-            print(tradingDatas[ts_code]);
+            #print(tradingDatas[ts_code]);
         print('===================================')
         #print(tradingDatas)
         print('***********************************')
@@ -60,8 +60,26 @@ def homePage(request):
             numOfMacroParams = len(macroParams)
             for macroType in macroParams:
                 macroDatas[macroType]=getMacroDataByType(macroType, startDate, endDate)
-                print(macroDatas)
+                #print(macroDatas)
         datas['macroDatas']= macroDatas
+
+        if(financialIndexParams):
+            fieldStr = 'ann_date,end_date'
+            for finaIndex in financialIndexParams:
+                fieldStr+=","+finaIndex
+            df = pro.query('fina_indicator', ts_code=stockCodes[0], start_date=startDate, end_date=endDate, fields=fieldStr)
+            finaIndexData = df.values.tolist()
+            for i in range(len(finaIndexData)):
+                finaIndexData[i][0] = int(finaIndexData[i][0])
+                finaIndexData[i][1] = int(finaIndexData[i][1])
+            finaIndexData.reverse()
+            print(finaIndexData)
+            datas['financialIndexDatas'] = finaIndexData
+        #     numOfFinancialIndexParams = len(financialIndexParams)
+        #     for financialIndex in financialIndexParams:
+        #         macroDatas[macroType] = getMacroDataByType(macroType, startDate, endDate)
+        #         print(macroDatas)
+        # datas['financialIndexDatas'] = financialIndexDatas
         #print(datas)
         #if showMacroData == '1':
         #    macroData=[[20191101,100],[20191115,120],[20191128,110],[20191201,125],[20191210,100],[20191215,130],[2020105,132]]
