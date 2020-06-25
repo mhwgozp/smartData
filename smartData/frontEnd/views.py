@@ -5,6 +5,7 @@ import tushare as ts
 from django.shortcuts import render
 from  django.http  import  JsonResponse
 from .models import *
+import datetime
 #from django.shortcuts import render_to_response
 
 import pandas as pd
@@ -15,7 +16,6 @@ pro = ts.pro_api()
 def homePage(request):
     #return render(request, "test.html")
 
-
     if request.method == 'POST':
         #json.loads(request.POST.get('stockCodes'))
         indexCodes = request.POST.getlist('indexCodes')
@@ -25,34 +25,22 @@ def homePage(request):
         macroParams=request.POST.getlist('macroParams')
         financialIndexParams=request.POST.getlist('financialIndexParams')
         datas = {'indexCodes':indexCodes,'stockCodes':stockCodes,'startDate':startDate,'macroParams':macroParams,'financialIndexParams':financialIndexParams,
-                 'indexTradingDatas':{},'tradingDatas':{},'macroDatas':{},'financialIndexDatas':{}}
+                 'indexTradingDatas':{},'tradingDatas':{},'macroDatas':{},'financialIndexDatas':{},'tradingCalendarData':{}}
         indexTradingDatas = {}
         tradingDatas={}
         macroDatas={}
-        print(datas)
         numOfStockCodes = len(stockCodes)
-        fieldStr = 'trade_date,open,close,low,high,vol'
+        tradingCalendar = getTradingCalendar(startDate, endDate)
 
         for ts_code in indexCodes:
-            df = pro.index_daily(ts_code=ts_code, start_date=startDate, end_date=endDate, fields=fieldStr)
-            curCodeData = df.values.tolist()
-            for i in range(len(curCodeData)):
-                curCodeData[i][0] = int(curCodeData[i][0])
-            curCodeData.reverse()
-            indexTradingDatas[ts_code]=curCodeData;
+            indexDatas = getIndexOrStock('I', ts_code, startDate, endDate)
+            indexTradingDatas[ts_code]=indexDatas;
             #print(indexTradingDatas[ts_code]);
 
         for ts_code in stockCodes:
-            df = pro.daily(ts_code=ts_code, start_date=startDate, end_date=endDate, fields=fieldStr)
-            curCodeData = df.values.tolist()
-            for i in range(len(curCodeData)):
-                curCodeData[i][0] = int(curCodeData[i][0])
-            curCodeData.reverse()
-            tradingDatas[ts_code]=curCodeData;
+            stockData = getIndexOrStock('E', ts_code, startDate, endDate)
+            tradingDatas[ts_code] = stockData;
             #print(tradingDatas[ts_code]);
-        print('===================================')
-        #print(tradingDatas)
-        print('***********************************')
         datas['indexTradingDatas'] = indexTradingDatas
         datas['tradingDatas']=tradingDatas
 
@@ -75,33 +63,40 @@ def homePage(request):
             finaIndexData.reverse()
             print(finaIndexData)
             datas['financialIndexDatas'] = finaIndexData
-        #     numOfFinancialIndexParams = len(financialIndexParams)
-        #     for financialIndex in financialIndexParams:
-        #         macroDatas[macroType] = getMacroDataByType(macroType, startDate, endDate)
-        #         print(macroDatas)
-        # datas['financialIndexDatas'] = financialIndexDatas
-        #print(datas)
-        #if showMacroData == '1':
-        #    macroData=[[20191101,100],[20191115,120],[20191128,110],[20191201,125],[20191210,100],[20191215,130],[2020105,132]]
         return JsonResponse(datas)
+    endDate = datetime.datetime.now().strftime('%Y%m%d')
+    startDate = (datetime.datetime.now() - datetime.timedelta(days=365)).strftime('%Y%m%d')
+    tradingCalendar = getTradingCalendar(startDate, endDate)
+    datas = getIndexOrStock('I','000001.SH', startDate, endDate)
+    return render(request, "index.html", {'stockData': datas, 'TradingCalendar':tradingCalendar})
 
-    df = pro.index_daily(ts_code='000001.SH', start_date='20190101', end_date='datetime.datetime.now()',
-                         fields='trade_date,open,close,low,high,vol')
-    #df = pro.monthly(ts_code='000001.SH', start_date='20000101', end_date='datetime.datetime.now()')
-    #df = pro.monthly(ts_code='000001.SH', start_date='20180101', end_date='20181101',fields='trade_date,open,high,low,close,vol,amount')
-    #print(df)
+def getIndexOrStock(type,ts_code, startDate, endDate):
+    #输出 trade_date      close       open       high        low    vol(成交量（手）)
+    df = ts.pro_bar(ts_code=ts_code, adj='qfq', asset=type, start_date=startDate,end_date=endDate)
+    df.drop(columns=["ts_code",'pre_close','change','pct_chg','amount'], inplace=True)
+    if(type=='E'):#从tushare查询出的股票交易数据顺序与指数的交易数据不一样，需要通过下面的方法排一下序
+        cols = ['trade_date','close','open','high','low','vol']
+        df = df.loc[:, cols]
+    print(df)
     datas = df.values.tolist()
-    for i in range(len(datas)):
-        datas[i][0] = int(datas[i][0])
     datas.reverse()
-     #   print(type(mydata[i][0]))
-#    for indexs in df.index:
-#        print(df.loc[indexs].values[0:-1])
-#        mydata.append(df.loc[indexs].values[0:-1])
-    return render(request, "index.html", {'stockData': datas})
-    #return render(request, "index.html", {'stockData': json.dumps(mydata)})
-    #return HttpResponse()
-    # return render_to_response("index.html", {'stockData': mydata}, context_instance=RequestContext(request))
+    return datas
+
+def getIndexOrStockFull(type,ts_code, startDate, endDate):
+    # 输出  ts_code trade_date      close       open       high  low  pre_close(昨日收盘点)  change(涨跌点)  pct_chg(涨跌幅 %)    vol(成交量（手）)  amount(成交额_千元）
+    df = pro.trade_cal(exchange='SSE', start_date=startDate, end_date=endDate)
+    df.drop(columns=['ts_code'], inplace=True)
+    datas = df.values.tolist()
+    datas.reverse()
+    return datas
+
+def getTradingCalendar(startDate, endDate):
+    df = pro.trade_cal(exchange='SSE', start_date=startDate, end_date=endDate)
+    newdf = df[(df.is_open == 1)]
+    newdf.drop(columns=['is_open','exchange'], inplace=True)
+    datas = newdf.values.tolist()
+    print(datas)
+    return datas
 
 def getMacroDataByType(macroType, startDate, endDate):
     if("macroCPI"==macroType):

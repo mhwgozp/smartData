@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>js代码（www.jsdaima.com）</title>
+	<title>SmartData</title>
 
 	<!-- Global stylesheets -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
@@ -1390,8 +1390,9 @@
 		// var upColorBorder = upColor;
 		// var downColorBorder = downColor;
 
-		var codeData = smartDataCandlesticks.splitDataByType({{ stockData }},false);
-		smartDataCandlesticks.setXAxisData(option, codeData.categoryData);
+		var codeData = smartDataCandlesticks.splitDataByType({{ stockData|safe }},false);
+		var tradingCalendar = {{ TradingCalendar|safe }}
+		smartDataCandlesticks.setXAxisData(option, tradingCalendar);
 		smartDataCandlesticks.attachStockData(option, "上证指数", codeData);
 
 		myChart.setOption(option, true);
