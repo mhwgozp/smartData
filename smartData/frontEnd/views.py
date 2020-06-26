@@ -63,6 +63,8 @@ def homePage(request):
             finaIndexData.reverse()
             print(finaIndexData)
             datas['financialIndexDatas'] = finaIndexData
+        datas['tradingCalendarData'] = tradingCalendar
+
         return JsonResponse(datas)
     endDate = datetime.datetime.now().strftime('%Y%m%d')
     startDate = (datetime.datetime.now() - datetime.timedelta(days=365)).strftime('%Y%m%d')

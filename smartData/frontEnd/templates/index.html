@@ -1431,29 +1431,24 @@
 						var numOfCodes = (response.indexCodes.length + response.stockCodes.length);
 						var isMultiCodes = (numOfCodes>1);
 						var haveBasicData = false;
-						var xAxisData = [];
+						//console.log(response.tradingCalendarData);
+						smartDataCandlesticks.setXAxisData(option, response.tradingCalendarData);
 
 						smartDataCandlesticks.resetSeriesData(option);//Çå¿ÕÊý¾Ý
 						///////////////////// attach index data ////////////////////////////////////////////
 						if(isMultiCodes)
 						{
-						option.yAxis[0].axisLabel.formatter='{value} %';
+							option.yAxis[0].axisLabel.formatter='{value} %';
 						}
 						else
 						{
-						option.yAxis[0].axisLabel.formatter='{value}';
+							option.yAxis[0].axisLabel.formatter='{value}';
 						}
 
 						for(var index=0; index < response.indexCodes.length; index++)
 						{
 							var indexCode = response.indexCodes[index];
 							var codeData = smartDataCandlesticks.splitDataByType(response.indexTradingDatas[indexCode], isMultiCodes);
-
-							if(false == haveBasicData)
-							 {  //Èç¹û»¹Ã»ÓÐ»­Ïß(Ã»ÓÐÌí¼ÓÈÎºÎÊý¾Ý)£¬ÔòÉèÖÃÒ»ÏÂxÖáµÄÊ±¼äÊý¾Ý
-								haveBasicData=true;
-								smartDataCandlesticks.setXAxisData(option, codeData.categoryData);
-							 }
 							 if(isMultiCodes)
 							 {  //Èç¹ûÓÐ(¹ÉÆ±+Ö¸Êý)ÓÐ¶à¸ö£¬Ôò²»ÓÃÀ¯ÖòÍ¼£¬¶øÓÃÆÕÍ¨µÄÕÛÏß»­
 								smartDataCandlesticks.attachStockLineData(option, indexCode, codeData.values, index);
@@ -1469,11 +1464,6 @@
 						{
 							var stockCode = response.stockCodes[index];
 							var codeData=smartDataCandlesticks.splitDataByType(response.tradingDatas[stockCode], isMultiCodes);
-							if(false == haveBasicData)
-							 {
-								haveBasicData=true;
-								smartDataCandlesticks.setXAxisData(option, codeData.categoryData);
-							 }
 							if(isMultiCodes)
 							{
 								smartDataCandlesticks.attachStockLineData(option, stockCode, codeData.values,(index+response.indexCodes.length) );
@@ -1488,7 +1478,7 @@
 						for(var macroDataIndex=0; macroDataIndex < response.macroParams.length; macroDataIndex++)
 						{
 							var macroDataType = response.macroParams[macroDataIndex];
-							smartDataCandlesticks.attachLineData(option, macroDataType, option.xAxis[0].data, response.macroDatas[macroDataType], (response.macroParams.length<2));
+							smartDataCandlesticks.attachLineData(option, macroDataType, response.tradingCalendarData, response.macroDatas[macroDataType], (response.macroParams.length<2));
 						}
 
 						///////////////////// attach financial Index data ////////////////////////////////////////////
@@ -1501,7 +1491,7 @@
 								datas.push([response.financialIndexDatas[i][0],response.financialIndexDatas[i][index+2]]);
 							}
 
-							smartDataCandlesticks.attachLineData(option, financialIndexParam, option.xAxis[0].data, datas, true);
+							smartDataCandlesticks.attachLineData(option, financialIndexParam, response.tradingCalendarData, datas, true);
 						}
 
 
