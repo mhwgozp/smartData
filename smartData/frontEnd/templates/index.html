@@ -1394,9 +1394,10 @@
 
 		var codeData = smartDataCandlesticks.splitDataByType({{ stockData|safe }},false);
 		var tradingCalendar = {{ TradingCalendar|safe }}
+		var macds = {{ macds|safe }}
 		smartDataCandlesticks.setXAxisData(option, tradingCalendar);
 		smartDataCandlesticks.attachStockData(option, "上证指数", codeData);
-
+        smartDataCandlesticks.attachMacdData(option, macds);
 		myChart.setOption(option, true);
 
 		myChart.dispatchAction({
@@ -1475,6 +1476,8 @@
 								smartDataCandlesticks.attachStockData(option, stockCode, codeData);
 							 }
 						}
+
+						smartDataCandlesticks.attachMacdData(option, response.macds);
 
 						///////////////////// attach macro data ////////////////////////////////////////////
 						for(var macroDataIndex=0; macroDataIndex < response.macroParams.length; macroDataIndex++)

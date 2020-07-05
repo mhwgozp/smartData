@@ -7,8 +7,10 @@ from  django.http  import  JsonResponse
 from .models import *
 import datetime
 #from django.shortcuts import render_to_response
-
+import numpy as np
 import pandas as pd
+import talib as ta
+from talib import MA_Type
 
 ts.set_token('abc23dc1908af03d82e14f830e52e28300ef5ac69bb5fe14e2ba8630')
 pro = ts.pro_api()
@@ -16,6 +18,7 @@ pro = ts.pro_api()
 def homePage(request):
     #return render(request, "test.html")
 
+    macds = {}
     if request.method == 'POST':
         #json.loads(request.POST.get('stockCodes'))
         indexCodes = request.POST.getlist('indexCodes')
@@ -25,10 +28,11 @@ def homePage(request):
         macroParams=request.POST.getlist('macroParams')
         financialIndexParams=request.POST.getlist('financialIndexParams')
         datas = {'indexCodes':indexCodes,'stockCodes':stockCodes,'startDate':startDate,'macroParams':macroParams,'financialIndexParams':financialIndexParams,
-                 'indexTradingDatas':{},'tradingDatas':{},'macroDatas':{},'financialIndexDatas':{},'tradingCalendarData':{}}
+                 'indexTradingDatas':{},'tradingDatas':{},'macroDatas':{},'financialIndexDatas':{},'tradingCalendarData':{},'macds':{}}
         indexTradingDatas = {}
         tradingDatas={}
         macroDatas={}
+        macds = {}
         numOfStockCodes = len(stockCodes)
         tradingCalendar = getTradingCalendar(startDate, endDate)
 
@@ -36,19 +40,21 @@ def homePage(request):
             indexDatas = getIndexOrStock('I', ts_code, startDate, endDate)
             indexTradingDatas[ts_code]=indexDatas;
             #print(indexTradingDatas[ts_code]);
+        datas['indexTradingDatas'] = indexTradingDatas
 
         for ts_code in stockCodes:
             stockData = getIndexOrStock('E', ts_code, startDate, endDate)
             tradingDatas[ts_code] = stockData;
-            #print(tradingDatas[ts_code]);
-        datas['indexTradingDatas'] = indexTradingDatas
+            closes = [x[2] for x in stockData];
+
+            macds['dif'],  macds['dea'],  macds['macd'] = getMACD(closes, tradingCalendar);
         datas['tradingDatas']=tradingDatas
+        datas['macds'] = macds
 
         if(macroParams):
             numOfMacroParams = len(macroParams)
             for macroType in macroParams:
                 macroDatas[macroType]=getMacroDataByType(macroType, startDate, endDate)
-                #print(macroDatas)
         datas['macroDatas']= macroDatas
 
         if(financialIndexParams):
@@ -61,7 +67,6 @@ def homePage(request):
                 finaIndexData[i][0] = int(finaIndexData[i][0])
                 finaIndexData[i][1] = int(finaIndexData[i][1])
             finaIndexData.reverse()
-            print(finaIndexData)
             datas['financialIndexDatas'] = finaIndexData
         datas['tradingCalendarData'] = tradingCalendar
 
@@ -70,16 +75,42 @@ def homePage(request):
     startDate = (datetime.datetime.now() - datetime.timedelta(days=365)).strftime('%Y%m%d')
     tradingCalendar = getTradingCalendar(startDate, endDate)
     datas = getIndexOrStock('I','000001.SH', startDate, endDate)
-    return render(request, "index.html", {'stockData': datas, 'TradingCalendar':tradingCalendar})
+    closes = [x[2] for x in datas];
+    macds['dif'], macds['dea'], macds['macd'] = getMACD(closes, tradingCalendar);
+    return render(request, "index.html", {'stockData': datas, 'TradingCalendar':tradingCalendar, 'macds':macds})
+
+def getMACD(closes, tradingCalendar):
+    #closes = df['close'].values
+    #print("=====getMACD:\n")
+    #macd【DIF】 = 12【fastperiod】天EMA - 26【slowperiod】天EMA
+    #macdsignal【DEA或DEM】 = 计算macd的signalperiod天的EMA
+    #macdhist【MACD柱状线】 = macd - macdsignal
+    macd,macdsigna,macdhist = ta.MACD(np.array(closes), fastperiod=12, slowperiod=26, signalperiod=9)
+    for i in range(len(macd)):
+        if np.isnan(np.mean(macd[i])):
+            macd[i] = 0
+        macd[i] = format(macd[i], '.2f')
+
+
+    for i in range(len(macdsigna)):
+        if np.isnan(np.mean(macdsigna[i])):
+            macdsigna[i] = 0
+        macdsigna[i] = format(macdsigna[i], '.2f')
+    #np.c_[tradingCalendar,macdsigna]
+
+    for i in range(len(macdhist)):
+        if np.isnan(np.mean(macdhist[i])):
+            macdhist[i] = 0
+        macdhist[i] = format(macdhist[i], '.2f')
+    return np.c_[tradingCalendar, macd].tolist() ,np.c_[tradingCalendar, macdsigna].tolist(), np.c_[tradingCalendar, macdhist].tolist()
 
 def getIndexOrStock(type,ts_code, startDate, endDate):
     #输出 trade_date      close       open       high        low    vol(成交量（手）)
     df = ts.pro_bar(ts_code=ts_code, adj='qfq', asset=type, start_date=startDate,end_date=endDate)
     df.drop(columns=["ts_code",'pre_close','change','pct_chg','amount'], inplace=True)
-    if(type=='E'):#从tushare查询出的股票交易数据顺序与指数的交易数据不一样，需要通过下面的方法排一下序
-        cols = ['trade_date','close','open','high','low','vol']
-        df = df.loc[:, cols]
-    print(df)
+    #if(type=='I'):#从tushare查询出的指数数据顺序与股票的交易数据不一样，需要通过下面的方法排一下序
+    cols = ['trade_date','open','close','low','high','vol']
+    df = df.loc[:, cols]
     datas = df.values.tolist()
     datas.reverse()
     return datas
@@ -97,7 +128,7 @@ def getTradingCalendar(startDate, endDate):
     newdf = df[(df.is_open == 1)]
     newdf.drop(columns=['is_open','exchange'], inplace=True)
     datas = newdf.values.tolist()
-    print(datas)
+    #print(datas)
     return datas
 
 def getMacroDataByType(macroType, startDate, endDate):
@@ -115,7 +146,7 @@ def getCpi(startDate, endDate):
     df = pro.cn_cpi(start_m=startDate[0:6], end_m=endDate[0:6], fields='month,nt_yoy')
     #print( "pro.cn_cpi(start_m="+ startDate[0:6]+", end_m="+endDate[0:6]+", fields='month,nt_yoy'")
     datas = df.values.tolist()
-    print(datas)
+    #print(datas)
     for i in range(len(datas)):
         datas[i][0] = int(datas[i][0]+"30")
     datas.reverse()
@@ -124,12 +155,12 @@ def getCpi(startDate, endDate):
 def getGdp(startDate, endDate):
     startQ=startDate[0:4]+"Q"+str(1+(int(startDate[4:6]))//4)
     endQ = endDate[0:4] + "Q" + str(1+(int(endDate[4:6])) // 4)
-    print("startQ:")
+    #print("startQ:")
     print (int(startDate[4:6]))
     df = pro.cn_gdp(start_q=startQ, end_q=endQ, fields='quarter,gdp_yoy')
-    print( "pro.cn_cpi(start_q="+ startQ+", end_q="+endQ+", fields='quarter,gdp_yoy'")
+    #print( "pro.cn_cpi(start_q="+ startQ+", end_q="+endQ+", fields='quarter,gdp_yoy'")
     datas = df.values.tolist()
-    print(datas)
+    #print(datas)
     for i in range(len(datas)):
         datas[i][0] = int(datas[i][0][0:4]+ str(int(datas[i][0][5:6])*3).zfill(2) +"30")
     datas.reverse()
@@ -154,15 +185,15 @@ def getMoneySupply(startDate, endDate):
         #      data["tableData"][i]["m1YOY"]
         #      ])
     datas.reverse()
-    print(datas)
+    #print(datas)
     return datas
     #return {'tableData': dataList, 'tableTitle': ["日期", "PPI", "同比", "环比", "累积", "公布日期"]}
 
 def getLPR(startDate, endDate):
-    print (int(startDate[4:6]))
+    #print (int(startDate[4:6]))
     df = pro.shibor_lpr(start_date=startDate, end_date=endDate)
     datas = df.values.tolist()
-    print(datas)
+    #print(datas)
     for i in range(len(datas)):
         datas[i][0] = int(datas[i][0]);
     datas.reverse()
