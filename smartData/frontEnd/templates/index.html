@@ -374,7 +374,7 @@
 								<!-- Main -->
 								<li><a href="static/index.html"><i class="icon-home4"></i> <span>主页</span></a></li>
 								<li class="navigation-header"><span>个股分析</span> <i class="icon-menu" title="个股分析"></i></li>
-								<li><a href="segments.html"><i class="icon-stack2"></i> <span>板块</span></a></li>
+								<li><a href="sectors"><i class="icon-stack2"></i> <span>板块</span></a></li>
 
 								<li>
 									<a href="#"><i class="icon-stack2"></i> <span>Page layouts</span></a>
@@ -1286,6 +1286,14 @@
             var day = ("0" + time.getDate()).slice(-2);
             var month = ("0" + (time.getMonth() + 1)).slice(-2);
             var lastYear = time.getFullYear()-1 + "-" + (month) + "-" + (day);
+            if(time.getHours()<18)
+            {
+            	var preDate = new Date(new Date()-24*60*60*1000);
+            	day = ("0" + preDate.getDate()).slice(-2);
+            	month = ("0" + (preDate.getMonth() + 1)).slice(-2);
+                lastYear = preDate.getFullYear()-1 + "-" + (month) + "-" + (day);
+            }
+
             $('#startDate').val(lastYear);
 
             var today = time.getFullYear() + "-" + (month) + "-" + (day);

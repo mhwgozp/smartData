@@ -18,13 +18,20 @@ from django.urls import path
 from django.views.generic.base import TemplateView
 
 from frontEnd import views
+from frontEnd import sectors
+from frontEnd import marketOverview
+from frontEnd import dataManagerView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('rr', views.dataManagerReserveRequirement),
-    #path('cpi', views.dataManagerCpi),
+    path('rr', views.dataManagerReserveRequirement),
+    path('cpi', views.dataManagerCpi),
     #path('ppi', views.dataManagerPpi),
     #path('pmi', views.dataManagerPmi),
     path('', views.homePage),
+    path('sectors', sectors.sectors),
+    path('marketOverview', marketOverview.main),
+    path('dataManager', dataManagerView.main),
+
     #path('vue/', TemplateView.as_view(template_name="vue.html")),
 ]

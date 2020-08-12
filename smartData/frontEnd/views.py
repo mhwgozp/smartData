@@ -71,8 +71,13 @@ def homePage(request):
         datas['tradingCalendarData'] = tradingCalendar
 
         return JsonResponse(datas)
-    endDate = datetime.datetime.now().strftime('%Y%m%d')
-    startDate = (datetime.datetime.now() - datetime.timedelta(days=365)).strftime('%Y%m%d')
+
+    curDate = datetime.datetime.now()
+    if curDate.hour < 18:
+        preDate = datetime.timedelta(days=1, hours=0, minutes=0, seconds=10)
+        curDate = curDate-preDate
+    endDate = curDate.strftime('%Y%m%d')
+    startDate = (curDate - datetime.timedelta(days=365)).strftime('%Y%m%d')
     tradingCalendar = getTradingCalendar(startDate, endDate)
     datas = getIndexOrStock('I','000001.SH', startDate, endDate)
     closes = [x[2] for x in datas];

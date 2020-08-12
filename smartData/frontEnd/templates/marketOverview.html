@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>SmartData</title>
+
+	<!-- Global stylesheets -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+	<link href="/static/assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+	<link href="/static/assets/css/minified/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="/static/assets/css/minified/core.min.css" rel="stylesheet" type="text/css">
+	<link href="/static/assets/css/minified/components.min.css" rel="stylesheet" type="text/css">
+	<link href="/static/assets/css/minified/colors.min.css" rel="stylesheet" type="text/css">
+	<link href="/static/dtree/dtree.css" rel="StyleSheet" type="text/css">
+	<!-- /global stylesheets -->
+
+	<!-- Core JS files -->
+	<script type="text/javascript" src="/static/assets/js/plugins/loaders/pace.min.js"></script>
+	<script type="text/javascript" src="/static/assets/js/core/libraries/jquery.min.js"></script>
+	<script type="text/javascript" src="/static/assets/js/core/libraries/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/static/assets/js/plugins/loaders/blockui.min.js"></script>
+
+	<!-- /core JS files -->
+
+	<!-- Theme JS files -->
+	<!--script type="text/javascript" src="/static/assets/js/plugins/forms/styling/switchery.min.js"></script-->
+	<script type="text/javascript" src="/static/assets/js/plugins/forms/selects/select2.min.js"></script>
+	<script type="text/javascript" src="/static/assets/js/plugins/ui/prism.min.js"></script>
+
+	<script type="text/javascript" src="/static/assets/js/core/app.js"></script>
+	<script type="text/javascript" src="/static/assets/js/pages/sidebar_dual.js"></script>
+	<script type="text/javascript" src="/static/echarts/dist/echarts.min.js"></script>
+	<script type="text/javascript" src="/static/dtree/dtree.js"></script>
+	<!-- /theme JS files -->
+
+</head>
+
+<body class="sidebar-xs">
+
+	<script type="text/javascript" src="/static/common/mainNavbar.js"></script>
+
+
+	<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">
+            <script type="text/javascript" src="/static/common/mainSidebar.js"></script>
+			<!-- Main content -->
+			<div class="content-wrapper">
+
+				<!-- Content area -->
+				<div class="content">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-flat">
+								<div class="panel-heading">
+									<div class="col-md-3">
+										<input id="startDate" class="form-control" type="date" name="date">
+										<span class="help-block">Start Date</span>
+
+									</div>
+									<div class="col-md-3">
+										<input id="endDate" class="form-control" type="date" name="date">
+										<span class="help-block">End Date</span>
+									</div>
+								</div>
+
+								<div class="panel-body">
+
+									<!-- Candlestick charts -->
+									<div class="row" id="main_echart_container">
+										<div class="col-lg-12">
+
+											<!-- Candlestick with line -->
+											<div class="panel panel-flat">
+												<div class="panel-body">
+													<div class="chart-container">
+															<div class="chart has-fixed-height" id="limitUpDown_line"></div>
+													</div>
+												</div>
+											</div>
+											<!-- /candlestick with line -->
+
+										</div>
+									</div>
+									<!-- /Candlestick charts -->
+								</div>
+							</div>
+
+
+							<div class="panel panel-flat">
+								<div class="panel-heading">
+									<h6 class="panel-title">每日成交数据曲线</h6>
+								</div>
+
+								<div class="panel-body">
+
+									<!-- Candlestick charts -->
+									<div class="row" id="main_echart_container">
+										<div class="col-lg-12">
+
+											<!-- Candlestick with line -->
+											<div class="panel panel-flat">
+												<div class="panel-body">
+													<div class="chart-container">
+															<div class="chart has-fixed-height" id="candlestick_line"></div>
+													</div>
+												</div>
+											</div>
+											<!-- /candlestick with line -->
+
+										</div>
+									</div>
+									<!-- /Candlestick charts -->
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<!-- Footer -->
+					<div class="footer text-muted" style="font-family:'Microsoft Yahei';">
+						&copy; 2020  SmartData公司&nbsp;&nbsp;ICP备XXXXXXXX号&nbsp;&nbsp;技术支持：<a style="font-family:'Microsoft Yahei';" href="http://www.jsdaima.com/" title="js代码" target="_blank">js代码</a>
+					</div>
+					<!-- /footer -->
+
+				</div>
+				<!-- /content area -->
+
+			</div>
+			<!-- /main content -->
+
+
+			<!-- Opposite sidebar -->
+			<div class="sidebar sidebar-opposite sidebar-default">
+				<div class="sidebar-content">
+
+					<div class="dtree" id="dtree_div">
+						<p><a href="javascript:  d.closeAll();">open</a> | <a href="javascript: d.openAll();">close</a></p>
+						<input id="dosearch_text" type="text" />
+						<input id="dosearch" type="button" value="search" onclick="nodeSearching()"/>
+
+					</div>
+
+					<div class="selectorResult">
+						Select result:
+						<ul id="ulSelected">
+						</ul>
+					</div>
+
+				</div>
+			</div>
+			<!-- /opposite sidebar -->
+
+		</div>
+		<!-- /page content -->
+
+	</div>
+	<!-- /page container -->
+
+</body>
+</html>
