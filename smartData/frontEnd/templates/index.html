@@ -1403,7 +1403,9 @@
 		var codeData = smartDataCandlesticks.splitDataByType({{ stockData|safe }},false);
 		var tradingCalendar = {{ TradingCalendar|safe }}
 		var macds = {{ macds|safe }}
-		smartDataCandlesticks.setXAxisData(option, tradingCalendar);
+		smartDataCandlesticks.setXAxisData(option, tradingCalendar, 0);
+		smartDataCandlesticks.setXAxisData(option, tradingCalendar, 1);
+		smartDataCandlesticks.setXAxisData(option, tradingCalendar, 2);
 		smartDataCandlesticks.attachStockData(option, "上证指数", codeData);
         smartDataCandlesticks.attachMacdData(option, macds);
 		myChart.setOption(option, true);
@@ -1462,7 +1464,7 @@
 							var codeData = smartDataCandlesticks.splitDataByType(response.indexTradingDatas[indexCode], isMultiCodes);
 							 if(isMultiCodes)
 							 {  //Èç¹ûÓÐ(¹ÉÆ±+Ö¸Êý)ÓÐ¶à¸ö£¬Ôò²»ÓÃÀ¯ÖòÍ¼£¬¶øÓÃÆÕÍ¨µÄÕÛÏß»­
-								smartDataCandlesticks.attachStockLineData(option, indexCode, codeData.values, index);
+								smartDataCandlesticks.attachLineDataOnFirstAxis(option, indexCode, codeData.values);
 							 }
 							 else
 							 {
@@ -1477,7 +1479,7 @@
 							var codeData=smartDataCandlesticks.splitDataByType(response.tradingDatas[stockCode], isMultiCodes);
 							if(isMultiCodes)
 							{
-								smartDataCandlesticks.attachStockLineData(option, stockCode, codeData.values,(index+response.indexCodes.length) );
+								smartDataCandlesticks.attachLineDataOnFirstAxis(option, stockCode, codeData.values);
 							 }
 							 else
 							 {
@@ -1491,7 +1493,7 @@
 						for(var macroDataIndex=0; macroDataIndex < response.macroParams.length; macroDataIndex++)
 						{
 							var macroDataType = response.macroParams[macroDataIndex];
-							smartDataCandlesticks.attachLineData(option, macroDataType, response.tradingCalendarData, response.macroDatas[macroDataType], (response.macroParams.length<2));
+							smartDataCandlesticks.createNewYAxisAndAttachLineData(option, macroDataType, response.tradingCalendarData, response.macroDatas[macroDataType], (response.macroParams.length<2));
 						}
 
 						///////////////////// attach financial Index data ////////////////////////////////////////////
@@ -1504,7 +1506,7 @@
 								datas.push([response.financialIndexDatas[i][0],response.financialIndexDatas[i][index+2]]);
 							}
 
-							smartDataCandlesticks.attachLineData(option, financialIndexParam, response.tradingCalendarData, datas, true);
+							smartDataCandlesticks.createNewYAxisAndAttachLineData(option, financialIndexParam, response.tradingCalendarData, datas, true);
 						}
 
 

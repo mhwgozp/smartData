@@ -16,11 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.views.generic.base import TemplateView
+from django.conf.urls import url
 
 from frontEnd import views
-from frontEnd import sectors
+from frontEnd import industries
 from frontEnd import marketOverview
 from frontEnd import dataManagerView
+from frontEnd import industry
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,7 +31,8 @@ urlpatterns = [
     #path('ppi', views.dataManagerPpi),
     #path('pmi', views.dataManagerPmi),
     path('', views.homePage),
-    path('sectors', sectors.sectors),
+    path('industries', industries.main),
+    url(r'^industry/$', industry.main),
     path('marketOverview', marketOverview.main),
     path('dataManager', dataManagerView.main),
 

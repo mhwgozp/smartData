@@ -391,7 +391,7 @@ $(function() {
     // Initialize with tags
     $(".select-multiple-drag").select2({
         width: '100%',
-        tags: ['red', 'green', 'blue', 'orange', 'white', 'black', 'purple', 'cyan', 'teal']
+        tags: ['red','blue']
     });
 
     // Add jQuery UI Sortable support

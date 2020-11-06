@@ -44,7 +44,7 @@ $(function() {
 
     // AJAX sourced data
     $('.datatable-ajax').dataTable({
-        ajax: 'assets/demo_data/tables/datatable_ajax.json'
+        ajax: 'static/assets/demo_data/tables/datatable_ajax.json'
     });
 
 

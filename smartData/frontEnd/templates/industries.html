@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,7 +33,69 @@
 	<script type="text/javascript" src="/static/assets/js/pages/sidebar_dual.js"></script>
 	<script type="text/javascript" src="/static/echarts/dist/echarts.min.js"></script>
 	<script type="text/javascript" src="/static/dtree/dtree.js"></script>
+	
+    <script type="text/javascript" src="/static/assets/js/core/libraries/jquery_ui/interactions.min.js"></script>
 	<!-- /theme JS files -->
+
+	<!-- Theme JS files -->
+	<script type="text/javascript" src="/static/assets/js/plugins/tables/datatables/datatables.min.js"></script>
+<!--	<script type="text/javascript" src="/static/assets/js/plugins/tables/datatables/extensions/col_vis.min.js"></script>-->
+	<script type="text/javascript" src="/static/assets/js/plugins/forms/styling/uniform.min.js"></script>
+<!--	<script type="text/javascript" src="/static/assets/js/pages/datatables_extension_colvis.js"></script>-->
+
+	<script type="module">
+	import * as smartDataCandlesticks from '../static/js/smartDataCandlesticks.js';
+
+	///////////////////////////////
+    var dom = document.getElementById("industrysIndicator_line");
+    var myChart = echarts.init(dom);
+    var app = {};
+    var option = smartDataCandlesticks.optionLine;
+    myChart.setOption(option, true);
+    ////////////////////////////////////////////////////////////////////////////////////
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+    }
+//////////////////////////////////
+//更新数据
+    $(".access-get").click(function () {
+        {   //获取所选参数并提交
+            var reg = new RegExp("-","g");
+            var startDate= $('#startDate').val().replace(reg,"");
+            var endDate= $('#endDate').val().replace(reg,"");
+
+            industryClassifySelected.splice(0,industryClassifySelected.length);
+            financialIndicatorsSelected.splice(0,financialIndicatorsSelected.length);
+            industryClassifySelected=$(".select-industryClassifys").select2("val");
+            financialIndicatorsSelected.push($(".select-financialIndicators").select2("val"));
+	    }
+
+        $.ajax({
+                url: '',
+                type: 'post',
+                traditional: true,
+                data: {'industryClassifySelected': industryClassifySelected,'financialIndicatorsSelected': financialIndicatorsSelected,'startDate': startDate, 'endDate': endDate},
+                success: function (response)
+                {
+                    smartDataCandlesticks.setXAxisData(option, response.calendarData, 0);
+                    smartDataCandlesticks.resetSeriesData(option);
+
+                    for (var key in response['financialDatas']) {
+                     smartDataCandlesticks.attachLineDataOnFirstAxis(option, industryClassifyJson[key], response['financialDatas'][key]);
+                    }
+
+                    myChart.setOption(option, true);
+                }
+        })
+    });
+
+    //窗口自动缩放
+	window.addEventListener('resize',function () {
+	if(myChart){myChart.resize();}})
+
+	</script>
+
+	<script type="text/javascript" src="/static/assets/js/pages/datatables_data_sources_industries.js"></script>
 
 </head>
 
@@ -41,7 +103,13 @@
 
 	<script type="text/javascript" src="/static/common/mainNavbar.js"></script>
 
-
+	<script type="text/javascript">
+		var industryClassifyJson={};
+		var industryClassifyList=[];
+		var financialIndicatorsList=[];
+		var industryClassifySelected=[];
+		var financialIndicatorsSelected=[];
+	</script>
 	<!-- Page container -->
 	<div class="page-container">
 
@@ -59,6 +127,17 @@
 								<div class="panel-heading">
 									<h6 class="panel-title">各板块数据曲线</h6>
 								</div>
+								<div class="form-group">
+													<input id="startDate" class="form-control" type="date" name="date">
+													<span class="help-block">Start Date</span>
+
+													<input id="endDate" class="form-control" type="date" name="date">
+													<span class="help-block">End Date</span>
+										<input type="hidden" class="select-industryClassifys" data-placeholder="选择板块（多选）" value="">
+										<input type="hidden" class="select-financialIndicators" data-placeholder="选择财务指标(单选)" value="">
+										<button type="button" class="btn btn-danger access-clear">清除</button>
+										<button type="button" class="btn btn-success access-get">确定</button>
+								</div>
 
 								<div class="panel-body">
 
@@ -70,7 +149,7 @@
 											<div class="panel panel-flat">
 												<div class="panel-body">
 													<div class="chart-container">
-															<div class="chart has-fixed-height" id="candlestick_line"></div>
+															<div class="chart has-fixed-height" id="industrysIndicator_line"></div>
 													</div>
 												</div>
 											</div>
@@ -84,6 +163,36 @@
 						</div>
 					</div>
 
+					<!-- Ajax sourced data -->
+					<div class="panel panel-flat">
+						<div class="panel-heading">
+							<h5 class="panel-title">板块财务指标</h5>
+							<div class="heading-elements">
+								<ul class="icons-list">
+			                		<li><a data-action="collapse"></a></li>
+			                		<li><a data-action="reload"></a></li>
+			                		<li><a data-action="close"></a></li>
+			                	</ul>
+		                	</div>
+						</div>
+						<table class="table datatable-ajax">
+							<thead>
+								<tr>
+									<th>行业</th>
+					                <th>行业ID</th>
+					                <th>报告期</th>
+					                <th>销售毛利率</th>
+					                <th>销售净利率</th>
+					                <th>净资产收益率</th>
+					                <th>净资产收益率(扣除非经常损益)</th>
+									<th>营业利润同比增长率</th>
+									<th>营业收入同比增长率</th>
+									<th>净资产同比增长率</th>
+					            </tr>
+							</thead>
+						</table>
+					</div>
+					<!-- /ajax sourced data -->
 					<!-- Footer -->
 					<div class="footer text-muted" style="font-family:'Microsoft Yahei';">
 						&copy; 2020  SmartData公司&nbsp;&nbsp;ICP备XXXXXXXX号&nbsp;&nbsp;技术支持：<a style="font-family:'Microsoft Yahei';" href="http://www.jsdaima.com/" title="js代码" target="_blank">js代码</a>

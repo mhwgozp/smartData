@@ -162,7 +162,6 @@ class StockListOfdustryClassify(models.Model):
     class Meta:
         db_table = 'stockListOfdustryClassify'
 
-
 def get_incomeTable_model(stockCode):
     table_name = 'incomeTable_%s' % str(stockCode)
 
@@ -249,3 +248,21 @@ def get_incomeTable_model(stockCode):
             db_table = table_name
 
     return IncomeTableModel
+
+class StockList(models.Model):
+    ts_code = models.CharField('ts_code', max_length=10)
+    symbol = models.CharField('symbol', max_length=7)
+    name = models.CharField('symbol', max_length=10)
+    area = models.CharField('area', max_length=10, null=True, blank=True)
+    industry = models.CharField('industry', max_length=10, null=True, blank=True)
+    fullname = models.CharField('fullname', max_length=30, null=True, blank=True)
+    enname = models.CharField('enname', max_length=100, null=True, blank=True)
+    market = models.CharField('market', max_length=6, null=True, blank=True)
+    exchange = models.CharField('exchange', max_length=10, null=True, blank=True)
+    curr_type = models.CharField('curr_type', max_length=6, null=True, blank=True)
+    list_status = models.CharField('list_status', max_length=6, null=True, blank=True)
+    list_date = models.CharField('list_date', max_length=8, null=True, blank=True)
+    delist_date = models.CharField('delist_date', max_length=8, null=True, blank=True)
+    is_hs = models.CharField('is_hs', max_length=2, null=True, blank=True)
+    class Meta:
+        db_table = 'StockList'
