@@ -17,24 +17,45 @@ import os
 ts.set_token('abc23dc1908af03d82e14f830e52e28300ef5ac69bb5fe14e2ba8630')
 pro = ts.pro_api()
 
+
+# datas
+# {
+# 'industryCode':
+# 'ts_code':
+# 'tradingCalendar':
+# 'tradingDatas':
+# 'macds':
+#     {'dif':
+#      'dea':
+#     'macd':
+#      }
+# 'financialDatas':
+# 'allFinancialDatas':
+# 'stocksName':
+# }
+
 def main(request):
+    startDate, endDate = getDefaultDate()
+    datas = {'industryCode':0,'indexCodes': [], 'ts_codes': [], 'startDate':startDate, 'endDate':endDate,
+             'financialIndexParams': [],
+             'tradingCalendar': [],
+             'stocksName':{},
+             'indexsName': {},
+             'indexTradingDatas': {}, 'tradingDatas': {}, 'financialIndexDatas': {},
+              'macds': {}}
     allStocksName = getStocksName()
     if request.method == 'POST':
         action = request.POST.get('action')
         industryCode = request.POST.get("industryCode")
-        datas = {}
         datas['industryCode'] = industryCode
+        allStocksName = getStocksName()
         if(action == 'getTradingDatas'):
             startDate = request.POST.get('startDate')
             endDate = request.POST.get('endDate')
             selectTopNum = int(request.POST.get('selectTopNum'))
             selectPeriod = request.POST.get('selectPeriod')
-            tradingDatasStocksName = {}
             datas['tradingCalendar'] = getTradingCalendar(startDate, endDate)
             datas['tradingDatas']  = getStockPriceTopList(industryCode, selectPeriod, startDate, endDate, selectTopNum)
-            for key in datas['tradingDatas']:
-                tradingDatasStocksName[key] =allStocksName[key]
-            datas['tradingDatasStocksName'] = tradingDatasStocksName
         elif (action == 'getFinancialDatas'):
             startDate = request.POST.get('startDate')
             endDate = request.POST.get('endDate')
@@ -55,20 +76,61 @@ def main(request):
             datas['allFinancialDatas'] = allFinancialDatas.tolist()
         return JsonResponse(datas)
     elif request.method == 'GET':
-        curDate = datetime.datetime.now()
-        if curDate.hour < 18:
-            preDate = datetime.timedelta(days=1, hours=0, minutes=0, seconds=10)
-            curDate = curDate - preDate
-        endDate = curDate.strftime('%Y%m%d')
-        startDate = (curDate - datetime.timedelta(days=365)).strftime('%Y%m%d')
-        industryCode = request.GET.get("industryCode")
-        tradingCalendar = getTradingCalendar(startDate, endDate)
-        tradingDatas = getStockPriceTopList(industryCode, 'W', startDate, endDate, 10)
+        ts_code = request.GET.get("ts_code")
+        datas['ts_codes'].append(ts_code)
 
-        tradingDatasStocksName = {}
-        for key in tradingDatas:
-            tradingDatasStocksName[key] = allStocksName[key]
-        return render(request, "industry.html", {'industryCode':industryCode, 'tradingCalendar': tradingCalendar, 'tradingDatas':tradingDatas, 'tradingDatasStocksName':tradingDatasStocksName})
+        datas['tradingCalendar'] = getTradingCalendar(startDate, endDate)
+
+        datas['tradingDatas'][ts_code] = getIndexOrStock('E', ts_code, startDate, endDate)
+
+        closes = [ x[2] for x in datas['tradingDatas'][ts_code] ];
+        datas['macds']['dif'], datas['macds']['dea'], datas['macds']['macd'] = getMACD(closes, datas['tradingCalendar'] );
+
+        datas['industryCode'] = getCurrentIndustryCode(ts_code)
+
+        stocksList = getStockListOfdustryClassify(datas['industryCode'])
+        for index in range(len(stocksList)):
+            datas['stocksName'][ stocksList[index]['stockCode'] ] = allStocksName[ stocksList[index]['stockCode'] ]
+        print(datas['stocksName'])
+        selectedIndexs = getDefaultSelectedIndex()
+        for key in selectedIndexs:
+            datas['indexsName'][key] = selectedIndexs[key]
+            datas['indexTradingDatas'][key] = getIndexOrStock('I', key, startDate, endDate)
+
+        indicatorsList = ['end_date', 'roic']
+        # indicatorsList = ['ts_code','end_date', 'roe','roic','q_gsprofit_margin','q_netprofit_margin','q_sales_yoy','q_op_yoy']
+        financialDatas = queryFinanceindicator(ts_code, startDate, endDate, indicatorsList)
+        print("\n")
+        print(financialDatas)
+        # selectedFinancialIndicators = getDefaultSelectedFinancialIndicators()
+        # indicatorsList = list(selectedFinancialIndicators.values())
+        #financialIndicatorsData[] = queryFinanceindicator(ts_code, startDate, endDate, indicatorsList)
+
+
+        return render(request, "stock.html", datas)
+
+def getDefaultDate():
+    curDate = datetime.datetime.now()
+    if curDate.hour < 18:
+        preDate = datetime.timedelta(days=1, hours=0, minutes=0, seconds=10)
+        curDate = curDate - preDate
+    endDate = curDate.strftime('%Y%m%d')
+    startDate = (curDate - datetime.timedelta(days=365 * 2)).strftime('%Y%m%d')
+    return startDate, endDate
+
+def getCurrentIndustryCode(ts_code):
+    industryItem = StockListOfdustryClassify.objects.filter(stockCode=ts_code)
+    return industryItem.values()[0]['industryCode']
+
+def getDefaultSelectedIndex():
+    return {'000001.SH':'上证指数',
+            '399006.SZ':'创业板指'}
+
+def getDefaultSelectedFinancialIndicators():
+    return {'equity_yoy': '净资产同比增长率',
+            'or_yoy': '营业收入同比增长率(%)',
+            'dt_netprofit_yoy': '归属母公司股东的净利润-扣除非经常损益同比增长率(%)'
+            }
 
 def getStockPriceTopList(industryCode, periodType, startDate, endDate, topNumber):
     stockListOfdustryClassify = getStockListOfdustryClassify(industryCode)

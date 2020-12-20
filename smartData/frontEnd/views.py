@@ -84,30 +84,7 @@ def homePage(request):
     macds['dif'], macds['dea'], macds['macd'] = getMACD(closes, tradingCalendar);
     return render(request, "index.html", {'stockData': datas, 'TradingCalendar':tradingCalendar, 'macds':macds})
 
-def getMACD(closes, tradingCalendar):
-    #closes = df['close'].values
-    #print("=====getMACD:\n")
-    #macd【DIF】 = 12【fastperiod】天EMA - 26【slowperiod】天EMA
-    #macdsignal【DEA或DEM】 = 计算macd的signalperiod天的EMA
-    #macdhist【MACD柱状线】 = macd - macdsignal
-    macd,macdsigna,macdhist = ta.MACD(np.array(closes), fastperiod=12, slowperiod=26, signalperiod=9)
-    for i in range(len(macd)):
-        if np.isnan(np.mean(macd[i])):
-            macd[i] = 0
-        macd[i] = format(macd[i], '.2f')
 
-
-    for i in range(len(macdsigna)):
-        if np.isnan(np.mean(macdsigna[i])):
-            macdsigna[i] = 0
-        macdsigna[i] = format(macdsigna[i], '.2f')
-    #np.c_[tradingCalendar,macdsigna]
-
-    for i in range(len(macdhist)):
-        if np.isnan(np.mean(macdhist[i])):
-            macdhist[i] = 0
-        macdhist[i] = format(macdhist[i], '.2f')
-    return np.c_[tradingCalendar, macd].tolist() ,np.c_[tradingCalendar, macdsigna].tolist(), np.c_[tradingCalendar, macdhist].tolist()
 
 def getIndexOrStock(type,ts_code, startDate, endDate):
     #输出 trade_date      close       open       high        low    vol(成交量（手）)

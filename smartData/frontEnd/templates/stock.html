@@ -62,12 +62,11 @@
 	kOption.yAxis[0].axisLabel.formatter='{value} %'
 
 	var tradingDatas = {{ tradingDatas|safe }};
-	var tradingDatasStocksName = {{ tradingDatasStocksName|safe }};
     for (var key in tradingDatas)
     {
 	　　var tradingData = tradingDatas[key];
 		var result = smartDataCandlesticks.splitDataByType(tradingData, true);
-		smartDataCandlesticks.attachLineDataOnFirstAxis(kOption, tradingDatasStocksName[key], result.values);
+		smartDataCandlesticks.attachLineDataOnFirstAxis(kOption, key, result.values);
 	}
     if (kOption && typeof kOption == "object") {
         kChart.setOption(kOption, true);
@@ -108,7 +107,7 @@
 					{
 					　　var tradingData = response['tradingDatas'][key];
 						var result = smartDataCandlesticks.splitDataByType(tradingData, true);
-						smartDataCandlesticks.attachLineDataOnFirstAxis(kOption, response['tradingDatasStocksName'][key], result.values);
+						smartDataCandlesticks.attachLineDataOnFirstAxis(kOption, key, result.values);
 					}
                     kChart.setOption(kOption, true);
                 }
@@ -178,7 +177,7 @@
 
 	</script>
 
-	<script type="text/javascript" src="/static/assets/js/pages/datatables_data_sources_industry.js"></script>
+	<script type="text/javascript" src="/static/assets/js/pages/datatables_data_sources_stock.js"></script>
 
 </head>
 
@@ -210,7 +209,7 @@
 						<div class="col-md-12">
 							<div class="panel panel-flat">
 								<div class="panel-heading">
-									<h6 class="panel-title">行业内股票股价涨跌幅曲线</h6>
+									<h6 class="panel-title">股价走势图</h6>
 								</div>
 								<div class="form-group">
 													<input id="kStartDate" class="form-control" type="date" name="date">
@@ -219,29 +218,28 @@
 													<input id="kEndDate" class="form-control" type="date" name="date">
 													<span class="help-block">End Date</span>
 
-										<select class="select" id="kSelectPeriod">
-												<option value="D">日线</option>
-												<option value="W" selected="selected">周线</option>
+										<select class="select" id="kIndex">
+												<option value="000001.SH">上证指数</option>
+												<option value="399001.SZ">深证成指</option>
+												<option value="399006.SZ">创业板指</option>
+												<option value="399005.SZ">中小板指</option>
+											    <option value="000016.SH">上证50</option>
+												<option value="000300.SH">沪深300</option>
+												<option value="000688.SH">科创50</option>
+										</select>
+									<select class="select" id="kSelectPeriod">
+												<option value="D" selected="selected">日线</option>
+												<option value="W">周线</option>
 												<option value="M">月线</option>
-										</select>
-
-									<select class="select"  id="kSelectTopNum">
-												<option value="5">Top5</option>
-												<option value="10">Top10</option>
-												<option value="15" selected="selected">Top15</option>
-												<option value="20">Top20</option>
-												<option value="25">Top25</option>
-												<option value="30">Top30</option>
-										</select>
-										<button type="button" class="btn btn-success topStockPrice-get">确定</button>
+									</select>
+									<input type="hidden" class="select-financialIndicator" data-placeholder="选择财务指标" value="">
+										<button type="button" class="btn btn-success kf-get">确定</button>
 								</div>
 
 								<div class="panel-body">
-
 									<!-- Candlestick charts -->
 									<div class="row" id="main_echart_container_kLine">
 										<div class="col-lg-12">
-
 											<!-- Candlestick with line -->
 											<div class="panel panel-flat">
 												<div class="panel-body">
@@ -260,60 +258,10 @@
 						</div>
 					</div>
 
-
-					<div class="row">
-						<div class="col-md-12">
-							<div class="panel panel-flat">
-								<div class="panel-heading">
-									<h6 class="panel-title">行业内公司财务数据曲线</h6>
-								</div>
-								<div class="form-group">
-													<input id="financeStartDate" class="form-control" type="date" name="date">
-													<span class="help-block">Start Date</span>
-
-													<input id="financeEndDate" class="form-control" type="date" name="date">
-													<span class="help-block">End Date</span>
-
-									<input type="hidden" class="select-financialIndicator" data-placeholder="选择财务指标(单选)" value="">
-									<select class="select"  id="indicatorSelectTopNum">
-												<option value="5">Top5</option>
-												<option value="10">Top10</option>
-												<option value="15" selected="selected">Top15</option>
-												<option value="20">Top20</option>
-												<option value="25">Top25</option>
-												<option value="30">Top30</option>
-												<option value="500">All</option>
-										</select>
-										<button type="button" class="btn btn-success topFinancial-get">确定</button>
-								</div>
-
-								<div class="panel-body">
-
-									<!-- Candlestick charts -->
-									<div class="row" id="main_echart_container_financeIndicatorLine">
-										<div class="col-lg-12">
-											<!-- Candlestick with line -->
-											<div class="panel panel-flat">
-												<div class="panel-body">
-													<div class="chart-container">
-															<div class="chart has-fixed-height" id="financeIndicatorLine"></div>
-													</div>
-												</div>
-											</div>
-											<!-- /candlestick with line -->
-
-										</div>
-									</div>
-									<!-- /Candlestick charts -->
-								</div>
-							</div>
-						</div>
-					</div>
-
 					<!-- Ajax sourced data -->
 					<div class="panel panel-flat">
 						<div class="panel-heading">
-							<h5 class="panel-title">当前行业股票财务指标列表</h5>
+							<h5 class="panel-title">主营业务构成</h5>
 							<div class="heading-elements">
 								<ul class="icons-list">
 			                		<li><a data-action="collapse"></a></li>

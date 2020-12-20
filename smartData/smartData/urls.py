@@ -23,6 +23,7 @@ from frontEnd import industries
 from frontEnd import marketOverview
 from frontEnd import dataManagerView
 from frontEnd import industry
+from frontEnd import stockView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,6 +34,7 @@ urlpatterns = [
     path('', views.homePage),
     path('industries', industries.main),
     url(r'^industry/$', industry.main),
+    url(r'^tsCode/$', stockView.main),
     path('marketOverview', marketOverview.main),
     path('dataManager', dataManagerView.main),
 

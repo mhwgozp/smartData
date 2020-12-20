@@ -14,6 +14,8 @@ from django.db.migrations.executor import MigrationExecutor
 from django.apps import apps
 from collections import OrderedDict
 from django.db.models import Q
+import talib as ta
+from talib import MA_Type
 
 ts.set_token('abc23dc1908af03d82e14f830e52e28300ef5ac69bb5fe14e2ba8630')
 pro = ts.pro_api()
@@ -652,7 +654,13 @@ def queryAvgFinancialIndicatorForOneIndustry(startDate,endDate, industryClassify
 # 股票行情管理 --获取k线所需数据
 def getIndexOrStock(type,ts_code, startDate, endDate):
     #输出 trade_date      close       open       high        low    vol(成交量（手）)
+    print(ts_code)
+    print(startDate)
+    print(endDate)
+    print(type)
     df = ts.pro_bar(ts_code=ts_code, adj='qfq', asset=type, start_date=startDate,end_date=endDate)
+    print("aaaaaaaaaaaaaaaaaaaaa\n")
+    print(df)
     df.drop(columns=["ts_code",'pre_close','change','pct_chg','amount'], inplace=True)
     #if(type=='I'):#从tushare查询出的指数数据顺序与股票的交易数据不一样，需要通过下面的方法排一下序
     cols = ['trade_date','open','close','low','high','vol']
@@ -708,4 +716,36 @@ def saveStockList(data):
     item.delist_date = data[12];
     item.is_hs = data[13];
     item.save()
+
+def getStocksName():
+    items = StockList.objects.all().values()
+    stocksNameList={}
+    for item in items:
+        stocksNameList[item['ts_code']]=item['name']
+    return stocksNameList
+
+def getMACD(closes, tradingCalendar):
+    #closes = df['close'].values
+    #print("=====getMACD:\n")
+    #macd【DIF】 = 12【fastperiod】天EMA - 26【slowperiod】天EMA
+    #macdsignal【DEA或DEM】 = 计算macd的signalperiod天的EMA
+    #macdhist【MACD柱状线】 = macd - macdsignal
+    macd,macdsigna,macdhist = ta.MACD(np.array(closes), fastperiod=12, slowperiod=26, signalperiod=9)
+    for i in range(len(macd)):
+        if np.isnan(np.mean(macd[i])):
+            macd[i] = 0
+        macd[i] = format(macd[i], '.2f')
+
+
+    for i in range(len(macdsigna)):
+        if np.isnan(np.mean(macdsigna[i])):
+            macdsigna[i] = 0
+        macdsigna[i] = format(macdsigna[i], '.2f')
+    #np.c_[tradingCalendar,macdsigna]
+
+    for i in range(len(macdhist)):
+        if np.isnan(np.mean(macdhist[i])):
+            macdhist[i] = 0
+        macdhist[i] = format(macdhist[i], '.2f')
+    return np.c_[tradingCalendar, macd].tolist() ,np.c_[tradingCalendar, macdsigna].tolist(), np.c_[tradingCalendar, macdhist].tolist()
 

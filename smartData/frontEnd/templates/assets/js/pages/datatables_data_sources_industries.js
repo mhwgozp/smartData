@@ -22,7 +22,7 @@ $(function() {
         "columnDefs": [
       {
        "render": function (data, type, row) {
-        return "<a href='industry/?industryCode=" + row[1]+"'>"+row[0]+"</a>";
+        return "<a href='/industry/?industryCode=" + row[1]+"'>"+row[0]+"</a>";
        },
        "targets": 0
       },
