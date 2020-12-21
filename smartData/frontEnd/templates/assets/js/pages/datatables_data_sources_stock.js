@@ -13,9 +13,9 @@ $(function() {
         month = ("0" + (preDate.getMonth() + 1)).slice(-2);
         startYear = preDate.getFullYear()-3 + "-" + (month) + "-" + (day);
     }
-    $('#kStartDate').val(startYear);
-    var today = time.getFullYear() + "-" + (month) + "-" + (day);
-    $('#kEndDate').val(today);
+   // $('#kStartDate').val(startYear);
+ //   var today = time.getFullYear() + "-" + (month) + "-" + (day);
+ //   $('#kEndDate').val(today);
 
     $('#financeStartDate').val(startYear);
     var today = time.getFullYear() + "-" + (month) + "-" + (day);

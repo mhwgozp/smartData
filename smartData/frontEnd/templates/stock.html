@@ -48,6 +48,18 @@
 
 	///////////////////////////////
 	var industryCode = '{{ industryCode }}';
+	var industryName = '{{ industryName }}';
+	var startDate = '{{ startDate }}';
+	var endDate = '{{ endDate }}';
+	var stockName = '{{ stockName }}';
+
+	var startDateFormat = startDate.slice(0,4) + "-"+ startDate.slice(4,6) + "-"+ startDate.slice(6,8);
+	var endDateFormat = endDate.slice(0,4) + "-"+ endDate.slice(4,6) + "-"+ endDate.slice(6,8);
+
+	$('#kStartDate').val(startDateFormat);
+	$('#kEndDate').val(endDateFormat);
+	document.getElementById("title_industry").innerHTML = industryName;
+	document.getElementById("title_stockName").innerHTML = stockName;
 
     var kDom = document.getElementById("kLine");
     var kChart = echarts.init(kDom);
@@ -62,23 +74,35 @@
 	kOption.yAxis[0].axisLabel.formatter='{value} %'
 
 	var tradingDatas = {{ tradingDatas|safe }};
+	var stocksName = {{ stocksName|safe }};
+
+	var indexTradingDatas = {{ indexTradingDatas|safe }};
+	var indexsName = {{ indexsName|safe }};
+
     for (var key in tradingDatas)
     {
 	　　var tradingData = tradingDatas[key];
 		var result = smartDataCandlesticks.splitDataByType(tradingData, true);
-		smartDataCandlesticks.attachLineDataOnFirstAxis(kOption, key, result.values);
+		smartDataCandlesticks.attachLineDataOnFirstAxis(kOption, stocksName[key], result.values);
 	}
+	for (var key in indexTradingDatas)
+    {
+	　　var indexTradingData = indexTradingDatas[key];
+		var result = smartDataCandlesticks.splitDataByType(indexTradingData, true);
+		smartDataCandlesticks.attachLineDataOnFirstAxis(kOption, indexsName[key], result.values);
+	}
+
     if (kOption && typeof kOption == "object") {
         kChart.setOption(kOption, true);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
-    var fDom = document.getElementById("financeIndicatorLine");
-    var fChart = echarts.init(fDom);
-    var fOption = smartDataCandlesticks.optionLine;
-    if (fOption && typeof fOption == "object") {
-        fChart.setOption(fOption, true);
-    }
+    //var fDom = document.getElementById("financeIndicatorLine");
+   // var fChart = echarts.init(fDom);
+   // var fOption = smartDataCandlesticks.optionLine;
+   // if (fOption && typeof fOption == "object") {
+   //     fChart.setOption(fOption, true);
+   // }
 //////////////////////////////////
 //更新数据
     $(".topStockPrice-get").click(function () {
@@ -203,6 +227,13 @@
 			<!-- Main content -->
 			<div class="content-wrapper">
 
+				<div class="page-header">
+					<div class="page-header-content">
+						<div class="page-title">
+							<h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold" id="title_industry" a="">Forms</span> - <span id="title_stockName">Input Groups</span> </h4>
+						</div>
+					</div>
+				</div>
 				<!-- Content area -->
 				<div class="content">
 					<div class="row">

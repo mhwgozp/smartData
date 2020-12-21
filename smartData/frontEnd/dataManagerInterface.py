@@ -552,10 +552,7 @@ def queryAvgFinanceindicaIndustriesForIndustries(endDate, indicatorsList):
         print(resultFields)
         datasDb = list(custom_model(name=avgFinancialIndicatorTableName, fields=fields, app_label='frontEnd',
                              module='frontEnd.models', options=options).objects.filter(end_date=endDate).values())
-        print(datasDb[0])
-        print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-        print(len(indicatorsList))
-        print(len(datasDb))
+
         result = [[0 for col in range(len(indicatorsList))] for row in range(len(datasDb))]
         for row in range(len(datasDb)):
             for col in range(len(indicatorsList)):
@@ -563,7 +560,7 @@ def queryAvgFinanceindicaIndustriesForIndustries(endDate, indicatorsList):
                     result[row][col] = datasDb[row][indicatorsList[col]]
                 else:
                     result[row][col] = round(datasDb[row][indicatorsList[col]],2)
-        print(result)
+
         return result
 
 
@@ -654,13 +651,7 @@ def queryAvgFinancialIndicatorForOneIndustry(startDate,endDate, industryClassify
 # 股票行情管理 --获取k线所需数据
 def getIndexOrStock(type,ts_code, startDate, endDate):
     #输出 trade_date      close       open       high        low    vol(成交量（手）)
-    print(ts_code)
-    print(startDate)
-    print(endDate)
-    print(type)
     df = ts.pro_bar(ts_code=ts_code, adj='qfq', asset=type, start_date=startDate,end_date=endDate)
-    print("aaaaaaaaaaaaaaaaaaaaa\n")
-    print(df)
     df.drop(columns=["ts_code",'pre_close','change','pct_chg','amount'], inplace=True)
     #if(type=='I'):#从tushare查询出的指数数据顺序与股票的交易数据不一样，需要通过下面的方法排一下序
     cols = ['trade_date','open','close','low','high','vol']

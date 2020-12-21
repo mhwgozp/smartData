@@ -48,6 +48,7 @@
 
 	///////////////////////////////
 	var industryCode = '{{ industryCode }}';
+	var industryName = '{{ industryName }}';
 
     var kDom = document.getElementById("kLine");
     var kChart = echarts.init(kDom);
@@ -159,7 +160,8 @@
 						"columnDefs": [
 						  {
 						   "render": function (data, type, row) {
-							return "<a href='/tsCode/?ts_code=" + row[1]+"'>"+row[0]+"</a>";
+							//return "<a href='/tsCode/?ts_code=" + row[1]+"'>"+row[0]+"</a>";
+							return "<a href='/tsCode/?industryCode=" + industryCode + "&ts_code=" +row[1]+ "&industryName=" +industryName+ "'>"+row[0]+"</a>";
 						   },
 						   "targets": 0
 						  },

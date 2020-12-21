@@ -62,13 +62,14 @@ def main(request):
         endDate = curDate.strftime('%Y%m%d')
         startDate = (curDate - datetime.timedelta(days=365)).strftime('%Y%m%d')
         industryCode = request.GET.get("industryCode")
+        industryName = request.GET.get("industryName")
         tradingCalendar = getTradingCalendar(startDate, endDate)
         tradingDatas = getStockPriceTopList(industryCode, 'W', startDate, endDate, 10)
 
         tradingDatasStocksName = {}
         for key in tradingDatas:
             tradingDatasStocksName[key] = allStocksName[key]
-        return render(request, "industry.html", {'industryCode':industryCode, 'tradingCalendar': tradingCalendar, 'tradingDatas':tradingDatas, 'tradingDatasStocksName':tradingDatasStocksName})
+        return render(request, "industry.html", {'industryCode':industryCode, 'industryName':industryName, 'tradingCalendar': tradingCalendar, 'tradingDatas':tradingDatas, 'tradingDatasStocksName':tradingDatasStocksName})
 
 def getStockPriceTopList(industryCode, periodType, startDate, endDate, topNumber):
     stockListOfdustryClassify = getStockListOfdustryClassify(industryCode)

@@ -36,12 +36,18 @@ pro = ts.pro_api()
 
 def main(request):
     startDate, endDate = getDefaultDate()
-    datas = {'industryCode':0,'indexCodes': [], 'ts_codes': [], 'startDate':startDate, 'endDate':endDate,
+    datas = {'industryCode':'',
+             'industryName':'',
+             'stockName':'',
+             'indexCodes': [],
+             'ts_codes': [],
+             'startDate':startDate,
+             'endDate':endDate,
              'financialIndexParams': [],
              'tradingCalendar': [],
              'stocksName':{},
              'indexsName': {},
-             'indexTradingDatas': {}, 'tradingDatas': {}, 'financialIndexDatas': {},
+             'indexTradingDatas': {}, 'tradingDatas': {}, 'financialDatas': {},
               'macds': {}}
     allStocksName = getStocksName()
     if request.method == 'POST':
@@ -77,21 +83,23 @@ def main(request):
         return JsonResponse(datas)
     elif request.method == 'GET':
         ts_code = request.GET.get("ts_code")
+        datas['industryCode'] = request.GET.get("industryCode")
+        datas['industryName'] = request.GET.get("industryName")
         datas['ts_codes'].append(ts_code)
-
         datas['tradingCalendar'] = getTradingCalendar(startDate, endDate)
-
         datas['tradingDatas'][ts_code] = getIndexOrStock('E', ts_code, startDate, endDate)
 
         closes = [ x[2] for x in datas['tradingDatas'][ts_code] ];
         datas['macds']['dif'], datas['macds']['dea'], datas['macds']['macd'] = getMACD(closes, datas['tradingCalendar'] );
 
-        datas['industryCode'] = getCurrentIndustryCode(ts_code)
+        # datas['industryCode'] = getCurrentIndustryCode(ts_code)
 
         stocksList = getStockListOfdustryClassify(datas['industryCode'])
         for index in range(len(stocksList)):
             datas['stocksName'][ stocksList[index]['stockCode'] ] = allStocksName[ stocksList[index]['stockCode'] ]
-        print(datas['stocksName'])
+
+        datas['stockName'] = datas['stocksName'][ts_code]
+
         selectedIndexs = getDefaultSelectedIndex()
         for key in selectedIndexs:
             datas['indexsName'][key] = selectedIndexs[key]
@@ -99,9 +107,9 @@ def main(request):
 
         indicatorsList = ['end_date', 'roic']
         # indicatorsList = ['ts_code','end_date', 'roe','roic','q_gsprofit_margin','q_netprofit_margin','q_sales_yoy','q_op_yoy']
-        financialDatas = queryFinanceindicator(ts_code, startDate, endDate, indicatorsList)
-        print("\n")
-        print(financialDatas)
+        datas['financialDatas'] = queryFinanceindicator(ts_code, startDate, endDate, indicatorsList)
+
+        print(datas['financialDatas'])
         # selectedFinancialIndicators = getDefaultSelectedFinancialIndicators()
         # indicatorsList = list(selectedFinancialIndicators.values())
         #financialIndicatorsData[] = queryFinanceindicator(ts_code, startDate, endDate, indicatorsList)
