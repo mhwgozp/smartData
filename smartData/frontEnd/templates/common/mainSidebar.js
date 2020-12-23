@@ -36,6 +36,7 @@ document.writeln("								<!-- Main -->");
 document.writeln("								<li><a href=\'/\'><i class=\'icon-home4\'></i> <span>主页</span></a></li>");
 document.writeln("								<li><a href=\'industries\'><i class=\'icon-stack2\'></i> <span>行业分析</span></a></li>");
 document.writeln("								<li class=\'navigation-header\'><span>个股分析</span> <i class=\'icon-menu\' title=\'个股分析\'></i></li>");
+document.writeln("								<li class=\'navigation-header\'><span>数据管理</span> <i class=\'icon-menu\' title=\'数据管理\'></i></li>");
 document.writeln("");			
 document.writeln("							</ul>");
 document.writeln("						</div>");
