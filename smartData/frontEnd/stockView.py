@@ -43,7 +43,7 @@ def main(request):
              'ts_codes': [],
              'startDate':startDate,
              'endDate':endDate,
-             'financialIndexParams': [],
+             'financialIndexParams': {},
              'tradingCalendar': [],
              'stocksName':{},
              'indexsName': {},
@@ -107,9 +107,20 @@ def main(request):
 
         indicatorsList = ['end_date', 'roic']
         # indicatorsList = ['ts_code','end_date', 'roe','roic','q_gsprofit_margin','q_netprofit_margin','q_sales_yoy','q_op_yoy']
-        datas['financialDatas'] = queryFinanceindicator(ts_code, startDate, endDate, indicatorsList)
-
+        financialDatas = queryFinanceindicator(ts_code, startDate, endDate, indicatorsList)
+        for i in range(len(indicatorsList) -1 ):
+            indicatorIndexInList = i+1
+            datas['financialIndexParams'][indicatorsList[indicatorIndexInList]] = getFinanceIndicatorList()[indicatorsList[i+1]]
+            tempFinancialData = []
+            for j in range(len(financialDatas)):
+                tempFinancialData.append([financialDatas[j][0], financialDatas[j][indicatorIndexInList]])
+            datas['financialDatas'][indicatorsList[indicatorIndexInList]] = tempFinancialData
+        print("\n")
+        print(financialDatas)
+        print("\n")
         print(datas['financialDatas'])
+        print("\n")
+        print(datas['financialIndexParams'])
         # selectedFinancialIndicators = getDefaultSelectedFinancialIndicators()
         # indicatorsList = list(selectedFinancialIndicators.values())
         #financialIndicatorsData[] = queryFinanceindicator(ts_code, startDate, endDate, indicatorsList)

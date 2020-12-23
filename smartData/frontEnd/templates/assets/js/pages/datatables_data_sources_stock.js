@@ -34,6 +34,43 @@ $(function() {
         }
     }
 
+//获取可选指数
+     $.ajax({
+              url:"/static/assets/data/indexs.json" , // 请求路径
+              type:"POST" , //请求方式
+              success:function (response) {
+                  responseJson=JSON.parse(response);
+                  indexsListJson = responseJson['data'];
+                  for (var key in responseJson['data']) {
+                  var item ={};
+                  item["id"]=  key;
+                  item["text"]=  responseJson['data'][key];
+//                           console.log(item["id"]);
+//                           console.log(item["text"]);
+                        indexsList.push(item);
+                  };
+
+                  $(".select-kIndex").select2({
+                    width: '100%',
+                    multiple: true,
+                    data: indexsList
+                }).val(["000001.SH","399006.SZ"]).trigger("change");
+
+              },//响应成功后的回调函数
+              error:function () {
+                  alert("出错啦...");
+              },//表示如果请求响应出现错误，会执行的回调函数
+              dataType:"text"//设置接受到的响应数据的格式
+          });
+ //用可选指数去初始化指数输入框 start
+    // Add jQuery UI Sortable support
+    $(".select-kIndex").select2("container").find("ul.select2-choices").sortable({
+        containment: 'parent',
+        start: function() { $(".select-kIndex").select2("onSortStart"); },
+        update: function() { $(".select-kIndex").select2("onSortEnd"); }
+    });
+ //用可选指数去初始化指数输入框 end
+
 //// 获取所有板块的当期的财务指标并显示在表中
 //    $('.datatable-ajax').dataTable({
 //        ajax: 'static/assets/data/industryIndicator.json',
@@ -62,6 +99,12 @@ $(function() {
     //                           console.log(item["text"]);
                             financialIndicatorsList.push(item);
                       }
+
+                  $(".select-financialIndicator").select2({
+                        width: '40%',
+                        multiple: true,
+                        data: financialIndicatorsList
+                    }).val(["roic"]).trigger("change");
               },//响应成功后的回调函数
               error:function () {
                   alert("出错啦...");
@@ -70,12 +113,6 @@ $(function() {
           });
 
  //用可选财务指标参数去初始化财务指标输入框 start
-    $(".select-financialIndicator").select2({
-        width: '40%',
-        multiple: false,
-        data: financialIndicatorsList
-    });
-
     // Add jQuery UI Sortable support
     $(".select-financialIndicator").select2("container").find("ul.select2-choices").sortable({
         containment: 'parent',

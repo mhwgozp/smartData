@@ -11,6 +11,7 @@ import numpy as np
 import pandas as pd
 import talib as ta
 from talib import MA_Type
+from .dataManagerInterface import *
 
 ts.set_token('abc23dc1908af03d82e14f830e52e28300ef5ac69bb5fe14e2ba8630')
 pro = ts.pro_api()

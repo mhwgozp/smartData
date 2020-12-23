@@ -92,6 +92,17 @@
 		smartDataCandlesticks.attachLineDataOnFirstAxis(kOption, indexsName[key], result.values);
 	}
 
+	var macds = {{ macds|safe }};
+	smartDataCandlesticks.attachMacdData(kOption, macds);
+
+	var financialDatas = {{ financialDatas|safe }};
+	var financialIndexParams = {{ financialIndexParams|safe }};
+
+	for (var key in financialDatas)
+	{
+		smartDataCandlesticks.createNewYAxisAndAttachLineData(kOption, financialIndexParams[key]+key, tradingCalendar, financialDatas[key], true);
+	}
+
     if (kOption && typeof kOption == "object") {
         kChart.setOption(kOption, true);
     }
@@ -105,21 +116,21 @@
    // }
 //////////////////////////////////
 //更新数据
-    $(".topStockPrice-get").click(function () {
+    $(".kf-get").click(function () {
         {   //获取所选参数并提交
             var reg = new RegExp("-","g");
             var startDate= $('#kStartDate').val().replace(reg,"");
             var endDate= $('#kEndDate').val().replace(reg,"");
 
             var kSelectPeriod= $('#kSelectPeriod').val();
-            var kSelectTopNum= $('#kSelectTopNum').val();
+            var indexCodes= $('#kIndex').val();
 	    }
 
         $.ajax({
                 url: '',
                 type: 'post',
                 traditional: true,
-                data: {'action':'getTradingDatas','industryCode':industryCode,'startDate': startDate, 'endDate': endDate, 'selectPeriod':kSelectPeriod, 'selectTopNum':kSelectTopNum},
+                data: {'action':'getTradingDatas','industryCode':industryCode,'startDate': startDate, 'endDate': endDate, 'selectPeriod':kSelectPeriod, 'indexCodes':indexCodesSelected},
                 success: function (response)
                 {
                     smartDataCandlesticks.setXAxisData(kOption, response.tradingCalendar, 0);
@@ -217,6 +228,10 @@
 		var financialIndicatorSelected=[];
 		var reportPeriodList=[];
 		var reportPeriodSelected="";
+
+		var indexsListJson={};
+		var indexsList=[];
+		var indexCodesSelected=[];
 	</script>
 	<!-- Page container -->
 	<div class="page-container">
@@ -248,16 +263,7 @@
 
 													<input id="kEndDate" class="form-control" type="date" name="date">
 													<span class="help-block">End Date</span>
-
-										<select class="select" id="kIndex">
-												<option value="000001.SH">上证指数</option>
-												<option value="399001.SZ">深证成指</option>
-												<option value="399006.SZ">创业板指</option>
-												<option value="399005.SZ">中小板指</option>
-											    <option value="000016.SH">上证50</option>
-												<option value="000300.SH">沪深300</option>
-												<option value="000688.SH">科创50</option>
-										</select>
+										<input type="hidden" class="select-kIndex">
 									<select class="select" id="kSelectPeriod">
 												<option value="D" selected="selected">日线</option>
 												<option value="W">周线</option>
