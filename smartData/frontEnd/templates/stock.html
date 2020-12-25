@@ -43,69 +43,47 @@
 	<script type="text/javascript" src="/static/assets/js/plugins/forms/styling/uniform.min.js"></script>
 <!--	<script type="text/javascript" src="/static/assets/js/pages/datatables_extension_colvis.js"></script>-->
 
-	<script type="module">
-	import * as smartDataCandlesticks from '../static/js/smartDataCandlesticks.js';
 
+	<script type="text/javascript">
+	//////////////////////////////////////
+	var industryClassifyJson={};
+	var industryClassifyList=[];
+	var industryClassifySelected=[];
+
+	var financialIndicatorsJson={};
+	var financialIndicatorsList=[];
+	var financialIndicatorsSelected=[];
+
+	var reportPeriodList=[];
+	var reportPeriodSelected="";
+
+	var indexsListJson={};
+	var indexsList=[];
+	var indexCodesSelected=[];
+
+	var stocksList=[];
+	var stocksSelected=[];
+	var ts_codes=[];
 	///////////////////////////////
 	var industryCode = '{{ industryCode }}';
 	var industryName = '{{ industryName }}';
 	var startDate = '{{ startDate }}';
 	var endDate = '{{ endDate }}';
 	var stockName = '{{ stockName }}';
-
-	var startDateFormat = startDate.slice(0,4) + "-"+ startDate.slice(4,6) + "-"+ startDate.slice(6,8);
-	var endDateFormat = endDate.slice(0,4) + "-"+ endDate.slice(4,6) + "-"+ endDate.slice(6,8);
-
-	$('#kStartDate').val(startDateFormat);
-	$('#kEndDate').val(endDateFormat);
-	document.getElementById("title_industry").innerHTML = industryName;
-	document.getElementById("title_stockName").innerHTML = stockName;
-
-    var kDom = document.getElementById("kLine");
-    var kChart = echarts.init(kDom);
-    var app = {};
-    var kOption = smartDataCandlesticks.option;
-
+	var ts_code = '{{ ts_code }}';
 	var tradingCalendar = {{ tradingCalendar|safe }};
-	smartDataCandlesticks.setXAxisData(kOption, tradingCalendar, 0);
-	smartDataCandlesticks.setXAxisData(kOption, tradingCalendar, 1);
-	smartDataCandlesticks.setXAxisData(kOption, tradingCalendar, 2);
-
-	kOption.yAxis[0].axisLabel.formatter='{value} %'
-
 	var tradingDatas = {{ tradingDatas|safe }};
 	var stocksName = {{ stocksName|safe }};
-
 	var indexTradingDatas = {{ indexTradingDatas|safe }};
 	var indexsName = {{ indexsName|safe }};
-
-    for (var key in tradingDatas)
-    {
-	　　var tradingData = tradingDatas[key];
-		var result = smartDataCandlesticks.splitDataByType(tradingData, true);
-		smartDataCandlesticks.attachLineDataOnFirstAxis(kOption, stocksName[key], result.values);
-	}
-	for (var key in indexTradingDatas)
-    {
-	　　var indexTradingData = indexTradingDatas[key];
-		var result = smartDataCandlesticks.splitDataByType(indexTradingData, true);
-		smartDataCandlesticks.attachLineDataOnFirstAxis(kOption, indexsName[key], result.values);
-	}
-
 	var macds = {{ macds|safe }};
-	smartDataCandlesticks.attachMacdData(kOption, macds);
-
 	var financialDatas = {{ financialDatas|safe }};
-	var financialIndexParams = {{ financialIndexParams|safe }};
+	var financialNamesSelected = {{ financialNamesSelected|safe }};
 
-	for (var key in financialDatas)
-	{
-		smartDataCandlesticks.createNewYAxisAndAttachLineData(kOption, financialIndexParams[key]+key, tradingCalendar, financialDatas[key], true);
-	}
 
-    if (kOption && typeof kOption == "object") {
-        kChart.setOption(kOption, true);
-    }
+
+
+
 
     ////////////////////////////////////////////////////////////////////////////////////
     //var fDom = document.getElementById("financeIndicatorLine");
@@ -115,104 +93,11 @@
    //     fChart.setOption(fOption, true);
    // }
 //////////////////////////////////
-//更新数据
-    $(".kf-get").click(function () {
-        {   //获取所选参数并提交
-            var reg = new RegExp("-","g");
-            var startDate= $('#kStartDate').val().replace(reg,"");
-            var endDate= $('#kEndDate').val().replace(reg,"");
-
-            var kSelectPeriod= $('#kSelectPeriod').val();
-            var indexCodes= $('#kIndex').val();
-	    }
-
-        $.ajax({
-                url: '',
-                type: 'post',
-                traditional: true,
-                data: {'action':'getTradingDatas','industryCode':industryCode,'startDate': startDate, 'endDate': endDate, 'selectPeriod':kSelectPeriod, 'indexCodes':indexCodesSelected},
-                success: function (response)
-                {
-                    smartDataCandlesticks.setXAxisData(kOption, response.tradingCalendar, 0);
-                    smartDataCandlesticks.setXAxisData(kOption, response.tradingCalendar, 1);
-                    smartDataCandlesticks.setXAxisData(kOption, response.tradingCalendar, 2);
-                    smartDataCandlesticks.resetSeriesData(kOption);
-                    alert("already get top stockprice!");
-					for (var key in response['tradingDatas'])
-					{
-					　　var tradingData = response['tradingDatas'][key];
-						var result = smartDataCandlesticks.splitDataByType(tradingData, true);
-						smartDataCandlesticks.attachLineDataOnFirstAxis(kOption, key, result.values);
-					}
-                    kChart.setOption(kOption, true);
-                }
-        })
-    });
-
-    $(".topFinancial-get").click(function () {
-        {   //获取所选参数并提交
-            var reg = new RegExp("-","g");
-            var startDate= $('#financeStartDate').val().replace(reg,"");
-            var endDate= $('#financeEndDate').val().replace(reg,"");
-            financialIndicatorSelected = ($(".select-financialIndicator").select2("val"));
-            var selectTopNum= $('#indicatorSelectTopNum').val();
-	    }
-
-        $.ajax({
-                url: '',
-                type: 'post',
-                traditional: true,
-                data: {'action':'getFinancialDatas','industryCode':industryCode,'startDate': startDate, 'endDate': endDate, 'financialIndicatorSelected':financialIndicatorSelected, 'selectTopNum':selectTopNum},
-                success: function (response)
-                {
-                    smartDataCandlesticks.resetSeriesData(fOption);
-                    smartDataCandlesticks.setXAxisData(fOption, response.calendarData, 0);
-					for (var key in response['financialDatas'])
-					{
-						smartDataCandlesticks.attachLineDataOnFirstAxis(fOption, key, response['financialDatas'][key]);
-					}
-                    fChart.setOption(fOption, true);
-                }
-        })
-    });
-
-    $(".financialIndicators-get").click(function () {
-        {   //获取所选参数并提交
-            reportPeriodSelected = ($(".select-reportPeriod").select2("val"));
-	    }
-
-        $.ajax({
-                url: '',
-                type: 'post',
-                traditional: true,
-                data: {'action':'getAllFinancialDatas','industryCode':industryCode,'reportPeriod': reportPeriodSelected},
-                success: function (response)
-                {
-					$('.datatable-ajax').dataTable({
-						data: response.allFinancialDatas,
-						"columnDefs": [
-						  {
-						   "render": function (data, type, row) {
-							return "<a href='/tsCode/?ts_code=" + row[1]+"'>"+row[0]+"</a>";
-						   },
-						   "targets": 0
-						  },
-						  { "visible": false, "targets": [ 1 ] }
-						 ]
-					});
-                }
-        })
-    });
-
-    //窗口自动缩放
-	window.addEventListener('resize',function () {
-	if(kChart){kChart.resize();}
-	if(fChart){fChart.resize();}
-	})
-
 	</script>
 
 	<script type="text/javascript" src="/static/assets/js/pages/datatables_data_sources_stock.js"></script>
+
+
 
 </head>
 
@@ -220,19 +105,109 @@
 
 	<script type="text/javascript" src="/static/common/mainNavbar.js"></script>
 
-	<script type="text/javascript">
-		var industryClassifyJson={};
-		var industryClassifyList=[];
-		var financialIndicatorsList=[];
-		var industryClassifySelected=[];
-		var financialIndicatorSelected=[];
-		var reportPeriodList=[];
-		var reportPeriodSelected="";
+	<script type="module">
+	import * as smartDataCandlesticks from '../static/js/smartDataCandlesticks.js';
+	//根据初次从后台返回的数据，更新k线图
+    var kDom = document.getElementById("kLine");
+    var kChart = echarts.init(kDom);
+    var app = {};
+    var kOption = smartDataCandlesticks.option;
 
-		var indexsListJson={};
-		var indexsList=[];
-		var indexCodesSelected=[];
+    smartDataCandlesticks.setXAxisData(kOption, tradingCalendar, 0);
+	smartDataCandlesticks.setXAxisData(kOption, tradingCalendar, 1);
+	smartDataCandlesticks.setXAxisData(kOption, tradingCalendar, 2);
+	kOption.yAxis[0].axisLabel.formatter='{value} %'
+
+    for (var key in tradingDatas)
+    {
+        var tradingData = tradingDatas[key];
+        var result = smartDataCandlesticks.splitDataByType(tradingData, true);
+        smartDataCandlesticks.attachLineDataOnFirstAxis(kOption, stocksName[key], result.values);
+	}
+	for (var key in indexTradingDatas)
+    {
+	　　var indexTradingData = indexTradingDatas[key];
+		var result = smartDataCandlesticks.splitDataByType(indexTradingData, true);
+		smartDataCandlesticks.attachLineDataOnFirstAxis(kOption, indexsName[key], result.values);
+	}
+	smartDataCandlesticks.attachMacdData(kOption, macds);
+
+	for (var key in financialDatas)
+	{
+		smartDataCandlesticks.createNewYAxisAndAttachLineData(kOption, financialNamesSelected[key]+key, tradingCalendar, financialDatas[key], true);
+	}
+
+    if (kOption && typeof kOption == "object") {
+        kChart.setOption(kOption, true);
+    }
+
+
+    //更新数据
+    $(".kf-get").click(function () {
+        {   //获取所选参数并提交
+            var reg = new RegExp("-","g");
+            var startDate= $('#kStartDate').val().replace(reg,"");
+            var endDate= $('#kEndDate').val().replace(reg,"");
+            var kSelectPeriod= $('#kSelectPeriod').val();
+            financialIndicatorsSelected.splice(0,financialIndicatorsSelected.length);
+            financialIndicatorsSelected=$(".select-financialIndicators").select2("val");
+            financialIndicatorsSelected.splice(0, 0, 'end_date');
+
+            indexCodesSelected.splice(0,indexCodesSelected.length);
+            indexCodesSelected=$(".select-kIndexs").select2("val");
+
+            stocksSelected.splice(0,stocksSelected.length);
+            stocksSelected=$(".select-kStocks").select2("val");
+            stocksSelected.splice(0, 0, ts_code);
+	    }
+
+        $.ajax({
+                url: '',
+                type: 'post',
+                traditional: true,
+                data: {'action':'getTradingDatas', 'startDate': startDate, 'endDate': endDate,'selectPeriod':kSelectPeriod,
+                //'industryCode':industryCode,'industryName':industryName,
+                'ts_codes':stocksSelected, 'indexsCode':indexCodesSelected,
+                //'stocksName':stocksNameSelected,'indexsName':stocksNameSelected,
+                'financialIndicatorsSelected':financialIndicatorsSelected},
+                success: function (response)
+                {
+                    smartDataCandlesticks.setXAxisData(kOption, response.tradingCalendar, 0);
+                    smartDataCandlesticks.setXAxisData(kOption, response.tradingCalendar, 1);
+                    smartDataCandlesticks.setXAxisData(kOption, response.tradingCalendar, 2);
+                    smartDataCandlesticks.resetSeriesData(kOption);
+					for (var key in response['tradingDatas'])
+					{
+					　　	var tradingData = response['tradingDatas'][key];
+						var result = smartDataCandlesticks.splitDataByType(tradingData, true);
+						smartDataCandlesticks.attachLineDataOnFirstAxis(kOption, stocksName[key], result.values);
+					}
+					for (var key in response['indexTradingDatas'])
+					{
+					　　	var indexTradingDatas = response['indexTradingDatas'][key];
+						var result = smartDataCandlesticks.splitDataByType(indexTradingDatas, true);
+						smartDataCandlesticks.attachLineDataOnFirstAxis(kOption, indexsListJson[key], result.values);
+					}
+
+					for (var key in response['financialDatas'] )
+					{
+						console.log(key);
+						console.log(financialDatas[key]);
+						smartDataCandlesticks.createNewYAxisAndAttachLineData(kOption, financialIndicatorsJson[key]+key,
+							response.tradingCalendar, response['financialDatas'][key], true);
+					}
+                    kChart.setOption(kOption, true);
+                }
+        })
+    });
+
+//窗口自动缩放
+	window.addEventListener('resize',function () {
+	if(kChart){kChart.resize();}
+	})
+
 	</script>
+
 	<!-- Page container -->
 	<div class="page-container">
 
@@ -258,19 +233,19 @@
 									<h6 class="panel-title">股价走势图</h6>
 								</div>
 								<div class="form-group">
-													<input id="kStartDate" class="form-control" type="date" name="date">
-													<span class="help-block">Start Date</span>
-
-													<input id="kEndDate" class="form-control" type="date" name="date">
-													<span class="help-block">End Date</span>
-										<input type="hidden" class="select-kIndex">
+									<input id="kStartDate" class="form-control" type="date" name="date">
+									<span class="help-block">Start Date</span>
+									<input id="kEndDate" class="form-control" type="date" name="date">
+									<span class="help-block">End Date</span>
+									<input type="hidden" class="select-kIndexs"> <!-- 指数列表 -->
+									<input type="hidden" class="select-kStocks" data-placeholder="同板块个股"> <!-- 同板块个股 -->
 									<select class="select" id="kSelectPeriod">
-												<option value="D" selected="selected">日线</option>
-												<option value="W">周线</option>
-												<option value="M">月线</option>
+										<option value="D" selected="selected">日线</option>
+										<option value="W">周线</option>
+										<option value="M">月线</option>
 									</select>
-									<input type="hidden" class="select-financialIndicator" data-placeholder="选择财务指标" value="">
-										<button type="button" class="btn btn-success kf-get">确定</button>
+									<input type="hidden" class="select-financialIndicators" data-placeholder="选择财务指标">
+									<button type="button" class="btn btn-success kf-get">确定</button>
 								</div>
 
 								<div class="panel-body">

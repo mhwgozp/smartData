@@ -43,7 +43,7 @@ def main(request):
              'ts_codes': [],
              'startDate':startDate,
              'endDate':endDate,
-             'financialIndexParams': {},
+             'financialNamesSelected': {},
              'tradingCalendar': [],
              'stocksName':{},
              'indexsName': {},
@@ -58,10 +58,33 @@ def main(request):
         if(action == 'getTradingDatas'):
             startDate = request.POST.get('startDate')
             endDate = request.POST.get('endDate')
-            selectTopNum = int(request.POST.get('selectTopNum'))
             selectPeriod = request.POST.get('selectPeriod')
+            industryCode = request.POST.get('industryCode')
+            industryName = request.POST.get('industryName')
+            ts_codes = request.POST.getlist('ts_codes')
+            indexsCode = request.POST.getlist('indexsCode')
+            financialIndicatorsSelected = request.POST.getlist('financialIndicatorsSelected')
+
             datas['tradingCalendar'] = getTradingCalendar(startDate, endDate)
-            datas['tradingDatas']  = getStockPriceTopList(industryCode, selectPeriod, startDate, endDate, selectTopNum)
+            print(startDate)
+            print(endDate)
+            print(ts_codes)
+            for i in range(len(ts_codes)):
+
+                datas['tradingDatas'][ts_codes[i]] = getIndexOrStock('E', ts_codes[i], startDate, endDate)
+            for i in range(len(indexsCode)):
+                datas['indexTradingDatas'][indexsCode[i]] = getIndexOrStock('I', indexsCode[i], startDate, endDate)
+            print(ts_codes[0])
+            print(financialIndicatorsSelected)
+            financialDatas = queryFinanceindicator(ts_codes[0], startDate, endDate, financialIndicatorsSelected)
+            for i in range(len(financialIndicatorsSelected) - 1):
+                indicatorIndexInList = i + 1
+                tempFinancialData = []
+                for j in range(len(financialDatas)):
+                    tempFinancialData.append([financialDatas[j][0], financialDatas[j][indicatorIndexInList]])
+                datas['financialDatas'][financialIndicatorsSelected[indicatorIndexInList]] = tempFinancialData
+            print(datas['financialDatas'])
+
         elif (action == 'getFinancialDatas'):
             startDate = request.POST.get('startDate')
             endDate = request.POST.get('endDate')
@@ -85,7 +108,7 @@ def main(request):
         ts_code = request.GET.get("ts_code")
         datas['industryCode'] = request.GET.get("industryCode")
         datas['industryName'] = request.GET.get("industryName")
-        datas['ts_codes'].append(ts_code)
+        datas['ts_code']=ts_code
         datas['tradingCalendar'] = getTradingCalendar(startDate, endDate)
         datas['tradingDatas'][ts_code] = getIndexOrStock('E', ts_code, startDate, endDate)
 
@@ -110,7 +133,7 @@ def main(request):
         financialDatas = queryFinanceindicator(ts_code, startDate, endDate, indicatorsList)
         for i in range(len(indicatorsList) -1 ):
             indicatorIndexInList = i+1
-            datas['financialIndexParams'][indicatorsList[indicatorIndexInList]] = getFinanceIndicatorList()[indicatorsList[i+1]]
+            datas['financialNamesSelected'][indicatorsList[indicatorIndexInList]] = getFinanceIndicatorList()[indicatorsList[i+1]]
             tempFinancialData = []
             for j in range(len(financialDatas)):
                 tempFinancialData.append([financialDatas[j][0], financialDatas[j][indicatorIndexInList]])
@@ -120,12 +143,10 @@ def main(request):
         print("\n")
         print(datas['financialDatas'])
         print("\n")
-        print(datas['financialIndexParams'])
+        # print(datas['financialNamesSelected'])
         # selectedFinancialIndicators = getDefaultSelectedFinancialIndicators()
         # indicatorsList = list(selectedFinancialIndicators.values())
         #financialIndicatorsData[] = queryFinanceindicator(ts_code, startDate, endDate, indicatorsList)
-
-
         return render(request, "stock.html", datas)
 
 def getDefaultDate():

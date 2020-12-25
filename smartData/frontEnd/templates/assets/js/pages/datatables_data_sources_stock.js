@@ -1,4 +1,3 @@
-
 $(function() {
 //初始化时间输入选项框
     var time = new Date();
@@ -49,8 +48,7 @@ $(function() {
 //                           console.log(item["text"]);
                         indexsList.push(item);
                   };
-
-                  $(".select-kIndex").select2({
+                  $(".select-kIndexs").select2({
                     width: '100%',
                     multiple: true,
                     data: indexsList
@@ -64,26 +62,12 @@ $(function() {
           });
  //用可选指数去初始化指数输入框 start
     // Add jQuery UI Sortable support
-    $(".select-kIndex").select2("container").find("ul.select2-choices").sortable({
+    $(".select-kIndexs").select2("container").find("ul.select2-choices").sortable({
         containment: 'parent',
-        start: function() { $(".select-kIndex").select2("onSortStart"); },
-        update: function() { $(".select-kIndex").select2("onSortEnd"); }
+        start: function() { $(".select-kIndexs").select2("onSortStart"); },
+        update: function() { $(".select-kIndexs").select2("onSortEnd"); }
     });
  //用可选指数去初始化指数输入框 end
-
-//// 获取所有板块的当期的财务指标并显示在表中
-//    $('.datatable-ajax').dataTable({
-//        ajax: 'static/assets/data/industryIndicator.json',
-//        "columnDefs": [
-//      {
-//       "render": function (data, type, row) {
-//        return "<a href='industry/?industryCode=" + row[1]+"'>"+row[0]+"</a>";
-//       },
-//       "targets": 0
-//      },
-//      { "visible": false, "targets": [ 1 ] }
-//     ]
-//    });
 
 //获取财务指标可选参数
      $.ajax({
@@ -91,17 +75,17 @@ $(function() {
               type:"POST" , //请求方式
               success:function (response) {
                   responseJson=JSON.parse(response);
-                      for (var key in responseJson['data']) {
+                  financialIndicatorsJson = responseJson['data'];
+                      for (var key in financialIndicatorsJson) {
                       var item ={};
                       item["id"]=  key;
-                      item["text"]=  responseJson['data'][key];
-    //                           console.log(item["id"]);
-    //                           console.log(item["text"]);
+                      item["text"]=  financialIndicatorsJson[key];
+//                               console.log(item["id"]);
+//                               console.log(item["text"]);
                             financialIndicatorsList.push(item);
                       }
-
-                  $(".select-financialIndicator").select2({
-                        width: '40%',
+                  $(".select-financialIndicators").select2({
+                        width: '50%',
                         multiple: true,
                         data: financialIndicatorsList
                     }).val(["roic"]).trigger("change");
@@ -114,14 +98,14 @@ $(function() {
 
  //用可选财务指标参数去初始化财务指标输入框 start
     // Add jQuery UI Sortable support
-    $(".select-financialIndicator").select2("container").find("ul.select2-choices").sortable({
+    $(".select-financialIndicators").select2("container").find("ul.select2-choices").sortable({
         containment: 'parent',
-        start: function() { $(".select-financialIndicator").select2("onSortStart"); },
-        update: function() { $(".select-financialIndicator").select2("onSortEnd"); }
+        start: function() { $(".select-financialIndicators").select2("onSortStart"); },
+        update: function() { $(".select-financialIndicators").select2("onSortEnd"); }
     });
  //用可选财务指标参数去初始化财务指标输入框 end
 
-  //报告期输入框 start
+//报告期输入框 start
     $(".select-reportPeriod").select2({
         width: '50%',
         multiple: false,
@@ -135,5 +119,26 @@ $(function() {
         update: function() { $(".select-reportPeriod").select2("onSortEnd"); }
     });
  //报告期输入框 end
+
+ //根据后台返回的数据初始化 起止时间
+    var startDateFormat = startDate.slice(0,4) + "-"+ startDate.slice(4,6) + "-"+ startDate.slice(6,8);
+    var endDateFormat = endDate.slice(0,4) + "-"+ endDate.slice(4,6) + "-"+ endDate.slice(6,8);
+    $('#kStartDate').val(startDateFormat);
+    $('#kEndDate').val(endDateFormat);
+    document.getElementById("title_industry").innerHTML = industryName;
+    document.getElementById("title_stockName").innerHTML = stockName;
+
+ //根据初次从后台返回的数据初始化 同板块股票
+ for (var key in stocksName) {
+		  var item ={};
+		  item["id"]=  key;
+		  item["text"]=  stocksName[key];
+				stocksList.push(item);
+		  }
+	$(".select-kStocks").select2({
+                    width: '100%',
+                    multiple: true,
+                    data: stocksList
+                });
 
 });
